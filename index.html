@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>standard prompter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY2OSIgaGVpZ2h0PSI2NjYiPjxwYXRoIGQ9Ik0wLDAgTDY2OSwwIEw2NjksNjY2IEwwLDY2NiBaIE0zNTQsMyBMMzU0LDE4NCBMMzc1LDE4NiBMMzkyLDE5MCBMNDEwLDE5OCBMNDIyLDIwNSBMNDM1LDIxNSBMNDQ2LDIyNiBMNDU3LDI0MSBMNDY2LDI1OCBMNDcwLDI2NyBMNDgxLDI2NCBMNDk2LDI1OSBMNTA5LDI1NSBMNTM2LDI0NiBMNTQ5LDI0MiBMNTczLDIzNCBMNTg2LDIzMCBMNjEzLDIyMSBMNjI2LDIxNyBMNjQxLDIxMiBMNjM5LDIwMyBMNjI5LDE3OSBMNjE2LDE1NCBMNjA0LDEzNSBMNTk0LDEyMiBMNTgzLDEwOCBMNTc2LDEwMSBMNTY5LDkzIEw1NjEsODUgTDU1Myw3OCBMNTQwLDY3IEw1MjUsNTYgTDUwNiw0NCBMNDc5LDMwIEw0NTYsMjEgTDQzOCwxNSBMNDI0LDExIEw0MDIsNyBMMzgwLDQgTDM2OCwzIFogTTI5MSw0IEwyNjYsNyBMMjM1LDE0IEwyMDgsMjMgTDE4OCwzMiBMMTY4LDQyIEwxNDksNTQgTDEzNSw2NCBMMTE4LDc4IEwxMDIsOTMgTDk0LDEwMSBMODcsMTA5IEw3NCwxMjUgTDU4LDE0OSBMNDgsMTY3IEwzNywxOTAgTDMwLDIwOSBMMzAsMjEyIEw1NiwxMjEgTDY5LDIyNSBMMjkzLDIzMyBMMTA2LDIzNyBMMTMzLDI0NiBMMTQ2LDI1MCBMMTczLDI1OSBMMTg2LDI2MyBMMTk4LDI2NyBMMjAyLDI2NiBMMjA5LDI1MCBMMjE4LDIzNSBMMjI3LDIyNCBMMjM4LDIxMyBMMjUyLDIwMyBMMjcxLDE5MyBMMjg2LDE4OCBMMjk1LDE4NiBMMzE2LDE4NCBMMzE2LDQgWiBNMTgsMjQ4IEwxNSwyNTUgTDEwLDI3NiBMNywyOTEgTDQsMzEzIEw0LDM2NSBMNSwzNzggTDExLDQxMCBMMTcsNDMxIEwyNCw0NTEgTDM0LDQ3NCBMNDQsNDkzIEw1Niw1MTIgTDY5LDUyOSBMNzgsNTQwIEw5MCw1NTMgTDEwMSw1NjQgTDExMiw1NzMgTDEyNyw1ODUgTDEzMSw1ODEgTDE0MSw1NjcgTDE1NCw1NDkgTDE2OCw1MzAgTDE4MSw1MTIgTDE5NCw0OTQgTDIwNyw0NzYgTDIyMSw0NTcgTDIzMyw0NDAgTDIzMyw0MzggTDIyMyw0MzAgTDIxNCw0MjEgTDIwMyw0MDYgTDE5NSwzOTAgTDE4OSwzNzUgTDE4NSwzNTUgTDE4NSwzMjggTDE4OCwzMTEgTDE4OSwzMDMgTDE3MywyOTggTDE0MSwyODcgTDEyNCwyODIgTDEwMSwyNzQgTDg0LDI2OSBMNjEsMjYxIEw0NCwyNTYgTDIxLDI0OCBaIE02NTAsMjQ4IEw2MTgsMjU5IEw2MDEsMjY0IEw1NzgsMjcyIEw1NjEsMjc3IEw1MzgsMjg1IEw1MjEsMjkwIEw0OTgsMjk4IEw0ODQsMzAyIEw0ODIsMzAzIEw0ODMsMzEwIEw0ODYsMzI2IEw0ODYsMzUzIEw0ODMsMzcwIEw0NzcsMzg4IEw0NjksNDA0IEw0NjAsNDE3IEw0NDgsNDMwIEw0MzgsNDM4IEw0MzksNDQyIEw0NTMsNDYxIEw0NjYsNDc5IEw0ODAsNDk4IEw0OTMsNTE2IEw1MDYsNTM0IEw1MTksNTUyIEw1MzMsNTcxIEw1NDMsNTg1IEw1NTIsNTc5IEw1NjYsNTY3IEw1NzgsNTU2IEw1ODgsNTQ2IEw1OTUsNTM4IEw2MDcsNTIzIEw2MjAsNTA0IEw2MzAsNDg3IEw2MzksNDcwIEw2NTAsNDQzIEw2NTgsNDE4IEw2NjQsMzg5IEw2NjcsMzY4IEw2NjcsMzE2IEw2NjQsMjkwIEw2NTgsMjYzIEw2NTQsMjQ5IFogTTI2Myw0NjIgTDI1MSw0NzkgTDIzNyw0OTggTDIyNCw1MTYgTDIxMSw1MzQgTDE5OCw1NTIgTDE4NCw1NzEgTDE3MSw1ODkgTDE1OSw2MDYgTDE2MSw2MTAgTDE4MCw2MjIgTDE5OCw2MzIgTDIxOSw2NDIgTDI0Nyw2NTIgTDI3MCw2NTggTDI4NSw2NjEgTDMxMSw2NjQgTDM1OSw2NjQgTDM3Nyw2NjIgTDQwMSw2NTggTDQyNCw2NTIgTDQ1MSw2NDIgTDQ3MSw2MzMgTDQ4OCw2MjQgTDUwOCw2MTEgTDUxMiw2MDggTDUxMCw2MDMgTDQ5Nyw1ODUgTDQ4Myw1NjYgTDQ3Myw1NTIgTDQ2MCw1MzQgTDQ0Niw1MTUgTDQzMyw0OTcgTDQyMCw0NzkgTDQwOCw0NjMgTDQwNCw0NjMgTDM4OCw0NzIgTDM3MCw0NzkgTDM0OSw0ODMgTDMyMSw0ODMgTDMwMSw0NzkgTDI4NSw0NzMgTDI3MCw0NjUgTDI2Niw0NjIgWiAiIGZpbGw9IiNGRUZFRkUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsMCkiLz48cGF0aCBkPSJNMCwwIEwxNCwwIEw0MiwzIEw2MSw2IEw3OCwxMCBMMTA4LDIwIEwxMzEsMzAgTDE1NCw0MiBMMTc4LDU4IEwxOTQsNzEgTDIwMiw3OCBMMjE1LDkwIEwyMzEsMTA3IEwyNDEsMTIwIEwyNTIsMTM1IEwyNjQsMTU1IEwyNzYsMTc4IEwyODYsMjAzIEwyODcsMjA5IEwyNjQsMjE3IEwyNDcsMjIyIEwyMjQsMjMwIEwyMDcsMjM1IEwxODcsMjQyIEwxNzAsMjQ3IEwxNDcsMjU1IEwxMzAsMjYwIEwxMTgsMjY0IEwxMTUsMjYzIEwxMDgsMjQ3IEw5OSwyMzIgTDg4LDIxOSBMNzksMjEwIEw2MiwxOTggTDQ1LDE5MCBMMzgsMTg3IEwyMSwxODMgTDAsMTgxIFogIiBmaWxsPSIjNDZCQkI3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNTQsMykiLz48cGF0aCBkPSJNMCwwIEw0LDEgTDExLDI3IEwxNSw0OSBMMTcsNjggTDE3LDEyMCBMMTMsMTQ3IEw3LDE3NCBMLTMsMjAzIEwtMTQsMjI4IEwtMjYsMjUwIEwtMzYsMjY1IEwtNDgsMjgxIEwtNTcsMjkyIEwtNzEsMzA3IEwtODAsMzE2IEwtOTEsMzI1IEwtMTA2LDMzNyBMLTExMCwzMzMgTC0xMjMsMzE1IEwtMTM2LDI5NyBMLTE1MCwyNzggTC0xNjMsMjYwIEwtMTc2LDI0MiBMLTE4OSwyMjQgTC0yMDMsMjA1IEwtMjEyLDE5MyBMLTIxMSwxODkgTC0yMDIsMTgyIEwtMTk0LDE3NCBMLTE4NCwxNjEgTC0xNzYsMTQ3IEwtMTY5LDEyOSBMLTE2NSwxMTIgTC0xNjQsMTA1IEwtMTY0LDc4IEwtMTY3LDYyIEwtMTY4LDU1IEwtMTU3LDUxIEwtMTQ0LDQ3IEwtMTE3LDM4IEwtMTA0LDM0IEwtNzcsMjUgTC02NCwyMSBMLTM3LDEyIEwtMjQsOCBaICIgZmlsbD0iIzAwOTdCMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjUwLDI0OCkiLz48cGF0aCBkPSJNMCwwIEw0LDEgTDIwLDEwIEwzNSwxNiBMNTIsMjAgTDU4LDIxIEw4NiwyMSBMMTA3LDE3IEwxMjksOCBMMTQyLDAgTDE0NiwyIEwxNjAsMjEgTDE3MywzOSBMMTg2LDU3IEwyMDAsNzYgTDIxMyw5NCBMMjI2LDExMiBMMjM5LDEzMCBMMjQ5LDE0NCBMMjQ4LDE0NyBMMjMzLDE1NyBMMjEyLDE2OSBMMTkzLDE3OCBMMTY5LDE4NyBMMTU0LDE5MiBMMTMzLDE5NyBMMTA5LDIwMSBMOTYsMjAyIEw0OCwyMDIgTDIyLDE5OSBMMCwxOTQgTC0xOSwxODkgTC00NCwxODAgTC03MywxNjYgTC05MywxNTQgTC0xMDQsMTQ2IEwtMTAyLDE0MSBMLTg5LDEyMyBMLTc2LDEwNSBMLTYyLDg2IEwtNDksNjggTC0zNiw1MCBMLTIzLDMyIEwtOSwxMyBaICIgZmlsbD0iI0VDOTg5NiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjYzLDQ2MikiLz48cGF0aCBkPSJNMCwwIEw2LDEgTDM4LDEyIEw1MSwxNiBMNzgsMjUgTDkxLDI5IEwxMTgsMzggTDEzMSw0MiBMMTU4LDUxIEwxNzEsNTUgTDE2OSw2NyBMMTY3LDgwIEwxNjcsMTA3IEwxNzEsMTI3IEwxNzksMTQ3IEwxODcsMTYxIEwxOTgsMTc1IEwyMDgsMTg1IEwyMTUsMTkwIEwyMTMsMTk1IEwyMDAsMjEzIEwxODYsMjMyIEwxNzYsMjQ2IEwxNjMsMjY0IEwxNDksMjgzIEwxMzYsMzAxIEwxMjMsMzE5IEwxMTAsMzM3IEwxMDQsMzMzIEw4OCwzMjAgTDc1LDMwOCBMNjQsMjk3IEw1NSwyODYgTDQzLDI3MSBMMzEsMjUzIEwxOSwyMzIgTDEwLDIxMyBMMSwxODkgTC00LDE3NCBMLTksMTUzIEwtMTMsMTMwIEwtMTQsMTE3IEwtMTQsNjUgTC0xMCwzNiBMLTYsMjAgTC0xLDEgWiAiIGZpbGw9IiNGMDVCNUUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4LDI0OCkiLz48cGF0aCBkPSJNMCwwIEwyNSwwIEwyNSwxODAgTDQsMTgyIEwtMTIsMTg2IEwtMjgsMTkzIEwtMzksMTk5IEwtNTAsMjA3IEwtNjAsMjE2IEwtNjcsMjIzIEwtNzcsMjM3IEwtODYsMjU0IEwtOTAsMjYzIEwtOTksMjYxIEwtMTEzLDI1NiBMLTEzMCwyNTEgTC0xNTMsMjQzIEwtMTcwLDIzOCBMLTE5MywyMzAgTC0yMTAsMjI1IEwtMjMwLDIxOCBMLTI0NywyMTMgTC0yNjEsMjA4IEwtMjU5LDE5OSBMLTI0OSwxNzUgTC0yMzksMTU1IEwtMjI4LDEzNyBMLTIxNiwxMjAgTC0yMDIsMTAzIEwtMTg4LDg4IEwtMTgwLDgwIEwtMTcyLDczIEwtMTU1LDU5IEwtMTMxLDQzIEwtMTE1LDM0IEwtODgsMjEgTC02NiwxMyBMLTQzLDcgTC0xOCwyIFogIiBmaWxsPSIjM0ZBRDg3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyOTEsNCkiLz48L3N2Zz4=">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #111827; /* gray-900 */
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1f2937; } /* gray-800 */
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; } /* gray-600 */
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; } /* gray-500 */
+
+        .generator-section { display: none; }
+        .generator-section.active { display: block; }
+
+        .tab-btn {
+            transition: all 0.2s ease-in-out;
+            padding: 0.5rem 0.75rem;
+            border-bottom: 2px solid transparent;
+        }
+        .tab-btn.active {
+            font-weight: 600;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .checkbox-label input {
+            margin-right: 0.5rem;
+        }
+         /* Custom focus ring colors */
+        .form-input:focus, textarea:focus {
+            border-color: var(--focus-color);
+            box-shadow: 0 0 0 2px var(--focus-color);
+            outline: none;
+        }
+        .form-checkbox:checked {
+            background-color: var(--focus-color);
+            border-color: var(--focus-color);
+        }
+    </style>
+</head>
+<body class="text-white antialiased">
+
+    <div class="container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
+        
+        <header class="mb-6 text-center">
+            <h1 class="text-4xl font-bold text-white lowercase">standard prompter</h1>
+            <p class="text-gray-400 mt-2">enter the relevant information to create a standardized prompt.</p>
+        </header>
+
+        <!-- Tabs for navigation -->
+        <div class="mb-6 border-b border-gray-700">
+            <nav id="nav-container" class="flex flex-wrap -mb-px space-x-2" aria-label="Tabs">
+                <!-- Tabs will be populated by JS -->
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <main id="main-container">
+            <!-- All generator sections will be populated by JS -->
+        </main>
+
+        <!-- Output Section -->
+        <div id="output-container" class="mt-8 bg-gray-800 rounded-lg shadow-lg p-6 hidden">
+            <div class="flex flex-wrap justify-between items-center mb-4 border-b border-gray-700 pb-3 gap-2">
+                <h3 id="output-title" class="text-xl font-semibold">Generated Prompt</h3>
+                <div class="flex items-center space-x-2">
+                    <button id="copy-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-md shadow-sm transition-colors text-sm">Copy</button>
+                    <button id="save-btn" class="bg-[#0097b2] hover:bg-[#007a8f] text-white font-bold py-2 px-4 rounded-md shadow-sm transition-colors text-sm">Save as .txt</button>
+                </div>
+            </div>
+            <pre class="bg-gray-900 rounded-md p-4 whitespace-pre-wrap text-gray-300 text-sm overflow-x-auto"><code id="output-prompt"></code></pre>
+            <div id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></div>
+        </div>
+        
+        <!-- Datalists for suggestions -->
+        <div id="datalist-container"></div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- BRAND & UI DATA ---
+            const brandColors = {
+                teal: '#46bbb7',
+                coral: '#f05b4e',
+                green: '#3fad87',
+                blue: '#0097b2',
+                pink: '#ec9896',
+            };
+
+            const generatorsData = [
+                { id: 'video', name: 'Video Script', color: brandColors.teal, fields: [
+                    { id: 'topic', label: 'Video Topic', type: 'textarea', placeholder: "Describe the video's subject, or refer to an attached file." },
+                    { id: 'duration', label: 'Video Duration (minutes)', type: 'number', placeholder: 'e.g., 8' },
+                    { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'General audience'", suggestions: 'audience' },
+                    { id: 'style', label: 'Style & Tone', type: 'text', placeholder: "e.g., 'Investigative and wondrous'", suggestions: 'videoStyle' },
+                    { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" },
+                    { id: 'stock', label: 'Stock Footage Library (Optional)', type: 'text', placeholder: "e.g., 'C:/Users/Me/Stock' or a Google Drive link." }
+                ]},
+                { id: 'report', name: 'Report', color: brandColors.green, fields: [
+                    { id: 'topic', label: 'Primary Topic & Thesis', type: 'textarea', placeholder: "Describe the report's subject and its central argument." },
+                    { id: 'sources', label: 'Key Data & Source Materials', type: 'textarea', placeholder: "Refer to attached files by name. e.g., 'See attached: study.pdf'" },
+                    { id: 'objective', label: 'Report Objective', type: 'text', placeholder: "e.g., 'To persuade policymakers to adopt new regulations.'" },
+                    { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" }
+                ]},
+                { id: 'research', name: 'Research Paper', color: brandColors.blue, fields: [
+                    { id: 'title', label: 'Title of Paper', type: 'text', placeholder: "Enter the full title of the research paper." },
+                    { id: 'authors', label: 'Authors and Affiliations', type: 'textarea', placeholder: "List authors and affiliations, one per line." },
+                    { id: 'sources', label: 'Primary Source Materials', type: 'textarea', placeholder: "Refer to attached files by name. e.g., 'See attached: M&E_Framework.xlsx'" },
+                    { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of balls on a sheet for gravity.'" }
+                ]},
+                { id: 'substack', name: 'Substack', color: brandColors.coral, fields: [
+                    { id: 'angle', label: 'Core Topic/Angle', type: 'text', placeholder: "The main topic or angle of the blog post." },
+                    { id: 'thesis', label: 'Core Argument/Thesis', type: 'textarea', placeholder: "State the central, provocative argument." },
+                    { id: 'data', label: 'Key Data Points to Reference', type: 'textarea', placeholder: "List key stats or chart ideas." },
+                    { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Draw from Street_Parking_Report.pdf'" },
+                    { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the concrete blocks analogy for housing.'" }
+                ]},
+                { id: 'press', name: 'Press Release', color: brandColors.pink, fields: [
+                    { id: 'headline', label: 'Headline', type: 'text', placeholder: "Enter the exact, full headline for the press release." },
+                    { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Based on findings in Report.pdf'" }
+                ]},
+                { id: 'tiktok', name: 'TikTok Video', color: brandColors.teal, fields: [
+                    { id: 'topic', label: 'Video Topic', type: 'text', placeholder: "e.g., '41% of Malé's streets block ambulances.'" },
+                    { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Use data from Street_Parking_Report.pdf.'" },
+                    { id: 'style', label: 'Style', type: 'text', placeholder: "e.g., 'Fast-paced, high-energy, quick cuts.'" }
+                ]},
+                { id: 'infographic', name: 'Infographic', color: brandColors.green, fields: [
+                    { id: 'topic', label: 'Infographic Topic', type: 'text', placeholder: "e.g., 'Visualizing the loss of public space to street parking.'" },
+                    { id: 'data', label: 'Key Data Points', type: 'textarea', placeholder: "List 3-5 key stats to visualize." },
+                    { id: 'aspect', label: 'Target Aspect Ratio', type: 'text', placeholder: "e.g., 'Instagram Post (1:1)', 'A4 Poster'", suggestions: 'aspectRatio' },
+                    { id: 'style', label: 'Desired Visual Style', type: 'text', placeholder: "e.g., 'Minimalist with a single accent color'", suggestions: 'infographicStyle' },
+                    { id: 'tools', label: 'Tool-Specific Instructions', type: 'checkbox', options: ['Canva Pro', 'Easel.ly'] }
+                ]},
+                { id: 'charts', name: 'Charts/Viz', color: brandColors.blue, fields: [
+                    { id: 'data', label: 'Data to Visualize', type: 'textarea', placeholder: "Describe or paste the data, or refer to an attached file." },
+                    { id: 'goal', label: 'Primary Goal / Story to Tell', type: 'text', placeholder: "e.g., 'Emphasize the improvement in accessibility.'" },
+                    { id: 'tools', label: 'Output Tools', type: 'checkbox', options: ['Datawrapper', 'Flourish', 'ggplot2 (in R)', 'Tableau'] }
+                ]},
+                { id: 'dashboard', name: 'Dashboard', color: brandColors.coral, fields: [
+                    { id: 'data', label: 'Data Description', type: 'textarea', placeholder: "Describe the dataset(s) or refer to attached files." },
+                    { id: 'objective', label: 'Primary Objective', type: 'text', placeholder: "e.g., 'To monitor workplan progress for senior management.'" },
+                    { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'Minister, Department Heads'", suggestions: 'audience' }
+                ]},
+                { id: 'methods', name: 'Research Methods', color: brandColors.pink, fields: [
+                    { id: 'question', label: 'Research Question', type: 'text', placeholder: "State the precise causal question." },
+                    { id: 'data', label: 'Available Data', type: 'textarea', placeholder: "Describe the dataset(s) or refer to attached files." }
+                ]},
+                { id: 'briefing', name: 'Briefing Note', color: brandColors.teal, fields: [
+                    { id: 'topic', label: 'Briefing Subject', type: 'text', placeholder: "e.g., 'Briefing on the key findings of the Third Spaces report.'" },
+                    { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'Minister of Social and Family Development'", suggestions: 'audience' },
+                    { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Draw all info from Third_Spaces_Draft.pdf'" }
+                ]}
+            ];
+            
+            const suggestions = {
+                audience: ['General audience', 'Policymakers', 'Ministry leadership', 'Students', 'Industry experts'],
+                videoStyle: ['Investigative (like Vox)', 'Fast-paced explainer (like Kurzgesagt)', 'Personal narrative (like Johnny Harris)', 'Humorous & technical (like Mark Rober)'],
+                infographicStyle: ['Minimalist with one accent color', 'Data-heavy and corporate', 'Playful and illustrative', 'Dark mode with neon highlights', 'Swiss design / International Typographic Style', 'Retro / Vintage'],
+                aspectRatio: ['Instagram Post (1:1)', 'Instagram Story (9:16)', 'A4 Poster (Vertical)', 'A3 Poster (Vertical)', 'Twitter Post (16:9)', 'Facebook Post (1.91:1)']
+            };
+
+            const templates = {
+                 video: p => `You are an expert YouTube video producer and scriptwriter. Your task is to generate a complete, scene-by-scene video production plan for a video based on the information I provide.
+
+**1. Core Video Details**
+* **Video Topic:** ${p.topic}
+* **Video Duration:** Approximately ${p.duration} minutes.
+* **Target Audience:** ${p.audience}
+* **Desired Style & Tone:** The style should be ${p.style}.
+* **Core Analogies:** ${p.analogies || 'None specified.'}
+* **Available Stock Footage:** ${p.stock || 'None specified. Suggest generic stock footage.'}
+
+**2. Mandatory Writing and Style Guide**
+* **Tone and Clarity:** The writing must be clear, direct, and accessible to a 12th-grade reading level. Avoid filler words like "tapestry," "symphony," or "delve." Do not use constructions like "it's not about X, it's about Y." Use technical language precisely where necessary but ensure the overall narrative is easy to follow.
+
+**3. Required Output Structure**
+Please structure your response as a chronological, scene-by-scene breakdown. For each timed segment, provide the following six elements:
+
+* **Timestamp:** The start and end time for the scene (e.g., \`0:00 - 0:15\`).
+* **Visual Description:** A detailed description of what should be on screen. If relevant footage exists in the provided library, suggest it by name.
+* **Audio (Music & SFX):** Describe the mood and style of the background music and suggest key sound effects.
+* **On-Screen Text / Graphics:** Specify any text, titles, or diagrams that should appear.
+* **CapCut Implementation:** Provide clear, actionable instructions on how to create the specified visuals using CapCut features.
+* **Narration (VO):** Write the complete voiceover script for this segment, adhering to the style guide.`,
+                report: p => `You are an expert policy analyst and report writer. Your writing style is modeled on publications that are clear, direct, and persuasive, aiming for a 12th-grade reading level. You communicate complex ideas without resorting to filler language or jargon, and you use technical terms precisely when necessary.
+
+**1. Core Report Details**
+
+* **Primary Topic & Thesis:** ${p.topic}
+* **Key Data & Source Materials:** ${p.sources}
+* **Report Objective:** ${p.objective}
+* **Core Analogies (Optional but Recommended):** ${p.analogies || 'None specified.'}
+
+**2. Mandatory Writing and Style Guide**
+
+* **Tone and Clarity:** The tone must be professional, direct, and objective. The language must be clear and accessible. Avoid passive voice. Do not use meaningless filler words or phrases like "tapestry," "symphony," "delve," "labyrinth," or constructions like "it's not about X, it's about Y."
+* **Structure and Formatting:** The report must be clearly organized with a logical flow. All headings and subheadings must be in **sentence case**, not title case.
+* **Factual Integrity:** Every claim or assertion must be directly supported by the provided source materials. **You must not invent or hallucinate any facts, statistics, or sources.** If information is missing, state that it is unavailable.
+* **Citations:** All sources must be cited in-text and listed in a final "References" section using **APA 7th Edition format**. For online sources, the reference must end with a direct, clickable URL enclosed in < >. Example: \`Author, A. A. (Year). *Title of work*. Source. <https://...>\`
+* **Use of Analogies:** Use the provided analogies sparingly and purposefully. They should only be used to (a) clarify a complex technical concept or (b) reframe an issue to make a persuasive point more effectively. Do not use them as rhetorical flourishes.
+
+**3. Required Report Structure**
+
+Generate the report using the following section-by-section blueprint:
+
+* **Executive summary:** A brief, one-paragraph overview of the report's purpose, key findings, and main recommendations.
+* **1. Introduction**
+* **2. Background / Methodology**
+* **3. Analysis / Key findings**
+* **4. Discussion / Arguments for change**
+* **5. Policy recommendations**
+* **6. Conclusion**
+* **7. References**`,
+                research: p => `You are an expert academic writer and policy researcher. Your task is to write a formal research paper that is meticulously structured, evidence-based, and written in a clear, direct, and objective style suitable for publication.
+
+**1. Core Paper Details**
+
+* **Title of Paper:** ${p.title}
+* **Authors and Affiliations:** ${p.authors}
+* **Primary Source Materials:** ${p.sources}
+* **Core Analogies (Optional):** ${p.analogies || 'None specified.'}
+
+**2. Mandatory Writing and Style Guide**
+
+* **Keywords:** Based on the provided materials, generate 5-7 relevant keywords for the paper.
+* **Tone and Clarity:** The writing must be clear, direct, and accessible to a 12th-grade reading level. Avoid filler words like "tapestry," "symphony," or "delve." Do not use constructions like "it's not about X, it's about Y." Use technical language precisely where necessary but ensure the overall narrative is easy to follow.
+* **Factual Integrity:** Every claim must be directly supported by the provided source materials. **Do not invent or hallucinate any facts, statistics, or sources.**
+* **Citations:** All sources must be cited in-text and listed in a final "References" section using **APA 7th Edition format**. For online sources, the reference must end with a direct URL enclosed in < >.
+
+**3. Required Paper Structure**
+
+Generate the research paper using the following section-by-section blueprint. The paper must begin with a header (e.g., \`PAPER NO. [DEPT/YEAR/ID]\`) and follow this exact structure:
+
+* **Abstract**
+* **1. Introduction**
+* **2. Background**
+* **3. Literature review and desk research**
+* **4. Goals of the project / Research objectives**
+* **5. Process and methodology**
+* **6. Technical tools and developments (if applicable)**
+* **7. Results and discussion**
+* **8. Mistakes and lessons learned**
+* **9. New institutional knowledge and recommendations**
+* **10. Next steps**
+* **11. Conclusion**
+* **12. References**
+* **Appendices (if applicable)**`,
+                substack: p => `You are an expert blogger and economic commentator, writing in the style of Noah Smith, Matt Yglesias, or Santi Ruiz. Your writing should be analytical, data-driven, and conversational, with a clear and often opinionated thesis.
+
+**1. Post Details**
+
+* **Core Topic/Angle:** ${p.angle}
+* **Core Argument/Thesis:** ${p.thesis}
+* **Key Data Points/Charts to Reference:** ${p.data}
+* **Source Materials:** ${p.sources}
+* **Core Analogies (Optional):** ${p.analogies || 'None specified.'}
+
+**2. Mandatory Writing and Style Guide**
+
+* **Title:** Generate 3-5 catchy, blog-style titles based on the core topic/angle.
+* **Tone:** Smart, informal, and direct. Use first-person ("I think...") where appropriate. Ask rhetorical questions to engage the reader.
+* **Structure:**
+    1.  Start with a clear opening paragraph that states the post's main thesis.
+    2.  Develop the argument using the provided data points. Explain charts and numbers simply.
+    3.  Link to external ideas, studies, or articles to support the argument (you can suggest these links).
+    4.  Use subheadings to break up the text and guide the reader.
+    5.  Conclude with a summary of the argument and a final "So what?" takeaway for the reader.
+* **Language:** Keep sentences and paragraphs relatively short. Avoid academic jargon.
+
+Please now generate the full Substack post based on these instructions.`,
+                press: p => `You are an expert public relations professional. Your task is to write a formal press release based on the provided information. The press release must be written in the style of a concise, factual news article.
+
+**1. Press Release Details**
+
+* **Headline:** ${p.headline}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Structure and Content**
+
+The press release must follow this exact structure and contain the specified boilerplate text.
+
+* **PRESS RELEASE** (Must be at the top)
+* **Headline:** (Use the exact headline provided above)
+* **Dateline:** MALÉ, MALDIVES – ${new Date().toLocaleDateString('en-CA')} –
+* **Body Paragraphs:**
+    * Write 3-5 body paragraphs summarizing the key findings from the source materials.
+    * The style must be that of a news article: clear, direct, and factual.
+    * Each paragraph should be short, containing only 2-4 sentences for maximum readability.
+    * The first paragraph must summarize the most important finding (the "lede").
+    * Subsequent paragraphs should provide supporting details, statistics, and key quotes (you can create a quote attributed to a spokesperson).
+* **Project Summary Paragraph:** (This paragraph must be included as written below, adapted with the project's details)
+    * "The research, titled '[Insert Report Title]', provides a comprehensive analysis of [briefly describe the project's purpose]. The study highlights the urgent need for policy changes to address [state the core problem] and improve urban livability for all residents."
+* **Boilerplate Paragraph:** (This paragraph must be included verbatim)
+    * "**About Public Policy Lab:** Public Policy Lab is a think tank and consultancy firm based in the Maldives focused on developing the policy environment through original research, targeted projects, and training. Follow our work on Instagram, TikTok, and X (formerly Twitter) at @policylabmv."
+* **###** (The press release must end with three hash marks centered on a new line)
+
+Please now generate the complete press release.`,
+                tiktok: p => `You are an expert TikTok video producer specializing in creating viral educational content. Your task is to generate a complete, shot-by-shot plan for a TikTok video based on the provided information.
+
+**1. Video Details**
+
+* **Topic:** ${p.topic}
+* **Source Materials:** ${p.sources}
+* **Style:** ${p.style}
+
+**2. Mandatory TikTok Format**
+
+The plan must follow a structure optimized for TikTok's algorithm and user experience.
+
+* **Hook (0-2 seconds):** Start with the most shocking or surprising fact to stop the scroll.
+* **Body (2-15 seconds):** Quickly provide 2-3 supporting points with fast-paced visuals.
+* **Payoff/Conclusion (15-20 seconds):** End with a clear, memorable takeaway or call to action.
+
+**3. Required Output Structure**
+
+Generate the plan as a markdown table with two columns: "Timestamp" and "Shot Details". The "Shot Details" column must be a comprehensive, multi-line description covering all of the following for each timestamp:
+* **Visuals:** Description of the clip (stock footage, b-roll, or graphics) in a 9:16 aspect ratio.
+* **On-Screen Text:** The exact text overlay and style notes.
+* **TTS Voiceover Script:** The script for TikTok's text-to-speech voice.
+* **Editing Notes:** Specific CapCut effects, transitions, and audio suggestions.`,
+                infographic: p => `You are an expert information designer. Your task is to generate a detailed plan for a single, cohesive infographic based on the provided topic and data.
+
+**1. Infographic Details**
+
+* **Topic:** ${p.topic}
+* **Key Data Points:** ${p.data}
+* **Target Platform & Aspect Ratio:** ${p.aspect}
+* **Desired Visual Style:** ${p.style}
+* **Tool-Specific Instructions:** ${p.tools}
+
+**2. Mandatory Visual and Design Guide**
+* **Color Palette:** The design must be heavily influenced by the Public Policy Lab brand colors: Teal (#46bbb7), Coral Red (#f05b4e), Green (#3fad87), Blue (#0097b2), and Pink (#ec9896). Use these as the core palette.
+
+**3. Required Output Structure**
+
+Provide a single, detailed concept with the following sections:
+
+* **Concept Title:** (e.g., "The Squeeze: How Our City is Losing Space")
+* **Core Analogy/Metaphor:** (e.g., "A shrinking road")
+* **Layout and Flow:** Describe the structure from top to bottom, explaining how the reader's eye should travel through the information.
+* **Visual Elements:** Detail the specific icons, charts, and illustrations to use for each data point.
+* **Text Content:** Write the exact text for the main title, section headers, labels, and descriptions.
+* **Tool-Specific Instructions:**
+    * **For Canva Pro:** Suggest specific templates, font pairings (e.g., "League Spartan" for headers), and elements from the Canva library.
+    * **For Easel.ly:** Suggest relevant templates and objects from the Easel.ly library.`,
+                charts: p => `You are an expert data visualization specialist. Your task is to analyze the provided data and goal, discuss potential chart options, and then provide a detailed recommendation and creation plan. Your analysis must be based on the principles outlined below.
+
+**1. Chart Details**
+
+* **Data to Visualize:** ${p.data}
+* **Primary Goal / Story to Tell:** ${p.goal}
+* **Output Tools:** ${p.tools}
+
+**2. Mandatory Design Guide**
+* **Color Palette:** The chart's color scheme should be based on the Public Policy Lab brand palette: Teal (#46bbb7), Coral Red (#f05b4e), Green (#3fad87), Blue (#0097b2), and Pink (#ec9896).
+
+**3. Mandatory Chart Selection Principles**
+
+You must choose the most appropriate chart type based on the primary data relationship. Adhere strictly to the following rules:
+
+* **Change over Time:** Use a **Line Chart** for continuous data, an **Area Chart** for volume, or a **Step Chart** for sudden changes.
+* **Part-to-Whole:** Use a **Stacked Bar/Column Chart**, **Stacked Area Chart**, or a **Treemap** for hierarchical data. Use a **Pie/Donut Chart** only for simple compositions with very few categories.
+* **Magnitude/Ranking (Comparison):** Use a **Column Chart** (vertical) or **Bar Chart** (horizontal). Use a **Grouped Bar/Column Chart** to compare sub-categories.
+* **Distribution:** Use a **Histogram** for frequency in bins, a **Box Plot** for ranges, or a **Scatter Plot** to show clusters and outliers.
+* **Correlation:** Use a **Scatter Plot** for two variables or a **Bubble Chart** for three.
+* **Deviation:** Use a **Diverging Bar Chart** to show positive/negative values from a baseline.
+* **Flow:** Use a **Waterfall Chart** to show how a value changes sequentially or a **Sankey Diagram** for flow between multiple states.
+* **Spatial:** Use a **Thematic/GIS Map** for regional data or a **Bubble Map** for point-based magnitude.
+
+**4. Required Output Structure**
+
+* **1. Discussion of Chart Options:**
+    * First, briefly discuss all viable chart types for the user's data and goal, without using specific examples in this instruction text.
+    * For each option, explain the narrative it would emphasize.
+    * Note if a combination of charts would be most effective to tell the full story.
+* **2. Final Recommendation and Design:**
+    * State your final recommended chart or combination of charts.
+    * **Chart Type:** (e.g., "Grouped Bar Chart")
+    * **Rationale:** Justify your final choice, explaining why it best serves the primary goal.
+    * **Design:** Suggest a clear title, axis labels, and legends.
+* **3. Creation Instructions:**
+    * Provide clear, step-by-step instructions for creating the recommended chart(s) in **each of the selected tools**.
+    * Include instructions on any necessary **data cleaning or pre-processing** steps.
+    * **For ggplot2:** Provide the complete, runnable R code. **The code must be heavily commented**, explaining each function and argument for a user who does not know R.`,
+                dashboard: p => `You are an expert data analyst and dashboard designer, specializing in Tableau. Your task is to design a detailed plan for a powerful and user-friendly dashboard based on the provided data and objectives.
+
+**1. Dashboard Details**
+
+* **Data Description:** ${p.data}
+* **Primary Objective:** ${p.objective}
+* **Target Audience:** ${p.audience}
+
+**2. Mandatory Design Guide**
+* **Color Palette:** The dashboard's color scheme should be based on the Public Policy Lab brand palette: Teal (#46bbb7), Coral Red (#f05b4e), Green (#3fad87), Blue (#0097b2), and Pink (#ec9896). Use these colors for charts, highlights, and key metrics.
+
+**3. Required Output Structure**
+
+Generate the dashboard plan with the following detailed sections:
+
+* **1. Data Pre-processing:**
+    * Recommend any necessary cleaning, transposing, or data joining steps required before importing into Tableau.
+    * List any required **Calculated Fields** and provide the Tableau formula for each (e.g., \`Name: 'Days Overdue'\`, \`Formula: IF [Status] != 'Completed' AND [Target Date] < TODAY() THEN ZN(DATEDIFF('day', [Target Date], TODAY())) END\`).
+* **2. Dashboard Layout:**
+    * Describe the overall layout (e.g., "A 2x2 grid").
+    * Specify the placement of each chart and filter.
+* **3. Key Visualizations (Worksheets):**
+    * For each chart on the dashboard, describe its **Type** (e.g., "KPI Big Numbers," "Gantt Chart," "Bar Chart"), its **Purpose**, and the **Dimensions and Measures** to be used.
+* **4. Interactivity and Filters:**
+    * List all recommended filters (e.g., "Filter by Department," "Filter by Status," "Date Range Slider for Target Date").
+    * Describe the filter type (e.g., "Multi-select dropdown," "Single-select list").
+    * Specify which worksheets each filter should apply to.
+* **5. PowerBI Adaptation:**
+    * Briefly describe how to create a similar dashboard in PowerBI, noting any key differences in approach or available visuals.`,
+                methods: p => `You are an expert econometrician and research methodologist. Your thinking is deeply informed by the principles of causal inference as detailed in Scott Cunningham's "Causal Inference: The Mixtape" and Nick Huntington-Klein's "The Effect." Your task is to propose a rigorous research methodology to answer the user's question based on their available data.
+
+**1. Research Details**
+
+* **Research Question:** ${p.question}
+* **Available Data:** ${p.data}
+
+**2. Required Output Structure**
+
+Generate a detailed research plan with the following sections:
+
+* **1. Causal Framework:**
+    * Draw a **Directed Acyclic Graph (DAG)** as a code block or text description to map the causal relationships between the treatment, outcome, and potential confounders.
+    * Identify the key causal question and the core identification challenge (e.g., "The challenge is selection bias, as the program was likely implemented in higher-crime neighborhoods.").
+* **2. Recommended Research Design:**
+    * Propose the most appropriate research design. Justify your choice.
+    * Examples: **Difference-in-Differences (DiD)**, **Regression Discontinuity (RD)**, **Instrumental Variables (IV)**, or a **Randomized Control Trial (RCT)**.
+* **3. Statistical Model:**
+    * Specify the primary regression equation to be estimated.
+    * Define each variable in the equation (Y, T, X).
+    * Recommend the specific regression type (e.g., "Linear OLS with clustered standard errors," "Logit model").
+    * Provide the complete R code to run the analysis. **The code must be heavily commented**, explaining each function and argument for a user who does not know R. Include data cleaning and preparation steps.
+* **4. Robustness Checks and Diagnostics:**
+    * List essential tests to validate the model's assumptions (e.g., "Test for parallel trends in the pre-treatment period for DiD," "Check for balance in covariates").
+    * Suggest alternative specifications or models to test the sensitivity of the results.
+* **5. Potential Pitfalls, Limitations, and Alternative Explanations:**
+    * **a. Statistical Limitations:** Discuss potential threats to statistical validity (e.g., "Spillover effects," "Measurement error," "Heteroskedasticity") and suggest ways to mitigate them.
+    * **b. Logical and Contextual Considerations:** Discuss non-statistical alternative explanations for the findings. This should include potential selection biases, the representativeness of the sample, confounding events (e.g., a major economic crisis, a natural disaster, a new law passed during the study period), seasonality (e.g., tourist seasons, holidays), reporting bias (e.g., changes in social stigma affecting reporting rates), and the Lucas critique (i.e., whether the findings would hold if the policy were scaled up). Consider the use of dummy variables to control for specific, niche events (e.g., a dummy for the COVID-19 pandemic years, or for a specific month of a state of emergency).
+    * **c. Checklist for Contextual Inquiry:** Generate a list of pointed questions the researcher must consider about the specific context, since you do not have that local knowledge. For example: "Were there any other major programs or events happening in the 'treated' group but not the 'control' group during the study period?", "How might the upcoming election cycle have influenced the behavior you are measuring?", "Could the observed change be due to a shift in how data is collected or defined, rather than a change in underlying behavior?".`,
+                 briefing: p => `You are an expert policy advisor. Your task is to write a clear, concise, and scannable briefing note on the provided topic, summarizing the key information from the source materials.
+
+**1. Briefing Note Details**
+
+* **Topic:** ${p.topic}
+* **Target Audience:** ${p.audience}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Format and Style**
+
+* **Length:** The entire output must be structured to fit on a single page (approximately 400-500 words).
+* **Clarity:** Use clear, direct language. Avoid jargon.
+* **Structure:** Rely on bullet points for easy scanning. The length of each section should be flexible based on the topic's needs.
+
+**3. Required Output Structure**
+
+Generate the briefing note using this exact format:
+
+**BRIEFING NOTE FOR:** ${p.audience}
+
+**SUBJECT:** ${p.topic}
+
+**DATE:** ${new Date().toLocaleDateString('en-CA')}
+
+**Purpose:**
+* A single sentence stating the purpose of this briefing note.
+
+**Background (if necessary):**
+* A brief, 2-3 sentence paragraph providing essential context, only if absolutely necessary for understanding the issue.
+
+**Key Points:**
+* Use bullet points to summarize the most critical facts, statistics, and findings from the source materials.
+
+**Implications:**
+* Use bullet points to explain the meaning and consequences of the key points. What problems or opportunities do they highlight?
+
+**Way Forward:**
+* Use bullet points to list actionable recommendations, decisions to be made, or next steps to be taken.`
+            };
+
+            // --- DYNAMIC UI BUILDER ---
+            const mainContainer = document.getElementById('main-container');
+            const navContainer = document.getElementById('nav-container');
+            const datalistContainer = document.getElementById('datalist-container');
+
+            // Create all datalists first
+            Object.keys(suggestions).forEach(key => {
+                const datalist = document.createElement('datalist');
+                datalist.id = `${key}-suggestions`;
+                suggestions[key].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    datalist.appendChild(option);
+                });
+                datalistContainer.appendChild(datalist);
+            });
+
+            generatorsData.forEach(gen => {
+                const tabBtn = document.createElement('button');
+                tabBtn.id = `tab-${gen.id}`;
+                tabBtn.className = 'tab-btn';
+                tabBtn.textContent = gen.name;
+                tabBtn.dataset.color = gen.color;
+                navContainer.appendChild(tabBtn);
+
+                const section = document.createElement('div');
+                section.id = `generator-${gen.id}`;
+                section.className = 'generator-section bg-gray-800 rounded-lg shadow-lg p-6';
+                
+                let fieldsHtml = gen.fields.map(f => {
+                    const inputId = `${gen.id}-${f.id}`;
+                    let inputHtml = '';
+                    if (f.type === 'checkbox') {
+                        let checkboxHtml = f.options.map(opt => `
+                            <label class="checkbox-label text-gray-300">
+                                <input type="checkbox" name="${inputId}" value="${opt}" class="form-checkbox h-4 w-4 rounded bg-gray-700 border-gray-600 focus:ring-2" style="color: ${gen.color}; --focus-color: ${gen.color};">
+                                ${opt}
+                            </label>
+                        `).join('');
+                        return `<div><label class="block text-sm font-medium text-gray-300 mb-2">${f.label}</label><div class="flex flex-wrap gap-4">${checkboxHtml}</div></div>`;
+                    } else if (f.type === 'textarea') {
+                        inputHtml = `<textarea id="${inputId}" rows="3" class="form-input w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm p-3 transition focus:ring-2" style="--focus-color: ${gen.color}" placeholder="${f.placeholder}"></textarea>`;
+                    } else {
+                        const listAttr = f.suggestions ? `list="${f.suggestions}-suggestions"` : '';
+                        inputHtml = `<input type="${f.type}" id="${inputId}" ${listAttr} class="form-input w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm p-3 transition focus:ring-2" style="--focus-color: ${gen.color}" placeholder="${f.placeholder}">`;
+                    }
+                    return `<div><label for="${inputId}" class="block text-sm font-medium text-gray-300 mb-1">${f.label}</label>${inputHtml}</div>`;
+                }).join('');
+
+                section.innerHTML = `
+                    <h2 class="text-xl font-semibold mb-4 border-b border-gray-700 pb-3" style="color: ${gen.color};">Generate ${gen.name} Prompt</h2>
+                    <div class="space-y-6">${fieldsHtml}<div class="text-right">
+                        <button id="generate-${gen.id}-btn" class="generate-btn text-white font-bold py-2 px-6 rounded-md shadow-md transition-transform transform hover:scale-105" style="background-color: ${gen.color};">Generate Prompt</button>
+                    </div></div>`;
+                mainContainer.appendChild(section);
+
+                document.getElementById(`generate-${gen.id}-btn`).addEventListener('click', () => {
+                    const params = {};
+                    gen.fields.forEach(f => {
+                        if (f.type === 'checkbox') {
+                            const checked = Array.from(document.querySelectorAll(`input[name="${gen.id}-${f.id}"]:checked`)).map(cb => cb.value);
+                            params[f.id] = checked.join(', ');
+                        } else {
+                            params[f.id] = document.getElementById(`${gen.id}-${f.id}`).value.trim();
+                        }
+                    });
+                    const fullPrompt = templates[gen.id] ? templates[gen.id](params) : `Template for ${gen.id} not fully implemented. Params: ${JSON.stringify(params)}`;
+                    displayOutput(fullPrompt, `Generated ${gen.name} Prompt`, gen.color);
+                });
+            });
+
+            // --- TAB SWITCHING & OUTPUT LOGIC ---
+            const switchTab = (tabId) => {
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.color = '#9ca3af'; // gray-400
+                    btn.style.borderColor = 'transparent';
+                });
+                document.querySelectorAll('.generator-section').forEach(sec => sec.classList.remove('active'));
+                
+                const activeBtn = document.getElementById(`tab-${tabId}`);
+                const activeGen = generatorsData.find(g => g.id === tabId);
+                activeBtn.classList.add('active');
+                activeBtn.style.color = activeGen.color;
+                activeBtn.style.borderColor = activeGen.color;
+                
+                document.getElementById(`generator-${tabId}`).classList.add('active');
+            };
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.id.replace('tab-', ''))));
+
+            const outputContainer = document.getElementById('output-container');
+            const outputPromptEl = document.getElementById('output-prompt');
+            const outputTitleEl = document.getElementById('output-title');
+            const copyBtn = document.getElementById('copy-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const copyFeedbackEl = document.getElementById('copy-feedback');
+
+            const displayOutput = (promptText, title, color) => {
+                outputPromptEl.textContent = promptText;
+                outputTitleEl.textContent = title;
+                outputTitleEl.style.color = color;
+                outputContainer.classList.remove('hidden');
+                outputContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(outputPromptEl.textContent).then(() => {
+                    copyFeedbackEl.textContent = 'Copied to clipboard!';
+                    setTimeout(() => { copyFeedbackEl.textContent = ''; }, 2000);
+                });
+            });
+            
+            saveBtn.addEventListener('click', () => {
+                const text = outputPromptEl.textContent;
+                const blob = new Blob([text], { type: 'text/plain' });
+                const anchor = document.createElement('a');
+                anchor.download = 'generated_prompt.txt';
+                anchor.href = window.URL.createObjectURL(blob);
+                anchor.style.display = 'none';
+                document.body.appendChild(anchor);
+                anchor.click();
+                document.body.removeChild(anchor);
+                window.URL.revokeObjectURL(anchor.href);
+            });
+
+            // Initial setup
+            switchTab('video');
+        });
+    </script>
+
+</body>
+</html>
