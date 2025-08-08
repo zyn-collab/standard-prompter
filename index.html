@@ -91,6 +91,10 @@
         <!-- Datalists for suggestions -->
         <div id="datalist-container"></div>
 
+        <footer class="text-center mt-12">
+            <p class="text-xs text-gray-500" style="font-family: 'Poppins', sans-serif;">developed 2025 by public policy lab</p>
+        </footer>
+
     </div>
 
     <script>
@@ -98,9 +102,9 @@
             // --- BRAND & UI DATA ---
             const brandColors = {
                 teal: '#46bbb7',
-                coral: '#f05b4e',
                 green: '#3fad87',
                 blue: '#0097b2',
+                coral: '#f05b4e',
                 pink: '#ec9896',
             };
 
@@ -144,6 +148,7 @@
                 { id: 'infographic', name: 'Infographic', color: brandColors.green, fields: [
                     { id: 'topic', label: 'Infographic Topic', type: 'text', placeholder: "e.g., 'Visualizing the loss of public space to street parking.'" },
                     { id: 'data', label: 'Key Data Points', type: 'textarea', placeholder: "List 3-5 key stats to visualize." },
+                    { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Use data from Report.pdf'"},
                     { id: 'aspect', label: 'Target Aspect Ratio', type: 'text', placeholder: "e.g., 'Instagram Post (1:1)', 'A4 Poster'", suggestions: 'aspectRatio' },
                     { id: 'style', label: 'Desired Visual Style', type: 'text', placeholder: "e.g., 'Minimalist with a single accent color'", suggestions: 'infographicStyle' },
                     { id: 'tools', label: 'Tool-Specific Instructions', type: 'checkbox', options: ['Canva Pro', 'Easel.ly'] }
@@ -166,6 +171,17 @@
                     { id: 'topic', label: 'Briefing Subject', type: 'text', placeholder: "e.g., 'Briefing on the key findings of the Third Spaces report.'" },
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'Minister of Social and Family Development'", suggestions: 'audience' },
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Draw all info from Third_Spaces_Draft.pdf'" }
+                ]},
+                { id: 'narrative', name: 'Narrative Framing', color: brandColors.green, fields: [
+                     { id: 'policy', label: 'Policy Idea & Detailed Explanation', type: 'textarea', placeholder: "Explain the policy's goals, mechanisms, and intended impact." },
+                     { id: 'goal', label: 'Primary Goal of Engagement', type: 'text', placeholder: "e.g., 'To secure funding in the next state budget.'" },
+                     { id: 'stakeholders', label: 'Known Stakeholders to Include', type: 'text', placeholder: "e.g., 'Ministry of Education, UNICEF'" },
+                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Base arguments on Report.pdf'"}
+                ]},
+                { id: 'advocacy', name: 'Advocacy Plan', color: brandColors.blue, fields: [
+                    { id: 'problem', label: 'Main Problem', type: 'textarea', placeholder: "Describe the broad problem the advocacy will address." },
+                    { id: 'issue', label: 'Specific Advocacy Issue (Root Cause)', type: 'textarea', placeholder: "Describe the specific, actionable root cause of the problem." },
+                    { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "Refer to any attached files containing evidence, data, or context." }
                 ]}
             ];
             
@@ -341,6 +357,7 @@ Generate the plan as a markdown table with two columns: "Timestamp" and "Shot De
 
 * **Topic:** ${p.topic}
 * **Key Data Points:** ${p.data}
+* **Source Materials:** ${p.sources}
 * **Target Platform & Aspect Ratio:** ${p.aspect}
 * **Desired Visual Style:** ${p.style}
 * **Tool-Specific Instructions:** ${p.tools}
@@ -494,7 +511,152 @@ Generate the briefing note using this exact format:
 * Use bullet points to explain the meaning and consequences of the key points. What problems or opportunities do they highlight?
 
 **Way Forward:**
-* Use bullet points to list actionable recommendations, decisions to be made, or next steps to be taken.`
+* Use bullet points to list actionable recommendations, decisions to be made, or next steps to be taken.`,
+                narrative: p => `You are an expert public policy strategist and lobbying consultant. Your task is to generate a comprehensive narrative framing and stakeholder engagement plan for a given policy idea. You must be strategic, persuasive, and meticulous, drawing on real-world information to tailor your recommendations.
+
+**1. Core Policy Details**
+
+* **Policy Idea & Detailed Explanation:** ${p.policy}
+* **Primary Goal of Engagement:** ${p.goal}
+* **Known Stakeholders to Include:** ${p.stakeholders}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Style Guide**
+
+* **Tone and Clarity:** The writing must be clear, direct, and accessible to a 12th-grade reading level. Avoid filler words like "tapestry," "symphony," or "delve." Do not use constructions like "it's not about X, it's about Y." Use technical language precisely where necessary.
+* **Factual Integrity:** When searching for information, prioritize official websites, recent reports, and reputable news sources. All research findings must be cited in APA 7th Edition format, with a direct URL in < >. Do not hallucinate facts, projects, or publications.
+
+**3. Required Output Structure**
+
+Generate the narrative framing document using the following comprehensive, multi-part structure:
+
+### 1. Potential Key Narratives/Framing
+* **Instruction:** Develop 2-3 high-level, persuasive core narratives to frame the policy for a general audience. Each narrative should be engaging, positive, and highlight the broad benefits in a compelling way that makes the policy seem like an obviously good idea.
+
+### 2. CICO analysis (Conflicts of Interest, Competition, Opposition)
+* **Instruction:** Analyze potential roadblocks based on the CICO framework.
+* **Conflicts of Interest:**
+    * **Organizational:** Identify potential conflicts between institutions (e.g., political opposition between a city council and the central government, upcoming elections causing delays).
+    * **Individual:** Consider potential rivalries or misaligned incentives between individuals within stakeholder organizations (e.g., competing executives, individuals whose authority might be diminished by the policy).
+* **Competition:**
+    * Identify entities that may not be direct legal competitors but could see the policy as a threat to their status quo (e.g., a private cinema opposing a free community film club).
+* **Opposition:**
+    * Identify groups that might oppose the policy on logistical, ideological, or social grounds (e.g., residents concerned about noise from a new community space, religious groups concerned about social mingling, criminal elements threatened by community improvement).
+
+### 3. Stakeholder identification and analysis
+* **Instruction:** Identify all relevant stakeholders using the provided reference list and supplementing with web searches. Note that the list is a reference and other stakeholders can be included.
+
+**Reference List of Potential Stakeholders in the Maldives:**
+
+* **Government Councils:**
+    * **The Social Council:** Chaired by the Vice President. Includes: Ministry of Education; Ministry of Health; Ministry of Islamic Affairs; Ministry of Social and Family Development; Ministry of Sports, Fitness and Recreation; Ministry of Dhivehi Language, Culture and Heritage; Ministry of Higher Education, Labour and Skills Development; Ministry of Youth Empowerment, Information and Arts; Ministry of Cities, Local Government and Public Works; Ministry of Homeland Security and Technology.
+    * **The Economic Council:** Chaired by the President. Includes: Ministry of Defence; Ministry of Finance and Planning; Ministry of Homeland Security and Technology; Ministry of Economic Development and Trade; Ministry of Fisheries and Ocean Resources; Ministry of Tourism and Environment; Ministry of Transport and Civil Aviation; Ministry of Construction, Housing and Infrastructure; Ministry of Agriculture and Animal Welfare; Ministry of Cities, Local Government and Public Works.
+    * **The Cabinet:** Includes all Ministers, the Vice President, and the President.
+* **International & Aid Organizations:** UNDP, UNICEF, WHO, UNFPA, World Bank, Asian Development Bank (ADB), IMF, IsDB, UNODC, IOM, UNESCO, AusAid, USAID, British High Commission, Australian High Commission, Japanese Government, Chinese Government, Transparency International, Westminster Foundation for Democracy (WFD), International Republican Institute (IRI), Merck Foundation.
+* **Local NGOs & Foundations:** Society for Health Education (SHE), Maldives Association for People with Disabilities (MAPD), Advocating the Rights of Children (ARC), Maldives Red Crescent, Regional Alliance for Fostering Youth (RAFY), Retirees Association of Maldives, Association for Disability and Development (ADD), Beautiful Eyes Down Syndrome Association of Maldives, Blind and Visually Impaired Association of Maldives (BVISM), Care Society, Maldives Autism Association, Maldives Deaf Association, Mental Health Support Group (MHSG).
+* **Corporate & SOE CSR Providers:** Housing Development Corporation (HDC), MTCC, MWSC, STELCO, WAMCO, Bank of Maldives (BML), Dhiraagu, Ooredoo, Maldives Pension Administration Office, Atmosphere Foundation.
+
+**For each Key Stakeholder (e.g., Ministry of Education, UNICEF, etc.):**
+
+* **a. Specific Mandates and Focus Areas:**
+    * *Instruction:* Search online for the organization's official mandate, strategic plan, recent press releases, and stated goals.
+    * Present the findings in a table.
+* **b. Narrative Framing and Persuasive Angles:**
+    * *Instruction:* Based on the mandates and general sector knowledge, analyze the likely policy interests and personal passions of individuals within the organization.
+    * Present the analysis in a table.
+
+### 4. Tailored messaging and persuasion tools
+* **a. Impactful Analogies**
+* **b. Memorable Messaging**
+
+### 5. Demonstrating synergy and expertise
+* **a. Connecting to Existing Work**
+* **b. Referencing Niche Information**
+
+### 6. Appealing to stakeholder interests
+* **a. Personal and Political Wins**
+* **b. PR and Risk Management**
+
+### 7. Risk, cost, and general preparedness
+* **a. Cost-Benefit Analysis**
+* **b. Strategic Analyses (SWOT, PEST, Risk Register)**
+* **c. Frequently Asked Questions (FAQs)**
+
+### 8. Incentives and adaptations for buy-in
+
+### 9. FOR RIGOROUS ANALYSIS PURPOSES - POTENTIAL ISSUES:
+* **Instruction:** Critically analyze the policy idea from an oppositional standpoint. Identify potential negative consequences, unintended side effects, implementation challenges, or valid counterarguments that could weaken the proposal.`,
+                advocacy: p => `You are an expert advocacy strategist. Your task is to generate a comprehensive, actionable advocacy plan based on the provided information, following the 10-part strategic framework.
+
+**1. Advocacy Details**
+
+* **Main Problem:** ${p.problem}
+* **Specific Advocacy Issue (Root Cause):** ${p.issue}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Style Guide**
+
+* **Tone and Clarity:** The writing must be clear, direct, and strategic. Use bullet points and tables for readability.
+* **Factual Integrity:** All claims should be grounded in the provided source materials.
+
+**3. Required Output Structure**
+
+Generate the advocacy plan using the following 10-part structure:
+
+### Part 1: Advocacy Issue
+* A brief summary of the main problem and the specific, actionable advocacy issue derived from it.
+
+### Part 2: Advocacy Goal and Objectives
+* **Advocacy Goal:** State the single, overarching policy change you want to achieve. It must be a SMART goal (Specific, Measurable, Achievable, Relevant, Time-bound) and follow the format:
+    * **WHO** (Decision-making institution) will **HOW** (Specific action/policy vehicle) to ensure **WHAT** (The desired change) by **WHEN** (The deadline).
+* **Advocacy Objectives:** List 2-3 intermediate, measurable steps that must be achieved to reach the main goal. These are actions you want decision-makers or influencers to take.
+
+### Part 3: Decision-Makers and Influencers
+* **Decision-Makers:** List the specific individuals or bodies with the formal power to approve your advocacy goal.
+* **Key Influencers:** List the key individuals or groups who can influence the decision-makers (e.g., professional associations, civic leaders, media, academics).
+
+### Part 4: Decision-Makers' Key Interests
+* Create a table analyzing up to three key decision-makers:
+| Decision-Maker | Awareness of Issue | Current Position | Key Interests (e.g., political, financial, personal) |
+| :--- | :--- | :--- | :--- |
+| [Name/Title] | [Unaware / Aware but uninformed / Accurately informed] | [High support / Low support / Non-mobilized / High opposition] | [List 2-3 key interests] |
+
+### Part 5: Opposition and Obstacles
+* **Opponents:** Identify potential individuals or groups who might oppose the goal and list their reasons and level of influence.
+* **Obstacles:** Identify potential non-personnel challenges (e.g., lack of funding, upcoming elections, bureaucratic hurdles).
+* **Mitigation Strategies:** For each key opponent or obstacle, suggest a strategy to mitigate their impact.
+
+### Part 6: Advocacy Assets and Gaps
+* Create a table inventorying your organization's resources for this campaign:
+| Asset/Skill Category | Specific Asset (if any) | Level (High/Medium/Low) |
+| :--- | :--- | :--- |
+| Staff availability | | |
+| Funding | | |
+| Relationships with decision-makers | | |
+| Media relationships | | |
+| Technical expertise on the issue | | |
+| Supporting data/evidence | | |
+
+### Part 7: Advocacy Partners
+* Identify 2-4 potential partner organizations or coalitions. For each, describe the strategic reason for partnering (e.g., "They fill our gap in media relations") and their anticipated role.
+
+### Part 8: Advocacy Tactics (Work Plan)
+* For **each objective** listed in Part 2, create a detailed work plan in a table format:
+| Activity/Tactic | Responsible Person/Org | Partner(s) | Resources Needed | Timeline |
+| :--- | :--- | :--- | :--- | :--- |
+| (e.g., "Hold briefing with MOH officials") | (e.g., "Jane Doe") | (e.g., "Partner NGO") | (e.g., "Policy brief, meeting room") | (e.g., "Q4 2025") |
+
+### Part 9: Advocacy Messages
+* For one key decision-maker, craft a concise and compelling core message (5-8 sentences) that answers these four questions:
+    1.  What is the issue?
+    2.  Why should this specific decision-maker care (linking to their interests from Part 4)?
+    3.  What is your proposed solution?
+    4.  What is the specific action you want them to take next?
+
+### Part 10: Plan to Measure Success
+* For each objective, list the key metrics for success, separating them into:
+    * **Outputs:** The direct products of your activities (e.g., "Number of meetings held," "Fact sheets distributed").
+    * **Outcomes:** The changes that result from your activities (e.g., "Decision-maker issues a public statement of support," "Increased positive media mentions of the issue").`
             };
 
             // --- DYNAMIC UI BUILDER ---
