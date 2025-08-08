@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +8,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY2OSIgaGVpZ2h0PSI2NjYiPjxwYXRoIGQ9Ik0wLDAgTDY2OSwwIEw2NjksNjY2IEwwLDY2NiBaIE0zNTQsMyBMMzU0LDE4NCBMMzc1LDE4NiBMMzkyLDE5MCBMNDEwLDE5OCBMNDIyLDIwNSBMNDM1LDIxNSBMNDQ2LDIyNiBMNDU3LDI0MSBMNDY2LDI1OCBMNDcwLDI2NyBMNDgxLDI2NCBMNDk2LDI1OSBMNTA5LDI1NSBMNTM2LDI0NiBMNTQ5LDI0MiBMNTczLDIzNCBMNTg2LDIzMCBMNjEzLDIyMSBMNjI2LDIxNyBMNjQxLDIxMiBMNjM5LDIwMyBMNjI5LDE3OSBMNjE2LDE1NCBMNjA0LDEzNSBMNTk0LDEyMiBMNTgzLDEwOCBMNTc2LDEwMSBMNTY5LDkzIEw1NjEsODUgTDU1Myw3OCBMNTQwLDY3IEw1MjUsNTYgTDUwNiw0NCBMNDc5LDMwIEw0NTYsMjEgTDQzOCwxNSBMNDI0LDExIEw0MDIsNyBMMzgwLDQgTDM2OCwzIFogTTI5MSw0IEwyNjYsNyBMMjM1LDE0IEwyMDgsMjMgTDE4OCwzMiBMMTY4LDQyIEwxNDksNTQgTDEzNSw2NCBMMTE4LDc4IEwxMDIsOTMgTDk0LDEwMSBMODcsMTA5IEw3NCwxMjUgTDU4LDE0OSBMNDgsMTY3IEwzNywxOTAgTDMwLDIwOSBMMzAsMjEyIEw1NiwxMjEgTDY5LDIyNSBMMjkzLDIzMyBMMTA2LDIzNyBMMTMzLDI0NiBMMTQ2LDI1MCBMMTczLDI1OSBMMTg2LDI2MyBMMTk4LDI2NyBMMjAyLDI2NiBMMjA5LDI1MCBMMjE4LDIzNSBMMjI3LDIyNCBMMjM4LDIxMyBMMjUyLDIwMyBMMjcxLDE5MyBMMjg2LDE4OCBMMjk1LDE4NiBMMzE2LDE4NCBMMzE2LDQgWiBNMTgsMjQ4IEwxNSwyNTUgTDEwLDI3NiBMNywyOTEgTDQsMzEzIEw0LDM2NSBMNSwzNzggTDExLDQxMCBMMTcsNDMxIEwyNCw0NTEgTDM0LDQ3NCBMNDQsNDkzIEw1Niw1MTIgTDY5LDUyOSBMNzgsNTQwIEw5MCw1NTMgTDEwMSw1NjQgTDExMiw1NzMgTDEyNyw1ODUgTDEzMSw1ODEgTDE0MSw1NjcgTDE1NCw1NDkgTDE2OCw1MzAgTDE4MSw1MTIgTDE5NCw0OTQgTDIwNyw0NzYgTDIyMSw0NTcgTDIzMyw0NDAgTDIzMyw0MzggTDIyMyw0MzAgTDIxNCw0MjEgTDIwMyw0MDYgTDE5NSwzOTAgTDE4OSwzNzUgTDE4NSwzNTUgTDE4NSwzMjggTDE4OCwzMTEgTDE4OSwzMDMgTDE3MywyOTggTDE0MSwyODcgTDEyNCwyODIgTDEwMSwyNzQgTDg0LDI2OSBMNjEsMjYxIEw0NCwyNTYgTDIxLDI0OCBaIE02NTAsMjQ4IEw2MTgsMjU5IEw2MDEsMjY0IEw1NzgsMjcyIEw1NjEsMjc3IEw1MzgsMjg1IEw1MjEsMjkwIEw0OTgsMjk4IEw0ODQsMzAyIEw0ODIsMzAzIEw0ODMsMzEwIEw0ODYsMzI2IEw0ODYsMzUzIEw0ODMsMzcwIEw0NzcsMzg4IEw0NjksNDA0IEw0NjAsNDE3IEw0NDgsNDMwIEw0MzgsNDM4IEw0MzksNDQyIEw0NTMsNDYxIEw0NjYsNDc5IEw0ODAsNDk4IEw0OTMsNTE2IEw1MDYsNTM0IEw1MTksNTUyIEw1MzMsNTcxIEw1NDMsNTg1IEw1NTIsNTc5IEw1NjYsNTY3IEw1NzgsNTU2IEw1ODgsNTQ2IEw1OTUsNTM4IEw2MDcsNTIzIEw2MjAsNTA0IEw2MzAsNDg3IEw2MzksNDcwIEw2NTAsNDQzIEw2NTgsNDE4IEw2NjQsMzg5IEw2NjcsMzY4IEw2NjcsMzE2IEw2NjQsMjkwIEw2NTgsMjYzIEw2NTQsMjQ5IFogTTI2Myw0NjIgTDI1MSw0NzkgTDIzNyw0OTggTDIyNCw1MTYgTDIxMSw1MzQgTDE5OCw1NTIgTDE4NCw1NzEgTDE3MSw1ODkgTDE1OSw2MDYgTDE2MSw2MTAgTDE4MCw2MjIgTDE5OCw2MzIgTDIxOSw2NDIgTDI0Nyw2NTIgTDI3MCw2NTggTDI4NSw2NjEgTDMxMSw2NjQgTDM1OSw2NjQgTDM3Nyw2NjIgTDQwMSw2NTggTDQyNCw2NTIgTDQ1MSw2NDIgTDQ3MSw2MzMgTDQ4OCw2MjQgTDUwOCw2MTEgTDUxMiw2MDggTDUxMCw2MDMgTDQ5Nyw1ODUgTDQ4Myw1NjYgTDQ3Myw1NTIgTDQ2MCw1MzQgTDQ0Niw1MTUgTDQzMyw0OTcgTDQyMCw0NzkgTDQwOCw0NjMgTDQwNCw0NjMgTDM4OCw0NzIgTDM3MCw0NzkgTDM0OSw0ODMgTDMyMSw0ODMgTDMwMSw0NzkgTDI4NSw0NzMgTDI3MCw0NjUgTDI2Niw0NjIgWiAiIGZpbGw9IiNGRUZFRkUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsMCkiLz48cGF0aCBkPSJNMCwwIEwxNCwwIEw0MiwzIEw2MSw2IEw3OCwxMCBMMTA4LDIwIEwxMzEsMzAgTDE1NCw0MiBMMTc4LDU4IEwxOTQsNzEgTDIwMiw3OCBMMjE1LDkwIEwyMzEsMTA3IEwyNDEsMTIwIEwyNTIsMTM1IEwyNjQsMTU1IEwyNzYsMTc4IEwyODYsMjAzIEwyODcsMjA5IEwyNjQsMjE3IEwyNDcsMjIyIEwyMjQsMjMwIEwyMDcsMjM1IEwxODcsMjQyIEwxNzAsMjQ3IEwxNDcsMjU1IEwxMzAsMjYwIEwxMTgsMjY0IEwxMTUsMjYzIEwxMDgsMjQ3IEw5OSwyMzIgTDg4LDIxOSBMNzksMjEwIEw2MiwxOTggTDQ1LDE5MCBMMzgsMTg3IEwyMSwxODMgTDAsMTgxIFogIiBmaWxsPSIjNDZCQkI3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNTQsMykiLz48cGF0aCBkPSJNMCwwIEw0LDEgTDExLDI3IEwxNSw0OSBMMTcsNjggTDE3LDEyMCBMMTMsMTQ3IEw3LDE3NCBMLTMsMjAzIEwtMTQsMjI4IEwtMjYsMjUwIEwtMzYsMjY1IEwtNDgsMjgxIEwtNTcsMjkyIEwtNzEsMzA3IEwtODAsMzE2IEwtOTEsMzI1IEwtMTA2LDMzNyBMLTExMCwzMzMgTC0xMjMsMzE1IEwtMTM2LDI5NyBMLTE1MCwyNzggTC0xNjMsMjYwIEwtMTc2LDI0MiBMLTE4OSwyMjQgTC0yMDMsMjA1IEwtMjEyLDE5MyBMLTIxMSwxODkgTC0yMDIsMTgyIEwtMTk0LDE3NCBMLTE4NCwxNjEgTC0xNzYsMTQ3IEwtMTY5LDEyOSBMLTE2NSwxMTIgTC0xNjQsMTA1IEwtMTY0LDc4IEwtMTY3LDYyIEwtMTY4LDU1IEwtMTU3LDUxIEwtMTQ0LDQ3IEwtMTE3LDM4IEwtMTA0LDM0IEwtNzcsMjUgTC02NCwyMSBMLTM3LDEyIEwtMjQsOCBaICIgZmlsbD0iIzAwOTdCMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjUwLDI0OCkiLz48cGF0aCBkPSJNMCwwIEw0LDEgTDIwLDEwIEwzNSwxNiBMNTIsMjAgTDU4LDIxIEw4NiwyMSBMMTA3LDE3IEwxMjksOCBMMTQyLDAgTDE0NiwyIEwxNjAsMjEgTDE3MywzOSBMMTg2LDU3IEwyMDAsNzYgTDIxMyw5NCBMMjI2LDExMiBMMjM5LDEzMCBMMjQ5LDE0NCBMMjQ4LDE0NyBMMjMzLDE1NyBMMjEyLDE2OSBMMTkzLDE3OCBMMTY5LDE4NyBMMTU0LDE5MiBMMTMzLDE5NyBMMTA5LDIwMSBMOTYsMjAyIEw0OCwyMDIgTDIyLDE5OSBMMCwxOTQgTC0xOSwxODkgTC00NCwxODAgTC03MywxNjYgTC05MywxNTQgTC0xMDQsMTQ2IEwtMTAyLDE0MSBMLTg5LDEyMyBMLTc2LDEwNSBMLTYyLDg2IEwtNDksNjggTC0zNiw1MCBMLTIzLDMyIEwtOSwxMyBaICIgZmlsbD0iI0VDOTg5NiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjYzLDQ2MikiLz48cGF0aCBkPSJNMCwwIEw2LDEgTDM4LDEyIEw1MSwxNiBMNzgsMjUgTDkxLDI5IEwxMTgsMzggTDEzMSw0MiBMMTU4LDUxIEwxNzEsNTUgTDE2OSw2NyBMMTY3LDgwIEwxNjcsMTA3IEwxNzEsMTI3IEwxNzksMTQ3IEwxODcsMTYxIEwxOTgsMTc1IEwyMDgsMTg1IEwyMTUsMTkwIEwyMTMsMTk1IEwyMDAsMjEzIEwxODYsMjMyIEwxNzYsMjQ2IEwxNjMsMjY0IEwxNDksMjgzIEwxMzYsMzAxIEwxMjMsMzE5IEwxMTAsMzM3IEwxMDQsMzMzIEw4OCwzMjAgTDc1LDMwOCBMNjQsMjk3IEw1NSwyODYgTDQzLDI3MSBMMzEsMjUzIEwxOSwyMzIgTDEwLDIxMyBMMSwxODkgTC00LDE3NCBMLTksMTUzIEwtMTMsMTMwIEwtMTQsMTE3IEwtMTQsNjUgTC0xMCwzNiBMLTYsMjAgTC0xLDEgWiAiIGZpbGw9IiNGMDVCNUUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4LDI0OCkiLz48cGF0aCBkPSJNMCwwIEwyNSwwIEwyNSwxODAgTDQsMTgyIEwtMTIsMTg2IEwtMjgsMTkzIEwtMzksMTk5IEwtNTAsMjA3IEwtNjAsMjE2IEwtNjcsMjIzIEwtNzcsMjM3IEwtODYsMjU0IEwtOTAsMjYzIEwtOTksMjYxIEwtMTEzLDI1NiBMLTEzMCwyNTEgTC0xNTMsMjQzIEwtMTcwLDIzOCBMLTE5MywyMzAgTC0yMTAsMjI1IEwtMjMwLDIxOCBMLTI0NywyMTMgTC0yNjEsMjA4IEwtMjU5LDE5OSBMLTI0OSwxNzUgTC0yMzksMTU1IEwtMjI4LDEzNyBMLTIxNiwxMjAgTC0yMDIsMTAzIEwtMTg4LDg4IEwtMTgwLDgwIEwtMTcyLDczIEwtMTU1LDU5IEwtMTMxLDQzIEwtMTE1LDM0IEwtODgsMjEgTC02NiwxMyBMLTQzLDcgTC0xOCwyIFogIiBmaWxsPSIjM0ZBRDg3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyOTEsNCkiLz48L3N2Zz4=">
+    <!-- Updated Favicon Link -->
+    <link rel="icon" href="logo.svg" type="image/svg+xml">
+    <link rel="alternate icon" href="icon-192.png" type="image/png" sizes="192x192">
+    <link rel="apple-touch-icon" href="icon-512.png">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #111827; /* gray-900 */
         }
         h1 {
             font-family: 'Poppins', sans-serif;
         }
-        /* Custom scrollbar for a cleaner look */
+        /* Custom scrollbar for light and dark modes */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1f2937; } /* gray-800 */
-        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; } /* gray-600 */
-        ::-webkit-scrollbar-thumb:hover { background: #6b7280; } /* gray-500 */
+        html.dark ::-webkit-scrollbar-track { background: #1f2937; } /* gray-800 */
+        html.dark ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; } /* gray-600 */
+        html.dark ::-webkit-scrollbar-thumb:hover { background: #6b7280; } /* gray-500 */
+
+        html:not(.dark) ::-webkit-scrollbar-track { background: #f3f4f6; } /* gray-100 */
+        html:not(.dark) ::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 4px; } /* gray-400 */
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #6b7280; } /* gray-500 */
 
         .generator-section { display: none; }
         .generator-section.active { display: block; }
@@ -54,17 +60,25 @@
         }
     </style>
 </head>
-<body class="text-white antialiased">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white antialiased relative">
+    
+    <!-- Theme Toggle Button -->
+    <div class="absolute top-4 right-4">
+        <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+    </div>
 
     <div class="container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
         
         <header class="mb-6 text-center">
-            <h1 class="text-4xl font-bold text-white lowercase">standard prompter</h1>
-            <p class="text-gray-400 mt-2">enter the relevant information to create a standardized prompt.</p>
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white lowercase">standard prompter</h1>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to create a standardized prompt.</p>
         </header>
 
         <!-- Tabs for navigation -->
-        <div class="mb-6 border-b border-gray-700">
+        <div class="mb-6 border-b border-gray-200 dark:border-gray-700">
             <nav id="nav-container" class="flex flex-wrap -mb-px space-x-2" aria-label="Tabs">
                 <!-- Tabs will be populated by JS -->
             </nav>
@@ -76,29 +90,68 @@
         </main>
 
         <!-- Output Section -->
-        <div id="output-container" class="mt-8 bg-gray-800 rounded-lg shadow-lg p-6 hidden">
-            <div class="flex flex-wrap justify-between items-center mb-4 border-b border-gray-700 pb-3 gap-2">
+        <div id="output-container" class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hidden">
+            <div class="flex flex-wrap justify-between items-center mb-4 border-b border-gray-200 dark:border-gray-700 pb-3 gap-2">
                 <h3 id="output-title" class="text-xl font-semibold">Generated Prompt</h3>
                 <div class="flex items-center space-x-2">
-                    <button id="copy-btn" class="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-md shadow-sm transition-colors text-sm">Copy</button>
+                    <button id="copy-btn" class="bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-white font-bold py-2 px-4 rounded-md shadow-sm transition-colors text-sm">Copy</button>
                     <button id="save-btn" class="bg-[#0097b2] hover:bg-[#007a8f] text-white font-bold py-2 px-4 rounded-md shadow-sm transition-colors text-sm">Save as .txt</button>
                 </div>
             </div>
-            <pre class="bg-gray-900 rounded-md p-4 whitespace-pre-wrap text-gray-300 text-sm overflow-x-auto"><code id="output-prompt"></code></pre>
-            <div id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></div>
+            <pre class="bg-gray-100 dark:bg-gray-900 rounded-md p-4 whitespace-pre-wrap text-gray-800 dark:text-gray-300 text-sm overflow-x-auto"><code id="output-prompt"></code></pre>
+            <div id="copy-feedback" class="text-green-500 dark:text-green-400 text-sm mt-2 h-4"></div>
         </div>
         
         <!-- Datalists for suggestions -->
         <div id="datalist-container"></div>
 
         <footer class="text-center mt-12">
-            <p class="text-xs text-gray-500" style="font-family: 'Poppins', sans-serif;">developed 2025 by public policy lab</p>
+            <p class="text-xs text-gray-500 dark:text-gray-500" style="font-family: 'Poppins', sans-serif;">developed 2025 by public policy lab</p>
         </footer>
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- THEME TOGGLE LOGIC ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+            // Set initial theme based on localStorage or system preference
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                themeToggleLightIcon.classList.remove('hidden');
+                document.documentElement.classList.add('dark');
+            } else {
+                themeToggleDarkIcon.classList.remove('hidden');
+                document.documentElement.classList.remove('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', function() {
+                // Toggle icons
+                themeToggleDarkIcon.classList.toggle('hidden');
+                themeToggleLightIcon.classList.toggle('hidden');
+
+                // Toggle theme and save to localStorage
+                if (localStorage.getItem('color-theme')) {
+                    if (localStorage.getItem('color-theme') === 'light') {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                } else {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                    }
+                }
+            });
+
             // --- BRAND & UI DATA ---
             const brandColors = {
                 teal: '#46bbb7',
@@ -117,13 +170,13 @@
                     { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" },
                     { id: 'stock', label: 'Stock Footage Library (Optional)', type: 'text', placeholder: "e.g., 'C:/Users/Me/Stock' or a Google Drive link." }
                 ]},
-                { id: 'report', name: 'Report', color: brandColors.green, fields: [
+                { id: 'report', name: 'Report', color: brandColors.blue, fields: [
                     { id: 'topic', label: 'Primary Topic & Thesis', type: 'textarea', placeholder: "Describe the report's subject and its central argument." },
                     { id: 'sources', label: 'Key Data & Source Materials', type: 'textarea', placeholder: "Refer to attached files by name. e.g., 'See attached: study.pdf'" },
                     { id: 'objective', label: 'Report Objective', type: 'text', placeholder: "e.g., 'To persuade policymakers to adopt new regulations.'" },
                     { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" }
                 ]},
-                { id: 'research', name: 'Research Paper', color: brandColors.blue, fields: [
+                { id: 'research', name: 'Research Paper', color: brandColors.pink, fields: [
                     { id: 'title', label: 'Title of Paper', type: 'text', placeholder: "Enter the full title of the research paper." },
                     { id: 'authors', label: 'Authors and Affiliations', type: 'textarea', placeholder: "List authors and affiliations, one per line." },
                     { id: 'sources', label: 'Primary Source Materials', type: 'textarea', placeholder: "Refer to attached files by name. e.g., 'See attached: M&E_Framework.xlsx'" },
@@ -136,7 +189,7 @@
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Draw from Street_Parking_Report.pdf'" },
                     { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the concrete blocks analogy for housing.'" }
                 ]},
-                { id: 'press', name: 'Press Release', color: brandColors.pink, fields: [
+                { id: 'press', name: 'Press Release', color: brandColors.green, fields: [
                     { id: 'headline', label: 'Headline', type: 'text', placeholder: "Enter the exact, full headline for the press release." },
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Based on findings in Report.pdf'" }
                 ]},
@@ -145,7 +198,7 @@
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Use data from Street_Parking_Report.pdf.'" },
                     { id: 'style', label: 'Style', type: 'text', placeholder: "e.g., 'Fast-paced, high-energy, quick cuts.'" }
                 ]},
-                { id: 'infographic', name: 'Infographic', color: brandColors.green, fields: [
+                { id: 'infographic', name: 'Infographic', color: brandColors.blue, fields: [
                     { id: 'topic', label: 'Infographic Topic', type: 'text', placeholder: "e.g., 'Visualizing the loss of public space to street parking.'" },
                     { id: 'data', label: 'Key Data Points', type: 'textarea', placeholder: "List 3-5 key stats to visualize." },
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Use data from Report.pdf'"},
@@ -153,7 +206,7 @@
                     { id: 'style', label: 'Desired Visual Style', type: 'text', placeholder: "e.g., 'Minimalist with a single accent color'", suggestions: 'infographicStyle' },
                     { id: 'tools', label: 'Tool-Specific Instructions', type: 'checkbox', options: ['Canva Pro', 'Easel.ly'] }
                 ]},
-                { id: 'charts', name: 'Charts/Viz', color: brandColors.blue, fields: [
+                { id: 'charts', name: 'Charts/Viz', color: brandColors.pink, fields: [
                     { id: 'data', label: 'Data to Visualize', type: 'textarea', placeholder: "Describe or paste the data, or refer to an attached file." },
                     { id: 'goal', label: 'Primary Goal / Story to Tell', type: 'text', placeholder: "e.g., 'Emphasize the improvement in accessibility.'" },
                     { id: 'tools', label: 'Output Tools', type: 'checkbox', options: ['Datawrapper', 'Flourish', 'ggplot2 (in R)', 'Tableau'] }
@@ -163,7 +216,7 @@
                     { id: 'objective', label: 'Primary Objective', type: 'text', placeholder: "e.g., 'To monitor workplan progress for senior management.'" },
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'Minister, Department Heads'", suggestions: 'audience' }
                 ]},
-                { id: 'methods', name: 'Research Methods', color: brandColors.pink, fields: [
+                { id: 'methods', name: 'Research Methods', color: brandColors.green, fields: [
                     { id: 'question', label: 'Research Question', type: 'text', placeholder: "State the precise causal question." },
                     { id: 'data', label: 'Available Data', type: 'textarea', placeholder: "Describe the dataset(s) or refer to attached files." }
                 ]},
@@ -172,16 +225,31 @@
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'Minister of Social and Family Development'", suggestions: 'audience' },
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Draw all info from Third_Spaces_Draft.pdf'" }
                 ]},
-                { id: 'narrative', name: 'Narrative Framing', color: brandColors.green, fields: [
+                { id: 'narrative', name: 'Narrative Framing', color: brandColors.blue, fields: [
                      { id: 'policy', label: 'Policy Idea & Detailed Explanation', type: 'textarea', placeholder: "Explain the policy's goals, mechanisms, and intended impact." },
                      { id: 'goal', label: 'Primary Goal of Engagement', type: 'text', placeholder: "e.g., 'To secure funding in the next state budget.'" },
                      { id: 'stakeholders', label: 'Known Stakeholders to Include', type: 'text', placeholder: "e.g., 'Ministry of Education, UNICEF'" },
                      { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "e.g., 'Base arguments on Report.pdf'"}
                 ]},
-                { id: 'advocacy', name: 'Advocacy Plan', color: brandColors.blue, fields: [
+                { id: 'advocacy', name: 'Advocacy Plan', color: brandColors.pink, fields: [
                     { id: 'problem', label: 'Main Problem', type: 'textarea', placeholder: "Describe the broad problem the advocacy will address." },
                     { id: 'issue', label: 'Specific Advocacy Issue (Root Cause)', type: 'textarea', placeholder: "Describe the specific, actionable root cause of the problem." },
                     { id: 'sources', label: 'Source Materials', type: 'text', placeholder: "Refer to any attached files containing evidence, data, or context." }
+                ]},
+                { id: 'council_paper', name: 'Cabinet/Council Paper', color: brandColors.coral, fields: [
+                    { id: 'title', label: 'Case Title', type: 'text', placeholder: 'Enter the official case title.' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List the file names of all relevant reports, data, or documents the AI should use to write this paper. e.g., "Draft_Report_v3.pdf", "Financial_Analysis.xlsx", "Stakeholder_Meeting_Minutes.docx"' },
+                    { id: 'preferred_outcome', label: 'Most Preferred Outcome', type: 'textarea', placeholder: '(For framing purposes). Describe the specific option or outcome you want the council to choose.' },
+                    { id: 'narrative_emphasis', label: 'Narrative to Emphasize', type: 'textarea', placeholder: '(For framing purposes). What core narrative arguments should be woven into the paper to guide the reader?' },
+                    { id: 'solutions_to_propose', label: 'Solutions to Analyze from Sources', type: 'textarea', placeholder: 'List the specific solutions or options you want the AI to analyze and present based on the source materials.' }
+                ]},
+                { id: 'treaty_report', name: 'Treaty Report', color: brandColors.green, fields: [
+                    { id: 'convention', label: 'Convention Name', type: 'text', placeholder: 'Specify the Convention, e.g., CRPD, CEDAW, CRC' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List all relevant source file names here. For example: "National Disability Policy 2023.pdf", "Statistics Bureau Annual Report 2024.xlsx", "CSO Consultation Meeting Minutes.docx"' }
+                ]},
+                { id: 'deep_research', name: 'DeepResearch', color: brandColors.blue, fields: [
+                    { id: 'objective_details', label: 'Research Objective (what it needs to cover)', type: 'textarea', placeholder: 'e.g., ...the history of gender equality policymaking in the Maldives from 2008 to the present day.' },
+                    { id: 'country', label: 'Country Focus', type: 'text', placeholder: 'Defaults to Maldives if left blank' }
                 ]}
             ];
             
@@ -656,7 +724,198 @@ Generate the advocacy plan using the following 10-part structure:
 ### Part 10: Plan to Measure Success
 * For each objective, list the key metrics for success, separating them into:
     * **Outputs:** The direct products of your activities (e.g., "Number of meetings held," "Fact sheets distributed").
-    * **Outcomes:** The changes that result from your activities (e.g., "Decision-maker issues a public statement of support," "Increased positive media mentions of the issue").`
+    * **Outcomes:** The changes that result from your activities (e.g., "Decision-maker issues a public statement of support," "Increased positive media mentions of the issue").`,
+                council_paper: p => `You are an expert policy analyst and strategist. Your primary task is to read, analyze, and synthesize the information from the user-provided source materials to write a formal, persuasive Cabinet or Council Paper from scratch.
+
+**1. Core Task & Source Materials**
+
+* **Source Materials to Analyze:** ${p.sources}
+* **Solutions to Analyze from Sources:** ${p.solutions_to_propose}
+
+**2. Strategic Framing Instructions**
+
+* **Most Preferred Outcome:** ${p.preferred_outcome}
+* **Narrative to Emphasize:** ${p.narrative_emphasis}
+* **Your Task:** While maintaining a professional and objective tone, you must write the paper to implicitly favor the **Most Preferred Outcome**. Use the **Narrative to Emphasize** as the underlying theme. When describing solutions, frame the preferred option more favorably by highlighting its benefits. When describing other options, present them factually but give more weight to their potential costs or risks found within the source materials.
+
+**3. Synthesis & Writing Instructions**
+
+* **Factual Integrity:** Every claim must be directly synthesized from the **Source Materials**. Do not invent facts. If information for a section is not found in the sources, you must explicitly state that it was not available in the provided materials.
+* **Infer Objective & Consultations:** You must determine the paper's primary objective, the key questions for the council, and the details of stakeholder consultations by analyzing the content of the **Source Materials**.
+* **Comprehensive Impact Analysis:** Analyze the sources for all relevant impacts. This must include **Budget Impact** and **Legal Impact** as specified in the guidelines. Additionally, you must specifically look for and report on **Gender Equality Impacts** and **Environmental Impacts** if the sources contain relevant information. The guidelines state to include all "relevant sections for your case".
+
+**4. Required Paper Structure**
+
+Generate the full paper by writing each of the following sections based on your synthesis of the source materials. Apply the strategic framing throughout.
+
+---
+
+### **Case Title**
+${p.title}
+
+### **1. Issues Requiring Cabinet or Council’s Advice**
+(Determine the core objective from the source materials and state the key questions and decisions the Council needs to address.)
+
+### **2. Executive Summary**
+(After synthesizing the entire document, write a brief, one-paragraph summary of the case, its background, and the key recommendations, framed by the Narrative to Emphasize.)
+
+### **3. Background of the Case**
+(Synthesize the history of the case and the reason for submission from the source materials.)
+
+### **4. Main Body of the Case**
+(Build a comprehensive analysis using data and facts from the source materials. Structure the evidence to logically lead towards the Most Preferred Outcome.)
+
+### **5. Proposed Solutions**
+(Analyze and present the options listed in 'Solutions to Analyze from Sources.' Frame the discussion according to the 'Strategic Framing Instructions' using evidence from the sources.)
+
+### **6. Parties Consulted Regarding the Case**
+(Identify and describe the stakeholder consultations documented within the source materials, such as in meeting minutes.)
+
+### **7. Impact Analysis**
+(Report on the budget, legal, gender, and environmental impacts as found in the source materials.)
+
+### **8. List of Attachments**
+(From the list of Source Materials, identify which ones are supplementary documents—such as detailed data tables, SWOT/PEST analyses, or long lists—and list their file names here.)
+
+---
+
+THE FINAL ENGLISH DOCUMENT SHOULD BE TRANSLATED INTO FORMAL DHIVEHI. IT IS RECOMMENDED TO USE CLAUDE SONNET-3.5, AS IT IS CURRENTLY THE BEST-PERFORMING MODEL FOR FORMAL DHIVEHI TRANSLATION.`,
+                treaty_report: p => `### Part 1: Role, objective, and source materials
+
+You are an expert policy analyst and technical writer for a government ministry. Your task is to synthesize a collection of official documents into a formal State Party Report for submission to the United Nations, following the official guidelines.
+
+* **Convention for this report:** ${p.convention}
+* **Source materials to analyze:** ${p.sources}
+
+---
+
+### Part 2: Core instructions for synthesis
+
+* **Factual integrity:** Your primary task is to read, analyze, and synthesize information **exclusively** from the provided source materials. Do not invent facts, policies, or data.
+* **Strict citation required:** For every piece of information, every statistic, and every policy you mention, you **must** indicate which source document it came from. Use a clear citation format, like \`[Source: file_name.pdf]\`. This is critical for verification.
+* **Voice and tone:** The tone must be formal, objective, and bureaucratic, suitable for a UN submission. Avoid emotive or subjective language.
+
+---
+
+### Part 3: Required document structure
+
+Generate the report in two distinct parts, following this exact structure:
+
+**A. Common Core Document**
+
+Synthesize information from the sources to describe the country's general framework for human rights. Include sections on:
+1.  **General factual and statistical information:** Include demographic, social, and economic data, disaggregated by age, sex, and other relevant factors (e.g., disability type) as available in the sources.
+2.  **General framework for the protection and promotion of human rights:** Describe the national legal and institutional structures, including any relevant constitutional provisions, laws, and national human rights institutions.
+
+**B. Treaty-Specific Document**
+
+This is the main part of the report. Create a dedicated section for **each substantive article** of the specified Convention.
+
+For each article, synthesize the relevant information from the source files into the following four subsections:
+
+* **a. Legislative, administrative, and policy measures:** Detail the specific laws, regulations, and national policies adopted to implement this article.
+* **b. Implementation and resources:** Describe the practical steps taken to apply these measures, including specific programs, institutional mechanisms, and allocated financial resources.
+* **c. Progress and data:** Provide concrete evidence and data showing the progress made in realizing the rights under this article.
+* **d. Challenges and difficulties:** Objectively describe the main obstacles and challenges encountered during implementation.
+
+---
+
+### Part 4: Special instructions on content
+
+* **Integrate consultation:** Throughout the report, when discussing progress and challenges, explicitly reference the consultations held with civil society organizations (CSOs) or Disabled Persons' Organizations (DPOs), drawing this information from any provided meeting minutes or consultation reports.
+* **Prioritize disaggregated data:** When presenting statistical information, always look for and use disaggregated data (e.g., by gender, age, disability type, urban/rural location) as found in the source materials.`,
+                deep_research: p => `Objective:
+Produce an exhaustive research paper that ${p.objective_details}.
+This is for ${p.country || 'Maldives'}.
+
+There is no maximum length for this report. The more detailed it is, the better. It will be reviewed by international policy experts, Ministers, and the President, and must meet the highest possible standards of quality and completeness.
+
+Scope and Sources:
+Government material
+- Official sites and archives of every ministry that has had mandates related to this research, including past names for the Ministry.
+- President’s Office press releases, legislation notices, cabinet decisions, and speeches.
+- Bills, acts, regulations, standing committee reports, gazette notices, and annual reports.
+- Maldives Bureau of Statistics datasets.
+- Saruna repository at Maldives National University for academic papers, theses and dissertations.
+- Texts of treaties, agreements, or conventions the Maldives has ratified that shape relevant policy.
+- Strategic action plans, five-year development plans, and national policy frameworks related to those areas.
+- Reports from the Maldives Bureau of Statistics on data, indicators, disaggregated data or variables and findings to do with these issues.
+- National reporting, Universal Periodic Review submissions, and Voluntary National Reviews under the SDGs.
+NGO and intergovernmental publications
+- Reports and briefs from Maldivian NGOs.
+- Publications by UN agencies and any other international agencies, including World Bank, IMF, and ADB country and thematic reports covering these areas.
+- Evaluation reports of donor-funded programs and technical assistance.
+
+Media archives
+- Local outlets (Sun, RaajjeTV, Mihaaru, AdduLIVE, The Edition) and international press reporting on laws, programs, incidents of related issues or topics, court cases, and protests.
+- Press releases that include all relevant keywords.
+- English and Dhivehi media reporting on related events, controversies, legal reform debates, and policy initiatives.
+- Reporting on prominent public cases or incidents related to the issue/topic and official responses to them.
+- News archives using targeted keywords.
+- Articles from the attached Excel sheet translating Dhivehi archives (keep in mind that the translations often have errors or issues so clearly reference any article mentions from this sheet).
+Academic and grey literature or other sources
+- Peer-reviewed articles, working papers, and conference papers on Maldivian women’s rights.
+- Dhivehi sources with English translation notes where relevant.
+- Academic articles or working papers indexed in Google Scholar or university databases.
+- Reports from human rights institutions or ombudspersons, where available.
+
+Required Structure and Content:
+The final paper should be structured as follows:
+Introduction
+- Research purpose and justification.
+- Scope of inquiry and policy domains covered.
+- Methodological overview: source types, selection criteria, translation protocols, timeline of analysis.
+Literature and Document Review
+- Synthesis of key academic and non-academic sources.
+- Summary of past policy evaluations, national development plans, and strategy documents.
+- Identification of neglected topics in policy documentation.
+- Highlight coverage gaps and areas where data or analysis is missing or outdated.
+Methodology
+- Explanation of research approach.
+- Keywords used.
+- Source languages, translation strategies, and integration of grey literature and informal materials.
+- Criteria for interpreting incidents, programs, and legal changes as relevant.
+Chronological Timeline of Developments:
+- Annual or semi-annual breakdown of policy announcements, law changes, leadership changes, major program launches, and key incidents.
+- Include key issues or incidents which led to public conversations, discussions, uproar, or pressure for policy changes or which highlighted the need for certain policies.
+- Include dates, names of legislation or programs, summary of contents, and outcome or next steps.
+- Highlight turning points such as passages and ratifications of key acts or treaties, changes in Ministers or leadership, creation or restructuring or renaming of related ministries, elections and administration changes, etc.
+- Be extremely comprehensive and thorough.
+Thematic Policy Analysis
+Structure this section around key issue areas as well as cross-cutting themes.
+Quantitative Data and Trends
+- Use official statistics to analyze trends in the issue over time.
+- Tables or charts comparing indicators across years.
+- Discuss data limitations, unavailability, and inconsistencies.
+Case Studies of Significant Events
+- Detailed case studies of all important incidents from the chronological timeline (e.g., landmark court rulings, high-profile cases, political controversies to do with the issue).
+- Analyze government response, public reaction, and resulting policy changes.
+International and NGO Contributions
+- Brief overview of major international or regional projects focused on these issues in the Maldives.
+- Assess impact of external funding, technical assistance, and treaty commitments on domestic policy development.
+- List and summarize all shadow reports and alternative reporting to UN bodies.
+Discussion
+- Critical analysis of what has improved, what has stagnated, and what regressed.
+- Structural weaknesses in related policymaking: institutional, legal, budgetary, or administrative.
+- Examine gaps in transparency, documentation, and continuity of policy between governments.
+- Role of civil society and media in shaping policy discourse and accountability.
+Conclusion and Recommendations
+- Summary of historical evolution and present gaps in gender equality policy.
+Annotated Bibliography and References
+- Every document cited (official reports, news articles, laws, academic articles, NGO briefs, etc.) must be included with a brief annotation.
+- For citations from the Excel sheet, include the actual sheet and row number if possible, or at least the full headline you used
+- APA style citations, with direct links wherever available.
+- Footnotes so everything is mentioned
+
+Language and Style Requirements:
+- Use clear, direct language with no filler or embellishment.
+- Avoid unnecessary modifiers; each sentence must deliver substantive content.
+- Maintain professional tone suitable for international expert and government readership.
+- Include English translations of Dhivehi materials wherever applicable, with translator notes or methodology if needed.
+- Everything in this paper has to be justified by some kind of evidence or information from a source, do not speculate or make anything up.
+- Avoid words like “tapestry”, “symphony”, “delve”, or other “AI slop” words and avoid the “it’s not __, it’s __” construction in your writing.
+
+How good this paper is very important to my career, and an excellent paper with extremely detailed and comprehensive accurate coverage could lead to promotions and set me up for life financially, while an inadequate or inaccurate paper could do lasting damage to my career, so please make sure it is very comprehensive and accurate and that every bit of information is sourced and cited so that I can also double check it!`
             };
 
             // --- DYNAMIC UI BUILDER ---
@@ -679,38 +938,38 @@ Generate the advocacy plan using the following 10-part structure:
             generatorsData.forEach(gen => {
                 const tabBtn = document.createElement('button');
                 tabBtn.id = `tab-${gen.id}`;
-                tabBtn.className = 'tab-btn';
+                tabBtn.className = 'tab-btn text-gray-500 dark:text-gray-400';
                 tabBtn.textContent = gen.name;
                 tabBtn.dataset.color = gen.color;
                 navContainer.appendChild(tabBtn);
 
                 const section = document.createElement('div');
                 section.id = `generator-${gen.id}`;
-                section.className = 'generator-section bg-gray-800 rounded-lg shadow-lg p-6';
+                section.className = 'generator-section bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6';
                 
                 let fieldsHtml = gen.fields.map(f => {
                     const inputId = `${gen.id}-${f.id}`;
                     let inputHtml = '';
                     if (f.type === 'checkbox') {
                         let checkboxHtml = f.options.map(opt => `
-                            <label class="checkbox-label text-gray-300">
-                                <input type="checkbox" name="${inputId}" value="${opt}" class="form-checkbox h-4 w-4 rounded bg-gray-700 border-gray-600 focus:ring-2" style="color: ${gen.color}; --focus-color: ${gen.color};">
+                            <label class="checkbox-label text-gray-700 dark:text-gray-300">
+                                <input type="checkbox" name="${inputId}" value="${opt}" class="form-checkbox h-4 w-4 rounded bg-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-2" style="color: ${gen.color}; --focus-color: ${gen.color};">
                                 ${opt}
                             </label>
                         `).join('');
-                        return `<div><label class="block text-sm font-medium text-gray-300 mb-2">${f.label}</label><div class="flex flex-wrap gap-4">${checkboxHtml}</div></div>`;
+                        return `<div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">${f.label}</label><div class="flex flex-wrap gap-4">${checkboxHtml}</div></div>`;
                     } else if (f.type === 'textarea') {
-                        inputHtml = `<textarea id="${inputId}" rows="3" class="form-input w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm p-3 transition focus:ring-2" style="--focus-color: ${gen.color}" placeholder="${f.placeholder}"></textarea>`;
+                        inputHtml = `<textarea id="${inputId}" rows="3" class="form-input w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-3 transition focus:ring-2 text-gray-900 dark:text-white" style="--focus-color: ${gen.color}" placeholder="${f.placeholder}"></textarea>`;
                     } else {
                         const listAttr = f.suggestions ? `list="${f.suggestions}-suggestions"` : '';
-                        inputHtml = `<input type="${f.type}" id="${inputId}" ${listAttr} class="form-input w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm p-3 transition focus:ring-2" style="--focus-color: ${gen.color}" placeholder="${f.placeholder}">`;
+                        inputHtml = `<input type="${f.type}" id="${inputId}" ${listAttr} class="form-input w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm p-3 transition focus:ring-2 text-gray-900 dark:text-white" style="--focus-color: ${gen.color}" placeholder="${f.placeholder}">`;
                     }
-                    return `<div><label for="${inputId}" class="block text-sm font-medium text-gray-300 mb-1">${f.label}</label>${inputHtml}</div>`;
+                    return `<div><label for="${inputId}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">${f.label}</label>${inputHtml}</div>`;
                 }).join('');
 
                 section.innerHTML = `
-                    <h2 class="text-xl font-semibold mb-4 border-b border-gray-700 pb-3" style="color: ${gen.color};">Generate ${gen.name} Prompt</h2>
-                    <div class="space-y-6">${fieldsHtml}<div class="text-right">
+                    <h2 class="text-xl font-semibold mb-4 border-b border-gray-200 dark:border-gray-700 pb-3" style="color: ${gen.color};">Generate ${gen.name} Prompt</h2>
+                    <div class="space-y-6">${fieldsHtml}<div class="text-right pt-4">
                         <button id="generate-${gen.id}-btn" class="generate-btn text-white font-bold py-2 px-6 rounded-md shadow-md transition-transform transform hover:scale-105" style="background-color: ${gen.color};">Generate Prompt</button>
                     </div></div>`;
                 mainContainer.appendChild(section);
@@ -734,7 +993,7 @@ Generate the advocacy plan using the following 10-part structure:
             const switchTab = (tabId) => {
                 document.querySelectorAll('.tab-btn').forEach(btn => {
                     btn.classList.remove('active');
-                    btn.style.color = '#9ca3af'; // gray-400
+                    btn.style.color = '';
                     btn.style.borderColor = 'transparent';
                 });
                 document.querySelectorAll('.generator-section').forEach(sec => sec.classList.remove('active'));
