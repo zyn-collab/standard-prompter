@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +74,7 @@
         
         <header class="mb-6 text-center">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white lowercase">standard prompter</h1>
-            <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to create a standardized prompt.</p>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to generate a standardized prompt. then, paste the generated prompt with all relevant files attached into an LLM like gemini pro.</p>
         </header>
 
         <!-- Tabs for navigation -->
@@ -132,23 +132,15 @@
                 themeToggleDarkIcon.classList.toggle('hidden');
                 themeToggleLightIcon.classList.toggle('hidden');
 
-                // Toggle theme and save to localStorage
-                if (localStorage.getItem('color-theme')) {
-                    if (localStorage.getItem('color-theme') === 'light') {
-                        document.documentElement.classList.add('dark');
-                        localStorage.setItem('color-theme', 'dark');
-                    } else {
-                        document.documentElement.classList.remove('dark');
-                        localStorage.setItem('color-theme', 'light');
-                    }
+                // The robust way: check the current state and flip it
+                if (document.documentElement.classList.contains('dark')) {
+                    // If it's dark, go light
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
                 } else {
-                    if (document.documentElement.classList.contains('dark')) {
-                        document.documentElement.classList.remove('dark');
-                        localStorage.setItem('color-theme', 'light');
-                    } else {
-                        document.documentElement.classList.add('dark');
-                        localStorage.setItem('color-theme', 'dark');
-                    }
+                    // If it's light, go dark
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
                 }
             });
 
@@ -167,8 +159,7 @@
                     { id: 'duration', label: 'Video Duration (minutes)', type: 'number', placeholder: 'e.g., 8' },
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'General audience'", suggestions: 'audience' },
                     { id: 'style', label: 'Style & Tone', type: 'text', placeholder: "e.g., 'Investigative and wondrous'", suggestions: 'videoStyle' },
-                    { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" },
-                    { id: 'stock', label: 'Stock Footage Library (Optional)', type: 'text', placeholder: "e.g., 'C:/Users/Me/Stock' or a Google Drive link." }
+                    { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" }
                 ]},
                 { id: 'report', name: 'Report', color: brandColors.blue, fields: [
                     { id: 'topic', label: 'Primary Topic & Thesis', type: 'textarea', placeholder: "Describe the report's subject and its central argument." },
@@ -247,9 +238,36 @@
                     { id: 'convention', label: 'Convention Name', type: 'text', placeholder: 'Specify the Convention, e.g., CRPD, CEDAW, CRC' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List all relevant source file names here. For example: "National Disability Policy 2023.pdf", "Statistics Bureau Annual Report 2024.xlsx", "CSO Consultation Meeting Minutes.docx"' }
                 ]},
-                { id: 'deep_research', name: 'DeepResearch', color: brandColors.blue, fields: [
+                { id: 'deep_research', name: 'DeepResearch', color: brandColors.teal, fields: [
                     { id: 'objective_details', label: 'Research Objective (what it needs to cover)', type: 'textarea', placeholder: 'e.g., ...the history of gender equality policymaking in the Maldives from 2008 to the present day.' },
                     { id: 'country', label: 'Country Focus', type: 'text', placeholder: 'Defaults to Maldives if left blank' }
+                ]},
+                { id: 'resilience', name: 'Policy Resilience Plan', color: brandColors.blue, fields: [
+                    { id: 'policy_name', label: 'Policy Name / Goal', type: 'text', placeholder: 'e.g., National Digital Literacy Program' },
+                    { id: 'political_env', label: 'Current Political Environment', type: 'textarea', placeholder: 'Describe the current political climate, key supporters, and the general government agenda.' },
+                    { id: 'agencies', label: 'Key Implementing Agencies', type: 'text', placeholder: 'e.g., Ministry of Education, Communications Authority' },
+                    { id: 'risks', label: 'Known Opponents or Risks', type: 'textarea', placeholder: 'List any known groups that might oppose this policy, or any immediate risks.' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
+                ]},
+                { id: 'risk', name: 'Risk Analysis', color: brandColors.pink, fields: [
+                    { id: 'policy_area', label: 'Policy Area / Goal', type: 'text', placeholder: "e.g., 'To improve urban solid waste management.'" },
+                    { id: 'population', label: 'Target Population', type: 'text', placeholder: "e.g., 'All households and commercial establishments in the capital city.'" },
+                    { id: 'stakeholders', label: 'Primary Stakeholders', type: 'textarea', placeholder: "e.g., 'Ministry of Environment, City Council, WAMCO, private businesses, general public.'" },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
+                ]},
+                { id: 'project_management', name: 'Project Management Plan', color: brandColors.coral, fields: [
+                    { id: 'goal', label: 'Project Goal', type: 'textarea', placeholder: 'Describe the final, high-level objective of the project.' },
+                    { id: 'constraints', label: 'Key Constraints (Budget, Staff, Time)', type: 'text', placeholder: 'e.g., "$50,000 budget, 2 full-time staff, 6-month deadline"' },
+                    { id: 'deliverables', label: 'Final Deliverables', type: 'textarea', placeholder: 'List the tangible outputs. e.g., "A published research report, a functional online dashboard, 5 stakeholder workshops."' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
+                ]},
+                { id: 'timeline', name: 'Project Timeline', color: brandColors.green, fields: [
+                    { id: 'goal', label: 'Project Goal & Key Deliverables', type: 'textarea', placeholder: 'e.g., To procure and install 100 public water fountains across the city.' },
+                    { id: 'start_date', label: 'Desired Start Date', type: 'text', placeholder: 'YYYY-MM-DD' },
+                    { id: 'capacity', label: 'Team Capacity & Workload', type: 'text', placeholder: 'e.g., "Small, overworked team" or "Dedicated, full-time project team"' },
+                    { id: 'dependencies', label: 'Major External Dependencies', type: 'textarea', placeholder: 'e.g., "Approval from Finance Ministry," "Data from the Bureau of Statistics," "Vendor availability."' },
+                    { id: 'components', label: 'Key Project Components', type: 'text', placeholder: 'List the main types of work, e.g., "research, procurement, software development, event, construction"' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
                 ]}
             ];
             
@@ -915,7 +933,203 @@ Language and Style Requirements:
 - Everything in this paper has to be justified by some kind of evidence or information from a source, do not speculate or make anything up.
 - Avoid words like “tapestry”, “symphony”, “delve”, or other “AI slop” words and avoid the “it’s not __, it’s __” construction in your writing.
 
-How good this paper is very important to my career, and an excellent paper with extremely detailed and comprehensive accurate coverage could lead to promotions and set me up for life financially, while an inadequate or inaccurate paper could do lasting damage to my career, so please make sure it is very comprehensive and accurate and that every bit of information is sourced and cited so that I can also double check it!`
+How good this paper is very important to my career, and an excellent paper with extremely detailed and comprehensive accurate coverage could lead to promotions and set me up for life financially, while an inadequate or inaccurate paper could do lasting damage to my career, so please make sure it is very comprehensive and accurate and that every bit of information is sourced and cited so that I can also double check it!`,
+                resilience: p => `You are an expert policy strategist specializing in institutional design and long-term policy sustainability. Your task is to generate a comprehensive Policy Resilience and Sustainability Plan based on the provided information. The plan should identify potential vulnerabilities and prescribe concrete strategies to ensure the policy can withstand political changes, staff turnover, and shifting priorities.
+
+**1. Policy Details**
+
+* **Policy Name / Goal:** ${p.policy_name}
+* **Current Political Environment:** ${p.political_env}
+* **Key Implementing Agencies:** ${p.agencies}
+* **Known Opponents or Risks:** ${p.risks}
+* **Source Materials:** ${p.sources || 'None specified. Base analysis on user inputs.'}
+
+**2. Mandatory Framework**
+
+Your analysis and recommendations must be structured around the core resilience principles for effective policymaking. For each section below, provide actionable recommendations grounded in the user's input and any provided source materials.
+
+**3. Required Output Structure**
+
+---
+
+### **Policy Resilience and Sustainability Plan: [User's Policy Name]**
+
+### **1. Structural "Stickiness": Making the policy hard to reverse**
+
+* **Binding Mechanisms:** Based on the policy goal, what specific, irreversible components can be built in? Recommend concrete actions.
+    * *Example: Suggest specific long-term contracts, public-private partnership agreements, or legal obligations that would be difficult or costly for a future administration to unwind.*
+* **Building a Beneficiary Coalition:** How can the policy create a constituency that will actively defend it?
+    * *Example: Identify the groups that benefit most and suggest ways to organize and empower them to advocate for the policy's continuation.*
+
+### **2. Self-Reinforcing Momentum: Creating positive feedback loops**
+
+* **Early, Visible Wins:** What specific, high-visibility milestones can be achieved quickly to build momentum and demonstrate value?
+    * *Example: Suggest a pilot program in a key political district or a public launch event celebrating an initial, tangible outcome.*
+* **Incentive Alignment:** How can the policy be designed so that its success creates further incentives for adoption and expansion?
+    * *Example: Recommend a funding model where successful implementation in one department unlocks additional resources or autonomy, creating a positive feedback loop.*
+
+### **3. Operational Resilience: Planning for human and institutional factors**
+
+* **Staff Turnover and Knowledge Management:** What is the plan to mitigate the risk of key staff leaving?
+    * *Example: Recommend the creation of detailed Standard Operating Procedures (SOPs), process video recordings, and a centralized knowledge base to ensure institutional memory survives transitions.*
+* **Minimizing Single Points of Failure:** How will the policy avoid over-reliance on specific individuals?
+    * *Example: Suggest a team-based structure with built-in redundancy for critical tasks, ensuring no single person holds all essential knowledge or connections.*
+* **Protecting Against Deprioritization:** What mechanisms will keep the policy on the agenda when new leadership or crises emerge?
+    * *Example: Propose mandatory public reporting requirements or linking the policy's outcomes to the performance metrics of senior officials to ensure it remains a priority.*
+
+### **4. External Durability: Embedding the policy in a wider network**
+
+* **Leveraging Non-State Actors:** How can NGOs, private sector actors, or international organizations be engaged to enhance sustainability?
+    * *Example: Suggest specific partnerships where a non-state actor takes on a key implementation role, making the program more robust against shifting government priorities or budget cuts.*
+* **Securing Long-Term Commitments:** What is the strategy for securing multi-year funding and long-term partnership agreements?
+    * *Example: Recommend tying the policy to long-term national development plans or international agreements that span multiple political cycles.*`,
+
+                risk: p => `You are an expert policy risk analyst and strategist. Your role is to conduct a rigorous "pre-mortem" analysis of the user's proposed policy. You will identify potential failure points, unintended consequences, and hidden obstacles based on established principles of policy design and political economy.
+
+**1. Policy Details**
+
+* **Policy Area / Goal:** ${p.policy_area}
+* **Target Population:** ${p.population}
+* **Primary Stakeholders:** ${p.stakeholders}
+* **Source Materials:** ${p.sources || 'None specified. Base analysis on user inputs.'}
+
+**2. Mandatory Framework**
+
+You must analyze the policy through the lenses of second-order effects, perverse incentives, collective action problems, corruption risks, and implementation bottlenecks. Your output must be a comprehensive risk register that identifies all plausible risks, not just a few examples.
+
+**3. Required Output Structure**
+
+---
+
+### **Risk and Bottleneck Analysis Report**
+
+### **1. Second- and Third-Order Effects**
+
+* **Description:** Analyze the potential cascading consequences beyond the immediate policy goal. Think through how the policy might ripple through related systems, markets, or social behaviors.
+* **Potential Effects:**
+    * *Based on the policy goal, list all plausible unintended consequences. For example, if the policy subsidizes a specific technology, consider the impact on competing industries, the long-term maintenance burden, and the potential for market distortion.*
+* **Mitigation Strategy:**
+    * *For each potential effect, suggest a specific design tweak, monitoring plan, or counter-measure to mitigate it.*
+
+### **2. Perverse Incentives and Dysfunctional Metrics**
+
+* **Description:** Identify all the ways the policy might accidentally incentivize behavior that undermines its core purpose, with reference to established principles.
+* **Potential Perverse Incentives (Analysis of the "Cobra Effect," Campbell's/Goodhart's Law):**
+    * *Example: If the policy rewards staff based on the number of applications processed, analyze how this could lead to rushed, low-quality work instead of meaningful outcomes. Suggest alternative metrics focused on quality or impact.*
+* **Mitigation Strategy:**
+    * *Propose performance indicators that are harder to manipulate and more closely aligned with the actual policy goal.*
+
+### **3. Collective Action Problems**
+
+* **Description:** Analyze if the policy is vulnerable to problems where individual self-interest undermines the collective good (e.g., tragedy of the commons, free-riding).
+* **Potential Problems:**
+    * *Example: If the policy creates a public resource, assess whether it could be depleted because individual users have no incentive to conserve it.*
+* **Mitigation Strategy:**
+    * *Suggest specific design features to prevent this, such as access restrictions, user fees to internalize costs, or mechanisms that enhance coordination and trust.*
+
+### **4. Corruption and Sabotage**
+
+* **Description:** Identify all potential avenues for corruption that the policy might inadvertently create or fail to close, and consider the potential for internal resistance.
+* **Potential Avenues for Corruption:**
+    * *Analyze the status quo to identify who benefits from existing inefficiencies. Pinpoint how they might react to the policy change and suggest how to prepare for this pushback.*
+* **Potential for Bureaucratic Sabotage:**
+    * *Consider how internal actors might quietly resist the change. Propose strategies to counter this, such as simplifying processes to reduce discretionary power and building in strong accountability measures.*
+
+### **5. Implementation Bottlenecks and Capacity Gaps**
+
+* **Description:** Pinpoint the most likely operational obstacles that could stall implementation.
+* **Likely Bottlenecks:**
+    * *Based on common government processes, identify all potential delays (e.g., procurement, legal review, inter-departmental approvals) and suggest targeted strategies to address them.*
+* **Institutional Capacity Gaps:**
+    * *Honestly assess whether the implementing agencies have the necessary skills, resources, and authority. If not, recommend specific capacity-building initiatives or partnerships to fill those gaps before launch.*`,
+                project_management: p => `You are an expert project manager specializing in public sector policy implementation. Your task is to generate a comprehensive and actionable Project Management Plan based on the user's inputs. The plan must follow a simple four-phase cycle and incorporate best practices for managing government initiatives.
+
+**1. Project Details**
+
+* **Project Goal:** ${p.goal}
+* **Key Constraints (Budget, Staff, Time):** ${p.constraints}
+* **Final Deliverables:** ${p.deliverables}
+* **Source Materials:** ${p.sources || 'None specified. Base analysis on user inputs.'}
+
+**2. Mandatory Framework**
+
+The plan must be structured using the **Scope, Plan, Track & Adapt, Close** four-phase cycle. Each section should contain clear, actionable instructions based on the user's inputs and any provided source materials.
+
+**3. Required Output Structure**
+
+---
+
+### **Project Management Plan: [User's Project Goal]**
+
+### **Phase 1: Scope - Defining the boundaries**
+
+* **1.1. Project Charter:**
+    * **Goals & Objectives:** A clear, concise statement of the project's purpose.
+    * **Final Deliverables:** A bulleted list of the tangible outcomes to be produced.
+    * **Known Constraints & Assumptions:** Explicitly state the budget, timeline, and staffing limitations.
+* **1.2. Stakeholder Register:**
+    * A list of all key stakeholders and their primary interests or concerns.
+
+### **Phase 2: Plan - Building the roadmap for victory**
+
+* **2.1. Work Breakdown Structure (WBS) & Task List:**
+    * Break the final deliverables into major milestones and discrete tasks.
+    * For each task, include:
+        * **Task Description:** Capture both the "what" and the "why".
+        * **Directly Responsible Individual (DRI):** Assign a single owner for each task.
+        * **Estimated Timeline:** Provide a realistic start and end date, accounting for the "planning fallacy".
+* **2.2. Dependency Mapping:**
+    * Identify critical task dependencies (e.g., "Task B cannot start until Task A is complete").
+    * Assign a point of contact for any external dependencies (e.g., another agency, a vendor).
+* **2.3. Initial Risk Register:**
+    * List the top 3-5 potential risks (e.g., staff turnover, political shifts, vendor delays).
+    * For each risk, outline a preliminary mitigation or fallback strategy.
+
+### **Phase 3: Track & Adapt - Monitoring progress and managing change**
+
+* **3.1. Monitoring & Communication Cadence:**
+    * **"Scoreboard" of Critical Indicators:** Identify 3-4 key metrics to track progress (e.g., % of tasks on time, budget vs. actuals).
+    * **Meeting Schedule:** Recommend a rhythm for check-ins (e.g., "Daily 15-minute stand-ups" or "Weekly sprint reviews").
+    * **Overcommunication Plan:** For critical handoffs, specify that communication should happen across multiple channels (e.g., email, chat, in-person).
+* **3.2. Change Management Process:**
+    * Recommend a "change budget" or a clear re-prioritization process to manage scope creep. Any new request requires removing an existing task of equivalent effort.
+
+### **Phase 4: Close - Formalizing completion**
+
+* **4.1. Project Closeout Checklist:**
+    * Final deliverable acceptance.
+    * Budget reconciliation.
+    * Final report submission.
+* **4.2. Post-Mortem / Retrospective Plan:**
+    * Schedule a debrief meeting to capture lessons learned.
+    * Key questions to ask: "What went well?", "What impeded progress?", and "What should we do differently next time?".`,
+                timeline: p => `You are an expert public sector project manager and procurement specialist with decades of experience working within government ministries. You have a reputation for creating realistic, practical project timelines that account for common bureaucratic delays, approval processes, and the planning fallacy. Your task is to generate a detailed, actionable project timeline based on the user's provided information.
+
+**1. Project Details to Analyze**
+
+* **Project Goal & Key Deliverables:** ${p.goal}
+* **Desired Start Date:** ${p.start_date}
+* **Team Capacity & Workload:** ${p.capacity}
+* **Major External Dependencies:** ${p.dependencies}
+* **Key Project Components to Include:** ${p.components}
+* **Source Materials:** ${p.sources || 'None specified. Base analysis on user inputs.'}
+
+**2. Core Instructions for Timeline Generation**
+
+* **Analyze Project Components:** First, analyze the **Key Project Components** provided by the user and any **Source Materials**. Your timeline must include detailed phases and tasks relevant to these components (e.g., if "procurement" is listed, include a full procurement phase; if "software development" is listed, include sprints, testing, and deployment tasks).
+* **Create a Phased Structure:** Structure the entire timeline into four logical phases: **1. Planning and Initiation**, **2. Procurement and Contracting** (if applicable), **3. Core Project Implementation**, and **4. Closing and Handover**.
+* **Generate Granular Tasks:** For each phase, generate a list of specific, actionable tasks. Do not use vague descriptions.
+    * **For Planning:** Include tasks like "Develop Project Concept Note," "Hold initial stakeholder consultation," "Draft Terms of Reference (ToR)," and "Submit budget for management approval."
+    * **For Procurement:** If required, include the full cycle: "Secure financial approval," "Announce Request for Bids," "Technical & Financial Bid Evaluation," "Contract Negotiation," and "Sign Contract."
+    * **For Implementation:** Base the tasks on the project's unique components (e.g., "Conduct fieldwork," "Analyze data," "Draft research report," "Develop software module 1," etc.).
+    * **For Closing:** Include "Submit final deliverables," "Conduct dissemination workshop," and "Complete financial closeout."
+* **Apply Realistic Durations:** Assign a duration in **working days** to each task. Your estimates **must** be realistic for a public sector context. Account for the user's specified **Team Capacity & Workload**. Crucially, add significant buffer time (e.g., 10-15 working days) for any task involving management approvals, legal reviews, or financial clearances from other authorities.
+* **Calculate Dates:** Starting from the **Desired Start Date**, calculate the chronological \`Start Date\` and \`End Date\` for each task. The start of one task should follow the end of the previous one, unless they can be done in parallel.
+* **Output in a Table:** Present the final, complete timeline as a series of Markdown tables, one for each phase. The tables must have the following columns: \`Task ID\`, \`Task Description\`, \`Duration (Working Days)\`, \`Start Date (YYYY-MM-DD)\`, \`End Date (YYYY-MM-DD)\`, and \`Notes / Dependencies\`.
+
+**3. Final Output**
+
+Begin the response with a brief disclaimer about the timeline being an estimate, then generate the full, phased timeline in the specified table format. Do not write any other introductory or concluding text.`
             };
 
             // --- DYNAMIC UI BUILDER ---
