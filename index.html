@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>standard prompter</title>
+    <!-- 1) Load Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
+    <script>
+    (function () {
+        try {
+        var stored = localStorage.getItem('color-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', stored === 'dark' || (!stored && prefersDark));
+        } catch(e) {
+        document.documentElement.classList.toggle('dark', window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        }
+    })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -34,7 +49,7 @@
 
         .tab-btn {
             transition: all 0.2s ease-in-out;
-            padding: 0.5rem 0.75rem;
+            padding: 0rem 0.6rem;
             border-bottom: 2px solid transparent;
         }
         .tab-btn.active {
@@ -79,7 +94,7 @@
 
         <!-- Tabs for navigation -->
         <div class="mb-6 border-b border-gray-200 dark:border-gray-700">
-            <nav id="nav-container" class="flex flex-wrap -mb-px space-x-2" aria-label="Tabs">
+            <nav id="nav-container" class="flex flex-wrap justify-center -mb-px gap-x-2 gap-y-1" aria-label="Tabs">
                 <!-- Tabs will be populated by JS -->
             </nav>
         </div>
@@ -114,36 +129,23 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- THEME TOGGLE LOGIC ---
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            const btn = document.getElementById('theme-toggle');
+            const sun = document.getElementById('theme-toggle-light-icon');
+            const moon = document.getElementById('theme-toggle-dark-icon');
 
-            // Set initial theme based on localStorage or system preference
-            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                themeToggleLightIcon.classList.remove('hidden');
-                document.documentElement.classList.add('dark');
-            } else {
-                themeToggleDarkIcon.classList.remove('hidden');
-                document.documentElement.classList.remove('dark');
+            function syncIcons() {
+            const dark = document.documentElement.classList.contains('dark');
+            moon.classList.toggle('hidden', dark);
+            sun.classList.toggle('hidden', !dark);
             }
+            syncIcons();
 
-            themeToggleBtn.addEventListener('click', function() {
-                // Toggle icons
-                themeToggleDarkIcon.classList.toggle('hidden');
-                themeToggleLightIcon.classList.toggle('hidden');
-
-                // The robust way: check the current state and flip it
-                if (document.documentElement.classList.contains('dark')) {
-                    // If it's dark, go light
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    // If it's light, go dark
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
+            btn.addEventListener('click', () => {
+            const nextDark = !document.documentElement.classList.contains('dark');
+            document.documentElement.classList.toggle('dark', nextDark);
+            localStorage.setItem('color-theme', nextDark ? 'dark' : 'light');
+            syncIcons();
             });
-
             // --- BRAND & UI DATA ---
             const brandColors = {
                 teal: '#46bbb7',
@@ -154,14 +156,14 @@
             };
 
             const generatorsData = [
-                { id: 'video', name: 'Video Script', color: brandColors.teal, fields: [
+                { id: 'video', name: 'YouTube Video', color: brandColors.teal, fields: [
                     { id: 'topic', label: 'Video Topic', type: 'textarea', placeholder: "Describe the video's subject, or refer to an attached file." },
                     { id: 'duration', label: 'Video Duration (minutes)', type: 'number', placeholder: 'e.g., 8' },
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: "e.g., 'General audience'", suggestions: 'audience' },
                     { id: 'style', label: 'Style & Tone', type: 'text', placeholder: "e.g., 'Investigative and wondrous'", suggestions: 'videoStyle' },
                     { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of urban cholesterol for parking.'" }
                 ]},
-                { id: 'report', name: 'Report', color: brandColors.blue, fields: [
+                { id: 'report', name: 'Standard Report', color: brandColors.blue, fields: [
                     { id: 'topic', label: 'Primary Topic & Thesis', type: 'textarea', placeholder: "Describe the report's subject and its central argument." },
                     { id: 'sources', label: 'Key Data & Source Materials', type: 'textarea', placeholder: "Refer to attached files by name. e.g., 'See attached: study.pdf'" },
                     { id: 'objective', label: 'Report Objective', type: 'text', placeholder: "e.g., 'To persuade policymakers to adopt new regulations.'" },
@@ -173,7 +175,7 @@
                     { id: 'sources', label: 'Primary Source Materials', type: 'textarea', placeholder: "Refer to attached files by name. e.g., 'See attached: M&E_Framework.xlsx'" },
                     { id: 'analogies', label: 'Core Analogies (Optional)', type: 'text', placeholder: "e.g., 'Use the analogy of balls on a sheet for gravity.'" }
                 ]},
-                { id: 'substack', name: 'Substack', color: brandColors.coral, fields: [
+                { id: 'substack', name: 'Substack Blog', color: brandColors.coral, fields: [
                     { id: 'angle', label: 'Core Topic/Angle', type: 'text', placeholder: "The main topic or angle of the blog post." },
                     { id: 'thesis', label: 'Core Argument/Thesis', type: 'textarea', placeholder: "State the central, provocative argument." },
                     { id: 'data', label: 'Key Data Points to Reference', type: 'textarea', placeholder: "List key stats or chart ideas." },
@@ -197,7 +199,7 @@
                     { id: 'style', label: 'Desired Visual Style', type: 'text', placeholder: "e.g., 'Minimalist with a single accent color'", suggestions: 'infographicStyle' },
                     { id: 'tools', label: 'Tool-Specific Instructions', type: 'checkbox', options: ['Canva Pro', 'Easel.ly'] }
                 ]},
-                { id: 'charts', name: 'Charts/Viz', color: brandColors.pink, fields: [
+                { id: 'charts', name: 'Chart/Visualization', color: brandColors.pink, fields: [
                     { id: 'data', label: 'Data to Visualize', type: 'textarea', placeholder: "Describe or paste the data, or refer to an attached file." },
                     { id: 'goal', label: 'Primary Goal / Story to Tell', type: 'text', placeholder: "e.g., 'Emphasize the improvement in accessibility.'" },
                     { id: 'tools', label: 'Output Tools', type: 'checkbox', options: ['Datawrapper', 'Flourish', 'ggplot2 (in R)', 'Tableau'] }
@@ -239,7 +241,7 @@
                     { id: 'convention', label: 'Convention Name', type: 'text', placeholder: 'Specify the Convention, e.g., CRPD, CEDAW, CRC' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List all relevant source file names here. For example: "National Disability Policy 2023.pdf", "Statistics Bureau Annual Report 2024.xlsx", "CSO Consultation Meeting Minutes.docx"' }
                 ]},
-                { id: 'deep_research', name: 'DeepResearch', color: brandColors.teal, fields: [
+                { id: 'deep_research', name: 'DeepResearch Prompt', color: brandColors.teal, fields: [
                     { id: 'objective_details', label: 'Research Objective (what it needs to cover)', type: 'textarea', placeholder: 'e.g., ...the history of gender equality policymaking in the Maldives from 2008 to the present day.' },
                     { id: 'country', label: 'Country Focus', type: 'text', placeholder: 'Defaults to Maldives if left blank' }
                 ]},
@@ -293,6 +295,14 @@
                     { id: 'tasks', label: 'Known Steps or Tasks to Include', type: 'textarea', placeholder: 'List any specific actions that must be included in the procedure.' },
                     { id: 'roles', label: 'Roles Involved & Responsibilities', type: 'textarea', placeholder: 'List the roles and their main duties, one per line (e.g., Hiring Manager: Schedules team intro meetings).' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing process maps, policies, or context.' }
+                ]},
+                { id: 'data_entry_form', name: 'Data Entry Form', color: brandColors.green, fields: [
+                    { id: 'objective', label: 'What is the primary goal of this data collection system?', type: 'textarea', placeholder: 'e.g., To create a reliable system for tracking weekly hospital admission statistics.' },
+                    { id: 'data_to_be_collected', label: 'Describe the data you need to collect.', type: 'textarea', placeholder: 'e.g., Daily patient counts, waitlist numbers, and doctor names for each hospital department.' },
+                    { id: 'data_entry_process', label: 'Who will be entering this data and from what source?', type: 'textarea', placeholder: 'e.g., Hospital admin staff will fill this form daily based on their internal records.' },
+                    { id: 'required_calculations_and_logic', label: 'What automatic calculations or totals are needed?', type: 'textarea', placeholder: 'e.g., A weekly total for patient counts per department, the daily bed occupancy percentage.' },
+                    { id: 'final_reporting_needs', label: 'Describe the final report you want to generate.', type: 'textarea', placeholder: 'e.g., A printable weekly summary report showing total patients per hospital and a pie chart of no-shows.' },
+                    { id: 'known_categories_and_rules', label: 'List any fields with fixed options or logical rules.', type: 'textarea', placeholder: 'e.g., Hospital Names: IGMH, HMH, AEH. Rule: Occupied Beds cannot be greater than Total Beds.' }
                 ]}
             ];
             
@@ -1465,7 +1475,89 @@ Generate the complete SOP using the following standard format.
 
 ### **5.0 References & Related Documents**
 * (List any forms, policies, or other documents that are referenced in the procedure. If none are specified, state "N/A".)
-`
+`,
+                data_entry_form: p => `You are an expert data architect and Microsoft Excel specialist. Your task is to generate a complete, three-part strategic plan for creating a robust data collection and reporting system in Excel.
+
+The plan must be a step-by-step guide for a non-expert user, teaching them how to build the system from scratch. It must begin with a high-level overview explaining the core data principles involved.
+
+**1. User requirements**
+
+* **System objective:** ${p.objective}
+* **Data to be collected:** ${p.data_to_be_collected}
+* **Data entry process:** ${p.data_entry_process}
+* **Required calculations:** ${p.required_calculations_and_logic}
+* **Final reporting needs:** ${p.final_reporting_needs}
+* **Known categories & rules:** ${p.known_categories_and_rules}
+
+**2. Mandatory plan structure**
+
+Generate a comprehensive plan that walks the user through creating three separate, linked Excel sheets. The plan must begin with the following overview.
+
+---
+
+### **Part 0: High-level overview and strategy**
+
+**a. The goal: Creating analysis-ready data**
+* Explain that the primary goal is to structure data in a way that is clean, reliable, and immediately usable for analysis (like creating reports, charts, or statistics). The challenge is that data which is easy for humans to read at a glance is often difficult for computers to analyze systematically.
+
+**b. Three-sheet system**
+* Introduce the solution: a system with three interconnected sheets designed for (1) safe and easy data entry, (2) clean and structured data storage, and (3) flexible, automated reporting.
+
+**c. Core concept: Flattening multi-dimensional data**
+* Explain data dimensions using rows and columns as the first two dimensions.
+* Provide examples of a third dimension, which could be time (e.g., the same table of hospital data repeated each week) or another category (e.g., the same hospital data table repeated for different countries, students and test scores across multiple schools).
+* Explain that for most analysis in Excel, this multi-dimensional data must be "flattened" or "folded down" into two dimensions (rows and columns). This is achieved by turning the third dimension (like "Week 1", "Week 2" or "Country A", "Country B" or "School A", "School B") into a new column. This process transforms the data into a "long" or "tidy" format, where every row is a single, unique observation.
+
+**d. Core concept: "Wide" vs. "Tidy" data format**
+* Visually explain the difference:
+    * **Wide Data:** Easy for humans to read for one instance (like a single day's report), but difficult to analyze across instances. Often has multiple values in a single row that are the same type of measurement (e.g., columns for "Jan", "Feb", "Mar").
+    * **Tidy Data:** Optimized for analysis. Every row is one observation, every column is one variable. It might seem less intuitive at first but is far more powerful. Explain that a "tidy" dataset can still be very wide if it has hundreds of variables; the key is its structure, not its literal shape.
+
+**e. Why we need data validation and protection**
+* **Data Validation:** Explain that this is about ensuring data quality at the point of entry. It's a set of rules to prevent common errors, such as:
+    * *Inconsistency:* Using dropdown lists for categories like "Hospital Name" ensures it's always entered the same way, not as "IGMH" one day and "Indira Gandhi Memorial Hospital" the next.
+    * *Logical Impossibility:* Using custom rules to enforce logic, like ensuring "Occupied Beds" is not greater than "Total Beds".
+* **Sheet Protection:** Explain that this is a critical safeguard against human error.
+    * It prevents users from accidentally deleting or overwriting cells containing important formulas or labels, which could break the entire system.
+    * Crucially, if a password is used, it forces any change to be **intentional**. A person casually Browse the sheet cannot make accidental edits; they must consciously decide to unprotect the sheet by entering the password, which dramatically reduces mistakes.
+
+---
+
+### **Part 1: The "Data Entry" sheet (The user-friendly form)**
+
+This is the sheet the staff will interact with daily.
+
+* **a. Recommended layout:** Describe a clean, intuitive visual layout for the form.
+* **b. Step-by-step setup instructions:**
+    1.  Provide a table showing which cells should contain which labels (e.g., A4: "Hospital Name", A5: "Date").
+    2.  Provide a second table detailing the setup for all **data validation and dropdown lists**. It must explain *how* to do it in Excel (Go to Data > Data Validation...).
+        | Cell(s) | Validation type | Instructions & formula/source | Error message (if applicable) |
+        | :--- | :--- | :--- | :--- |
+    3.  Explain how to **lock all non-entry cells** (labels, headers) and **protect the sheet**, detailing the different protection options (e.g., a "Stop" error versus a "Warning").
+
+---
+
+### **Part 2: The "Dataset" sheet (The clean, analysis-ready data)**
+
+This sheet will automatically collect the data from the "Data Entry" sheet into a proper, long-format table.
+
+* **a. Explanation of purpose:** Briefly explain why this sheet is critical for time-series analysis (i.e., converting a 3D problem into a 2D table).
+* **b. Recommended layout:** Design the structure of the master data table. The first column should list all the variable codes (e.g., \`igmh_gen_opd_fluclinic\`). The next column is for the values from the current day's entry form.
+* **c. Step-by-step setup instructions:**
+    1.  Explain how to create the list of variable codes, detailing the "Find and Replace" trick in Word to generate hundreds of variable names quickly.
+    2.  Provide detailed instructions for linking the "Value" column to the "Data Entry" sheet. Include an example: "Click on cell B3 in this sheet, type \`=\`, then navigate to the 'Data Entry' sheet and click on cell C8. The formula bar will show \`='Data Entry'!C8\`. Press Enter. Now, whatever value is in C8 on the entry form will appear in B3 of your dataset.".
+
+---
+
+### **Part 3: The "Automated Report" sheet (The final output)**
+
+This sheet will automatically aggregate and display data from a master dataset file.
+
+* **a. Explanation of process:** Explain the workflow: the user will copy the "Value" column from each daily file and use **"Paste Special (Values)"** to add it as a new column in a separate master dataset file. This report will automatically update from that master file.
+* **b. Recommended layout:** Design a professional, printable report layout based on the user's reporting needs.
+* **c. Step-by-step setup instructions:**
+    1.  Provide a table with example formulas (\`SUMIFS\`, \`AVERAGEIFS\`, \`VLOOKUP\`) to pull the required data from the master dataset into the report. Explain each argument of the function. For example: "To get the weekly total for IGMH Flu Clinic, use \`=SUM(Data!B11:H11)\`, where B11:H11 is the row containing the daily flu clinic data for the 7 days of the week in your data aggregation sheet."
+    2.  If charts were requested, provide clear instructions on how to create them and link their data ranges to the auto-populating cells in the report.`
             };
 
             // --- DYNAMIC UI BUILDER ---
