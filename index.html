@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Updated Favicon Link -->
     <link rel="icon" href="logo.svg" type="image/svg+xml">
     <link rel="alternate icon" href="icon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="icon-512.png">
@@ -62,7 +61,6 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white antialiased relative">
     
-    <!-- Theme Toggle Button -->
     <div class="absolute top-4 right-4">
         <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -77,19 +75,14 @@
             <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to generate a standardized prompt. then, paste the generated prompt with all relevant files attached into an LLM like gemini pro.</p>
         </header>
 
-        <!-- Tabs for navigation -->
         <div class="mb-6 border-b border-gray-200 dark:border-gray-700">
             <nav id="nav-container" class="flex flex-wrap -mb-px space-x-2" aria-label="Tabs">
-                <!-- Tabs will be populated by JS -->
-            </nav>
+                </nav>
         </div>
 
-        <!-- Main Content Area -->
         <main id="main-container">
-            <!-- All generator sections will be populated by JS -->
-        </main>
+            </main>
 
-        <!-- Output Section -->
         <div id="output-container" class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hidden">
             <div class="flex flex-wrap justify-between items-center mb-4 border-b border-gray-200 dark:border-gray-700 pb-3 gap-2">
                 <h3 id="output-title" class="text-xl font-semibold">Generated Prompt</h3>
@@ -102,7 +95,6 @@
             <div id="copy-feedback" class="text-green-500 dark:text-green-400 text-sm mt-2 h-4"></div>
         </div>
         
-        <!-- Datalists for suggestions -->
         <div id="datalist-container"></div>
 
         <footer class="text-center mt-12">
@@ -209,7 +201,8 @@
                 ]},
                 { id: 'methods', name: 'Research Methods', color: brandColors.green, fields: [
                     { id: 'question', label: 'Research Question', type: 'text', placeholder: "State the precise causal question." },
-                    { id: 'data', label: 'Available Data', type: 'textarea', placeholder: "Describe the dataset(s) or refer to attached files." }
+                    { id: 'data', label: 'Available Data', type: 'textarea', placeholder: "Describe the dataset(s) or refer to attached files." },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing additional context.' }
                 ]},
                 { id: 'briefing', name: 'Briefing Note', color: brandColors.teal, fields: [
                     { id: 'topic', label: 'Briefing Subject', type: 'text', placeholder: "e.g., 'Briefing on the key findings of the Third Spaces report.'" },
@@ -268,6 +261,21 @@
                     { id: 'dependencies', label: 'Major External Dependencies', type: 'textarea', placeholder: 'e.g., "Approval from Finance Ministry," "Data from the Bureau of Statistics," "Vendor availability."' },
                     { id: 'components', label: 'Key Project Components', type: 'text', placeholder: 'List the main types of work, e.g., "research, procurement, software development, event, construction"' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
+                ]},
+                { id: 'linkedin_article', name: 'LinkedIn Article', color: brandColors.blue, fields: [
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List the file names of all relevant reports, data, or documents the AI should use to find an article topic.' },
+                    { id: 'audience', label: 'Target Audience (Optional)', type: 'text', placeholder: 'e.g., "Policymakers," "Tech Executives," "Recent Graduates"' },
+                    { id: 'goal', label: 'Primary Goal (Optional)', type: 'text', placeholder: 'e.g., "Start a discussion," "Drive traffic to our main report," "Establish thought leadership"' }
+                ]},
+                { id: 'data_cleaning', name: 'Data Cleaning Plan', color: brandColors.teal, fields: [
+                    { id: 'sources', label: 'Source Data File', type: 'text', placeholder: 'Enter the exact file name of the dataset to be analyzed (e.g., "survey_data.xlsx").' },
+                    { id: 'topic', label: 'Research Topic or Goal', type: 'textarea', placeholder: 'Briefly describe what you intend to analyze or prove using this data. This helps assess data suitability.' }
+                ]},
+                { id: 'presentation', name: 'Presentations', color: brandColors.pink, fields: [
+                    { id: 'topic', label: 'Presentation Topic & Core Message', type: 'textarea', placeholder: 'e.g., "The case for developing community third spaces in Malé."' },
+                    { id: 'audience', label: 'Target Audience', type: 'text', placeholder: 'e.g., "Government policymakers," "Potential investors," "The general public."' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: "e.g., \"Base the content on the attached 'Third Spaces Draft.pdf'.\"" },
+                    { id: 'output_format', label: 'Output Format (Select one or both)', type: 'checkbox', options: ['Gamma', 'PowerPoint Outline'] }
                 ]}
             ];
             
@@ -531,35 +539,60 @@ Generate the dashboard plan with the following detailed sections:
     * Specify which worksheets each filter should apply to.
 * **5. PowerBI Adaptation:**
     * Briefly describe how to create a similar dashboard in PowerBI, noting any key differences in approach or available visuals.`,
-                methods: p => `You are an expert econometrician and research methodologist. Your thinking is deeply informed by the principles of causal inference as detailed in Scott Cunningham's "Causal Inference: The Mixtape" and Nick Huntington-Klein's "The Effect." Your task is to propose a rigorous research methodology to answer the user's question based on their available data.
+                methods: p => `You are an expert research methodologist with deep knowledge of both quantitative and qualitative traditions. Your thinking is informed by causal inference principles and practical application in policy and social science. Your task is to propose a rigorous and appropriate research methodology to answer the user's question, drawing from the full spectrum of available techniques.
 
 **1. Research Details**
 
 * **Research Question:** ${p.question}
 * **Available Data:** ${p.data}
+* **Source Materials:** ${p.sources || 'None specified. Base analysis on user inputs.'}
 
 **2. Required Output Structure**
 
-Generate a detailed research plan with the following sections:
+Generate a detailed research plan with the following comprehensive sections. You must first determine the best paradigm (quantitative, qualitative, or mixed-methods) and then build the plan accordingly.
 
-* **1. Causal Framework:**
+---
+
+### **Comprehensive Research Plan**
+
+### **1. Recommended Research Paradigm & Design**
+* **Paradigm Justification:** First, state whether the research question is best answered using a **quantitative**, **qualitative**, or **mixed-methods** approach. Justify your choice based on the nature of the question (e.g., "Is it asking 'how much?' or 'why/how'?").
+* **Overall Research Design Discussion & Recommendation:**
+    * **If Quantitative:** Recommend a specific design like a **Randomized Controlled Trial (RCT)**, **Regression Discontinuity Design (RDD)**, or **Difference-in-Differences (DiD)**. Briefly explain why this design is the best fit for establishing causality in this context.
+    * **If Qualitative:** Discuss 2-3 viable qualitative designs from the Rainbow Framework (e.g., **Case Study**, **Contribution Analysis**, **Most Significant Change**). For each, briefly explain its strengths and weaknesses in relation to the user's research question. After the discussion, state your final recommended design and justify the choice.
+
+### **2. Data Collection Strategy**
+*(Provide this section if the user has not specified 'Available Data' or if new data is required.)*
+* **Proposed Method:** Recommend a primary data collection strategy.
+* **Quantitative Data:** If quantitative data is needed, suggest methods like a **National Opinion Polling Model** (with considerations for weighting and sampling bias) or **Web Scraping** from online sources (e.g., social media, news archives) using tools like ParseHub.
+* **Qualitative Data:** If qualitative data is needed, suggest methods like **Appreciative Inquiry**, **Beneficiary Assessment**, or structured interviews for **Oral Histories**.
+* **Implementation Steps:** Provide a brief, actionable outline of the steps to execute the data collection.
+
+### **3. Quantitative Analysis Plan (If Applicable)**
+* **a. Causal Framework:**
     * Draw a **Directed Acyclic Graph (DAG)** as a code block or text description to map the causal relationships between the treatment, outcome, and potential confounders.
-    * Identify the key causal question and the core identification challenge (e.g., "The challenge is selection bias, as the program was likely implemented in higher-crime neighborhoods.").
-* **2. Recommended Research Design:**
-    * Propose the most appropriate research design. Justify your choice.
-    * Examples: **Difference-in-Differences (DiD)**, **Regression Discontinuity (RD)**, **Instrumental Variables (IV)**, or a **Randomized Control Trial (RCT)**.
-* **3. Statistical Model:**
-    * Specify the primary regression equation to be estimated.
-    * Define each variable in the equation (Y, T, X).
-    * Recommend the specific regression type (e.g., "Linear OLS with clustered standard errors," "Logit model").
-    * Provide the complete R code to run the analysis. **The code must be heavily commented**, explaining each function and argument for a user who does not know R. Include data cleaning and preparation steps.
-* **4. Robustness Checks and Diagnostics:**
-    * List essential tests to validate the model's assumptions (e.g., "Test for parallel trends in the pre-treatment period for DiD," "Check for balance in covariates").
-    * Suggest alternative specifications or models to test the sensitivity of the results.
-* **5. Potential Pitfalls, Limitations, and Alternative Explanations:**
-    * **a. Statistical Limitations:** Discuss potential threats to statistical validity (e.g., "Spillover effects," "Measurement error," "Heteroskedasticity") and suggest ways to mitigate them.
-    * **b. Logical and Contextual Considerations:** Discuss non-statistical alternative explanations for the findings. This should include potential selection biases, the representativeness of the sample, confounding events (e.g., a major economic crisis, a natural disaster, a new law passed during the study period), seasonality (e.g., tourist seasons, holidays), reporting bias (e.g., changes in social stigma affecting reporting rates), and the Lucas critique (i.e., whether the findings would hold if the policy were scaled up). Consider the use of dummy variables to control for specific, niche events (e.g., a dummy for the COVID-19 pandemic years, or for a specific month of a state of emergency).
-    * **c. Checklist for Contextual Inquiry:** Generate a list of pointed questions the researcher must consider about the specific context, since you do not have that local knowledge. For example: "Were there any other major programs or events happening in the 'treated' group but not the 'control' group during the study period?", "How might the upcoming election cycle have influenced the behavior you are measuring?", "Could the observed change be due to a shift in how data is collected or defined, rather than a change in underlying behavior?".`,
+    * Identify the key causal question and the core identification challenge (e.g., "The challenge is selection bias...").
+* **b. Statistical Model:**
+    * **Regression Equation:** Specify the primary regression equation to be estimated (e.g., $y = B_0 + B_1X_1 + B_2X_2 + E$). Define each variable.
+    * **Model Type:** Recommend a regression type (e.g., "Linear OLS," "Logit").
+    * **R Code:** Provide the complete R code to run the analysis. The code **must be very heavily commented**, explaining each line or code block's purpose, function arguments, and logic so a layperson can understand the process.
+* **c. How to Interpret Results:** Explain how the user would interpret the key outputs from the recommended statistical model:
+    * **Coefficients:** Explain what the coefficients represent. If recommending a non-linear model (e.g., Logit), explain how to interpret its output (e.g., as log-odds or by converting to odds ratios).
+    * **Variable Transformations:** If variables are transformed (e.g., using a logarithm), explain how to interpret the resulting coefficient (e.g., "A 1% increase in X is associated with a B1-unit change in Y").
+    * **Key Statistics:** Explain the practical meaning of the **p-value** (the probability the result is due to chance) and the **R-squared** (the proportion of variance explained by the model).
+
+### **4. Qualitative Analysis Plan (If Applicable)**
+* **a. Analytical Framework:** Based on your recommendation in Section 1, state the chosen qualitative approach (e.g., "Thematic Analysis" for a Case Study, or the filtering process for "Most Significant Change").
+* **b. Process:** Outline the steps for analysis. For example, for a **Contribution Analysis** approach, this would include:
+    1.  Mapping out the intended theory of change.
+    2.  Gathering existing evidence for each link in the causal chain.
+    3.  Assembling and assessing the contribution claim, and seeking out alternative explanations.
+* **c. Presentation of Findings:** Suggest how the qualitative findings will be presented (e.g., as a contribution narrative, a series of case studies, or a thematic report).
+
+### **5. Potential Pitfalls and Limitations**
+* **a. Threats to Validity:** Discuss potential threats to the validity of your recommended design (e.g., for DiD, the "parallel trends" assumption; for RCTs, potential for sample contamination or ethical concerns).
+* **b. Data-Specific Issues:** If using scraped web data, mention potential issues like selection bias (e.g., only capturing complaints when prices are high) and the need to cross-validate with other sources.
+* **c. Logical and Contextual Considerations:** Provide a checklist of contextual questions the researcher must consider.`,
                  briefing: p => `You are an expert policy advisor. Your task is to write a clear, concise, and scannable briefing note on the provided topic, summarizing the key information from the source materials.
 
 **1. Briefing Note Details**
@@ -1129,7 +1162,232 @@ The plan must be structured using the **Scope, Plan, Track & Adapt, Close** four
 
 **3. Final Output**
 
-Begin the response with a brief disclaimer about the timeline being an estimate, then generate the full, phased timeline in the specified table format. Do not write any other introductory or concluding text.`
+Begin the response with a brief disclaimer about the timeline being an estimate, then generate the full, phased timeline in the specified table format. Do not write any other introductory or concluding text.`,
+                linkedin_article: p => `You are an expert in professional content strategy and communication, specializing in creating engaging thought leadership articles for LinkedIn.
+
+**1. Core Task & Source Materials**
+
+* **Your Task:** Your primary task is to thoroughly analyze the attached **Source Materials**. From your analysis, you must identify a single, compelling topic that is insightful, relevant, and well-suited for a professional LinkedIn audience. You will then write a complete LinkedIn article on that topic.
+* **Source Materials to Analyze:** ${p.sources}
+* **Target Audience:** ${p.audience || 'A general professional audience on LinkedIn.'}
+* **Primary Goal:** ${p.goal || 'To establish thought leadership and spark meaningful discussion.'}
+
+**2. Mandatory Article Structure and Style**
+
+The generated article must adhere to the best practices for LinkedIn articles to maximize engagement and readability.
+
+* **1. Identify a Topic:** First, silently review the source materials and select a core idea that can be framed as a concise, valuable insight for a professional audience.
+* **2. Generate a Compelling Headline:** Create a headline that is clear, intriguing, and includes keywords relevant to the target audience. It should promise a specific takeaway.
+* **3. Write a Strong Opening Hook:** The first 2-3 sentences must grab the reader's attention immediately, state the core problem or insight, and make them want to read more.
+* **4. Develop the Body with Scannable Content:**
+    * **Length:** The article should be between **400 and 800 words**.
+    * **Paragraphs:** Keep paragraphs short (2-4 sentences). Use generous white space.
+    * **Structure:** Use bullet points or numbered lists to break up text and present key points clearly.
+    * **Tone:** Maintain a professional, confident, and accessible tone. Frame the content as a valuable lesson, a new perspective, or actionable advice.
+* **5. Conclude with a Clear Takeaway and Call to Action:** The final paragraph should summarize the main point and ask an open-ended question to encourage comments and discussion.
+* **6. Suggest Relevant Hashtags:** Provide a list of 3-5 relevant hashtags at the very end to increase visibility.
+
+**3. Required Output**
+
+Generate the full LinkedIn article based on the topic you have identified from the source materials. The final output should start with the headline and be ready to publish.
+
+---
+
+### **Generated LinkedIn Article**
+
+**(Begin output here)**`,
+                data_cleaning: p => `You are an expert data analyst and data scientist with deep experience in data cleaning, validation, structural engineering, and exploratory data analysis (EDA).
+
+**1. Core Task & Source Materials**
+
+* **Your Task:** Your primary task is to act as a data strategy consultant. You will analyze the attached data file and generate a comprehensive Data Cleaning and Exploratory Analysis Plan. The plan must be practical, actionable, and provide clear instructions and strategic recommendations for improving the dataset's structure and analytical potential.
+* **Source Data File to Analyze:** ${p.sources}
+* **Stated Research Topic/Goal:** ${p.topic}
+
+**2. Required Output Structure**
+
+Generate the plan using the following multi-part structure. Your analysis must be thorough, identifying potential issues within the data file and providing concrete solutions and strategic enhancements.
+
+---
+
+### **Data Cleaning & Exploratory Analysis Plan**
+
+### **Part 1: Initial Data Assessment**
+
+1.  **File Overview:** State the file name and its likely format (e.g., CSV, Excel).
+2.  **Column Identification:** List all column headers found in the dataset.
+3.  **Data Type Inference:** For each column, infer the data type (e.g., Numeric, Text, Date, Categorical).
+4.  **Suitability Analysis:** Briefly assess if the available columns and data types seem suitable for addressing the stated **Research Topic/Goal**. Highlight any obvious gaps (e.g., "The dataset lacks a date column, which will make trend analysis difficult.").
+
+### **Part 2: Step-by-Step Data Cleaning Plan**
+
+For each potential data integrity issue you identify, present it in a structured format. Address common issues like inconsistent formats, spelling errors, duplicates, and missing values.
+
+**Issue 1: [Name of the Identified Issue (e.g., Inconsistent Spelling in 'department' column)]**
+* **How to Identify:** (e.g., "The 'department' column may contain variations like 'HR', 'H.R.', and 'Human Resources'.")
+* **Excel Solution:**
+    1.  **Identify Variations:** Use the formula \`=UNIQUE(A2:A100)\` (adjust range) in a new sheet to see all unique entries.
+    2.  **Standardize:** Use nested \`SUBSTITUTE()\` functions or the 'Find and Replace' tool to standardize the variations to a single format (e.g., 'Human Resources').
+* **R Solution:**
+    \`\`\`R
+    # Load necessary library
+    library(dplyr)
+
+    # See all unique values to identify inconsistencies
+    unique(your_dataframe$department)
+
+    # Standardize values using case_when()
+    your_dataframe <- your_dataframe %>%
+      mutate(department = case_when(
+        department %in% c("HR", "H.R.") ~ "Human Resources",
+        # Add other conditions here
+        TRUE ~ department # Keep other values as they are
+      ))
+    \`\`\`
+
+**(Repeat this structure for every issue you identify.)**
+
+### **Part 3: Unstructured Text Analysis & Structuring Plan**
+
+*(Analyze any columns containing long-form text, like 'notes' or 'description'.)*
+
+**Analysis of Column '[Column Name]':**
+* **Observation:** (e.g., "The 'casework_notes' field is unstructured text, but frequently contains recurring information about household composition, disability status, and housing conditions.")
+* **Recommendation:** Decompose this text field into multiple structured columns to make the data analyzable. The original text field can be kept for unique, case-specific context.
+* **Proposed New Columns:**
+    * \`num_children\`: Numeric
+    * \`has_disability\`: Binary (1/0)
+    * \`housing_condition\`: Categorical (e.g., "Overcrowded", "Adequate", "Substandard")
+    * \`receives_assistance\`: Binary (1/0)
+* **Implementation Strategy (R Example):**
+    \`\`\`R
+    library(stringr)
+    # Extract number of children using regular expressions
+    your_dataframe <- your_dataframe %>%
+      mutate(
+        num_children = as.numeric(str_extract(casework_notes, "\\\\d+(?= child)")),
+        has_disability = ifelse(str_detect(casework_notes, "disability|disabled"), 1, 0)
+      )
+    \`\`\`
+
+### **Part 4: Data Dictionary and Structural Recommendations**
+
+Based on your analysis, provide a data dictionary that documents the current state of variables and recommends structural changes or new variable creation for improved analysis.
+
+| Variable Name | Current State (Type/Format) | Recommended State / New Variable | Rationale for Change / Creation |
+| :--- | :--- | :--- | :--- |
+| **Existing Vars** | | | |
+| [e.g., employee_id] | [e.g., Numeric] | Keep as is | Serves as a unique identifier. |
+| [e.g., housing_type] | Numeric (Ordinal: 4,5,6,7,8) | Decompose into multiple new variables. | Ordinal numbers imply a ranked relationship that doesn't exist. Binary variables are better for regression analysis. |
+| **Newly Created** | | | |
+| [e.g., own_home] | Newly Created | Binary (1 or 0) | Creates a clear binary variable for homeownership from \`housing_type\` codes 4 and 5. |
+| [e.g., renter] | Newly Created | Binary (1 or 0) | Isolates renters (from \`housing_type\` code 6) for targeted analysis. |
+| [e.g., homeless] | Newly Created | Binary (1 or 0) | Isolates individuals experiencing homelessness (from \`housing_type\` code 8). |
+
+### **Part 5: Exploratory Data Analysis (EDA) Plan**
+
+This section should provide code and instructions for the user to explore their newly cleaned and structured data.
+
+1.  **Summary Statistics:**
+    * **Explanation:** Explain that summary statistics help identify strange values and understand data distribution.
+    * **R Code & Interpretation:**
+        \`\`\`R
+        # Get summary statistics for the entire dataset
+        summary(your_dataframe)
+        # How to interpret: Look at the Min/Max values for numeric columns. Are they plausible?
+        \`\`\`
+2.  **Visual Outlier Detection:**
+    * **Explanation:** Explain that plotting each variable is the fastest way to spot outliers or errors.
+    * **R Code & Interpretation (using ggplot2):**
+        \`\`\`R
+        library(ggplot2)
+        # For a numeric variable (e.g., 'salary')
+        ggplot(your_dataframe, aes(x = salary)) + geom_histogram(bins = 30)
+        # How to interpret: Look for bars far away from the main group.
+        \`\`\`
+
+### **Part 6: Recommendations for Data Enhancement**
+
+1.  **Unique Identifier:**
+    * **Assessment:** (e.g., "The dataset appears to lack a unique identifier for each row, which could lead to issues tracking records or identifying duplicate entries.")
+    * **Recommendation:** Create a unique ID for each row.
+    * **R Code:** \`your_dataframe <- your_dataframe %>% mutate(record_id = row_number())\`
+2.  **Merging with External Data for Deeper Analysis:**
+    * **Strategic Suggestion:** (e.g., "The stated goal is to analyze student test scores. The current dataset contains school names but no demographic context. To conduct a more powerful analysis, you could merge this data with external sources.")
+    * **Example Plan:**
+        1.  **Obtain School Location Data:** Find a public dataset that lists schools with their addresses or geographic coordinates. Merge this with your data using the school name to get each student's location.
+        2.  **Obtain Socioeconomic Data:** Find a public dataset with census or economic data by region (e.g., income levels by county/district).
+        3.  **Merge and Analyze:** Merge the socioeconomic data based on the school's location. This allows you to analyze test scores while controlling for the wealth level of the area. This can help identify high-performing schools in low-income areas, whose practices could be replicated.
+`,
+                presentation: p => {
+                    const createGammaBlueprint = () => `
+### **Part 1: Gamma Presentation Blueprint**
+
+**How to use this blueprint in Gamma:**
+1.  Open Gamma and select "Create New (AI)".
+2.  Choose "Paste in Text" and select the "Presentation" setting.
+3.  Copy the entire text below (starting from the first "Card Title") and paste it into the text box.
+4.  In the settings on the right, find the "Content" section and click "See more options". **Crucially, select "Preserve this exact text"** to prevent Gamma from auto-summarizing or rewriting your content.
+5.  Click "Continue" to generate your presentation.
+
+---
+(The AI will generate the slide-by-slide blueprint below, with each slide separated by '---' on a new line)
+`;
+
+                    const createPowerPointBlueprint = () => `
+### **Part 2: PowerPoint Outline Blueprint**
+
+**How to use this outline in PowerPoint:**
+1.  Open a new PowerPoint presentation.
+2.  Go to the "View" tab and click on "Outline View". A sidebar will appear on the left.
+3.  Copy the entire text below (starting from the first slide title) and paste it into the sidebar. All the text will appear on a single slide initially.
+4.  To create new slides, place your cursor just before the "/" on each line, delete the "/", press the left arrow key once (to move before the title), and press Enter. This will create a new slide with the correct title.
+5.  **Pro-Tip:** Even if you start with a presentation from Gamma and export it to PowerPoint, you can easily edit all its text content in this "Outline View".
+
+---
+(The AI will generate the slide-by-slide outline below)
+`;
+
+                    let output = `You are an expert presentation designer and data storyteller. Your task is to create a detailed, slide-by-slide blueprint for a presentation based on the provided information.
+
+**1. Presentation Details**
+
+* **Topic:** ${p.topic}
+* **Target Audience:** ${p.audience}
+* **Source Materials:** ${p.sources}
+* **Requested Format(s):** ${p.output_format || 'Gamma and PowerPoint Outline'}
+
+**2. Mandatory Visual and Design Guide**
+
+* **Color Palette:** The suggested design must be influenced by the Public Policy Lab brand colors: Teal (#46bbb7), Coral Red (#f05b4e), Green (#3fad87), Blue (#0097b2), and Pink (#ec9896).
+* **Imagery:** **Do not use AI-generated art.** Use simple, clean icons, line-art illustrations, and high-quality stock photos where appropriate.
+* **Data Visualization:** You must select the most appropriate chart or graphic for the data being presented, such as Bar Charts for comparisons, Line Charts for trends, and simple Number Cards for powerful stats.
+
+**3. Presentation Blueprint(s)**
+`;
+
+                    const wantsGamma = !p.output_format || p.output_format.includes('Gamma');
+                    const wantsPowerPoint = !p.output_format || p.output_format.includes('PowerPoint');
+
+                    if (wantsGamma) {
+                        output += createGammaBlueprint();
+                        output += `
+* **Card Title:** (The main heading for the slide)
+* **Card Content:** (The key text, bullet points, or data for the slide)
+* **Visual Element:** (Detailed description of the chart, illustration, or photo to use)
+* **Design Rationale:** (A brief explanation of why the chosen visual is the most effective way to communicate the information on this slide)
+`;
+                    }
+
+                    if (wantsPowerPoint) {
+                        output += createPowerPointBlueprint();
+                        output += `
+(Slide Title) / (Bulleted list of content for the slide)
+`;
+                    }
+
+                    return output;
+                }
             };
 
             // --- DYNAMIC UI BUILDER ---
