@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Updated Favicon Link -->
     <link rel="icon" href="logo.svg" type="image/svg+xml">
     <link rel="alternate icon" href="icon-192.png" type="image/png" sizes="192x192">
     <link rel="apple-touch-icon" href="icon-512.png">
@@ -61,6 +62,7 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white antialiased relative">
     
+    <!-- Theme Toggle Button -->
     <div class="absolute top-4 right-4">
         <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -75,14 +77,19 @@
             <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to generate a standardized prompt. then, paste the generated prompt with all relevant files attached into an LLM like gemini pro.</p>
         </header>
 
+        <!-- Tabs for navigation -->
         <div class="mb-6 border-b border-gray-200 dark:border-gray-700">
             <nav id="nav-container" class="flex flex-wrap -mb-px space-x-2" aria-label="Tabs">
-                </nav>
+                <!-- Tabs will be populated by JS -->
+            </nav>
         </div>
 
+        <!-- Main Content Area -->
         <main id="main-container">
-            </main>
+            <!-- All generator sections will be populated by JS -->
+        </main>
 
+        <!-- Output Section -->
         <div id="output-container" class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 hidden">
             <div class="flex flex-wrap justify-between items-center mb-4 border-b border-gray-200 dark:border-gray-700 pb-3 gap-2">
                 <h3 id="output-title" class="text-xl font-semibold">Generated Prompt</h3>
@@ -95,6 +102,7 @@
             <div id="copy-feedback" class="text-green-500 dark:text-green-400 text-sm mt-2 h-4"></div>
         </div>
         
+        <!-- Datalists for suggestions -->
         <div id="datalist-container"></div>
 
         <footer class="text-center mt-12">
@@ -262,12 +270,12 @@
                     { id: 'components', label: 'Key Project Components', type: 'text', placeholder: 'List the main types of work, e.g., "research, procurement, software development, event, construction"' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
                 ]},
-                { id: 'linkedin_article', name: 'LinkedIn Article', color: brandColors.blue, fields: [
+                { id: 'linkedin_article', name: 'LinkedIn Article', color: brandColors.teal, fields: [
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List the file names of all relevant reports, data, or documents the AI should use to find an article topic.' },
                     { id: 'audience', label: 'Target Audience (Optional)', type: 'text', placeholder: 'e.g., "Policymakers," "Tech Executives," "Recent Graduates"' },
                     { id: 'goal', label: 'Primary Goal (Optional)', type: 'text', placeholder: 'e.g., "Start a discussion," "Drive traffic to our main report," "Establish thought leadership"' }
                 ]},
-                { id: 'data_cleaning', name: 'Data Cleaning Plan', color: brandColors.teal, fields: [
+                { id: 'data_cleaning', name: 'Data Cleaning Plan', color: brandColors.blue, fields: [
                     { id: 'sources', label: 'Source Data File', type: 'text', placeholder: 'Enter the exact file name of the dataset to be analyzed (e.g., "survey_data.xlsx").' },
                     { id: 'topic', label: 'Research Topic or Goal', type: 'textarea', placeholder: 'Briefly describe what you intend to analyze or prove using this data. This helps assess data suitability.' }
                 ]},
@@ -276,6 +284,15 @@
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: 'e.g., "Government policymakers," "Potential investors," "The general public."' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: "e.g., \"Base the content on the attached 'Third Spaces Draft.pdf'.\"" },
                     { id: 'output_format', label: 'Output Format (Select one or both)', type: 'checkbox', options: ['Gamma', 'PowerPoint Outline'] }
+                ]},
+                { id: 'sop', name: 'SOPs', color: brandColors.coral, fields: [
+                    { id: 'process_name', label: 'Process Name', type: 'text', placeholder: 'e.g., New Employee Onboarding Process' },
+                    { id: 'objective', label: 'Objective of the SOP', type: 'textarea', placeholder: 'What is the primary goal of this procedure?' },
+                    { id: 'audience', label: 'Target Audience', type: 'text', placeholder: 'e.g., "All Hiring Managers and HR Staff"' },
+                    { id: 'stages', label: 'Key Stages of the Process', type: 'textarea', placeholder: 'List the major phases, one per line (e.g., Pre-Arrival, Day 1, First Week).' },
+                    { id: 'tasks', label: 'Known Steps or Tasks to Include', type: 'textarea', placeholder: 'List any specific actions that must be included in the procedure.' },
+                    { id: 'roles', label: 'Roles Involved & Responsibilities', type: 'textarea', placeholder: 'List the roles and their main duties, one per line (e.g., Hiring Manager: Schedules team intro meetings).' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing process maps, policies, or context.' }
                 ]}
             ];
             
@@ -1387,7 +1404,67 @@ This section should provide code and instructions for the user to explore their 
                     }
 
                     return output;
-                }
+                },
+                sop: p => `You are an expert in process management and technical writing, specializing in creating clear, scannable, and actionable Standard Operating Procedures (SOPs).
+
+**1. SOP Details**
+
+* **Process Name:** ${p.process_name}
+* **Objective of the SOP:** ${p.objective}
+* **Target Audience (Who will use this SOP?):** ${p.audience}
+* **Key Stages of the Process:** ${p.stages}
+* **Known Steps or Tasks to Include:** ${p.tasks}
+* **Roles Involved & Responsibilities:** ${p.roles}
+* **Source Materials:** ${p.sources || 'None specified. Base analysis on user inputs.'}
+
+**2. Mandatory Format and Style Guide**
+
+* **Clarity and Tone:** Use clear, direct, and unambiguous language. Write in the active voice. Number each step sequentially. The tone should be formal and instructional.
+* **Structure:** The SOP must be highly organized with a logical, hierarchical flow. Use a consistent numbering system for main sections and sub-steps (e.g., 4.0, 4.1, 4.1.1).
+* **Factual Integrity:** All procedural steps must be logically derived from the provided details and any source materials.
+
+**3. Required Output Structure**
+
+Generate the complete SOP using the following standard format.
+
+---
+
+### **Standard Operating Procedure**
+
+**SOP Title:** ${p.process_name}
+**SOP ID:** [DEPT-PROCESS-YEAR-VERSION]
+**Version:** 1.0
+**Effective Date:** ${new Date().toLocaleDateString('en-CA')}
+
+### **1.0 Purpose**
+* (A concise, 1-2 sentence statement describing the primary goal of this SOP, based on the provided objective.)
+
+### **2.0 Scope**
+* (A brief statement describing who this SOP applies to, based on the target audience.)
+
+### **3.0 Roles and Responsibilities**
+* **[Role 1 e.g., Hiring Manager]:** (List the specific responsibilities for this role in the process.)
+* **[Role 2 e.g., HR Coordinator]:** (List the specific responsibilities for this role in the process.)
+* **(Continue for all roles involved.)**
+
+### **4.0 Procedure**
+
+**(This is the main section. Break down the entire process into sequential, actionable steps. Group steps under the 'Key Stages' provided by the user.)**
+
+**4.1 [First Stage Name, e.g., Pre-Arrival]**
+    4.1.1   (First step in this stage...)
+    4.1.2   (Second step in this stage...)
+
+**4.2 [Second Stage Name, e.g., Day 1 Onboarding]**
+    4.2.1   (First step in this stage...)
+    4.2.2   (Second step in this stage...)
+        4.2.2.1 (A sub-step if necessary...)
+
+**(Continue this structure for all stages and steps.)**
+
+### **5.0 References & Related Documents**
+* (List any forms, policies, or other documents that are referenced in the procedure. If none are specified, state "N/A".)
+`
             };
 
             // --- DYNAMIC UI BUILDER ---
