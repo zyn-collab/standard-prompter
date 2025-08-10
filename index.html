@@ -74,7 +74,7 @@
         
         <header class="mb-6 text-center">
             <h1 class="text-4xl font-bold text-gray-900 dark:text-white lowercase">standard prompter</h1>
-            <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to generate a standardized prompt. then, paste the generated prompt with all relevant files attached into an LLM like gemini pro.</p>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">enter the relevant information to generate a standardized prompt. then, paste that generated prompt with all relevant files attached into an LLM like gemini pro. the resulting output should be a useful reference draft. check it, correct it, build on it, and adapt it to develop your final result. please keep in mind that LLMs have limited contextual or background knowledge, especially on local issues, and can sometimes hallucinate facts or even sources/links. LLM output from these prompts are meant only to be a starting point.</p>
         </header>
 
         <!-- Tabs for navigation -->
@@ -270,7 +270,7 @@
                     { id: 'components', label: 'Key Project Components', type: 'text', placeholder: 'List the main types of work, e.g., "research, procurement, software development, event, construction"' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files containing evidence, data, or context.' }
                 ]},
-                { id: 'linkedin_article', name: 'LinkedIn Article', color: brandColors.teal, fields: [
+                { id: 'linkedin_article', name: 'LinkedIn Blog', color: brandColors.teal, fields: [
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List the file names of all relevant reports, data, or documents the AI should use to find an article topic.' },
                     { id: 'audience', label: 'Target Audience (Optional)', type: 'text', placeholder: 'e.g., "Policymakers," "Tech Executives," "Recent Graduates"' },
                     { id: 'goal', label: 'Primary Goal (Optional)', type: 'text', placeholder: 'e.g., "Start a discussion," "Drive traffic to our main report," "Establish thought leadership"' }
@@ -279,13 +279,13 @@
                     { id: 'sources', label: 'Source Data File', type: 'text', placeholder: 'Enter the exact file name of the dataset to be analyzed (e.g., "survey_data.xlsx").' },
                     { id: 'topic', label: 'Research Topic or Goal', type: 'textarea', placeholder: 'Briefly describe what you intend to analyze or prove using this data. This helps assess data suitability.' }
                 ]},
-                { id: 'presentation', name: 'Presentations', color: brandColors.pink, fields: [
+                { id: 'presentation', name: 'Presentation', color: brandColors.pink, fields: [
                     { id: 'topic', label: 'Presentation Topic & Core Message', type: 'textarea', placeholder: 'e.g., "The case for developing community third spaces in Malé."' },
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: 'e.g., "Government policymakers," "Potential investors," "The general public."' },
                     { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: "e.g., \"Base the content on the attached 'Third Spaces Draft.pdf'.\"" },
                     { id: 'output_format', label: 'Output Format (Select one or both)', type: 'checkbox', options: ['Gamma', 'PowerPoint Outline'] }
                 ]},
-                { id: 'sop', name: 'SOPs', color: brandColors.coral, fields: [
+                { id: 'sop', name: 'SOP', color: brandColors.coral, fields: [
                     { id: 'process_name', label: 'Process Name', type: 'text', placeholder: 'e.g., New Employee Onboarding Process' },
                     { id: 'objective', label: 'Objective of the SOP', type: 'textarea', placeholder: 'What is the primary goal of this procedure?' },
                     { id: 'audience', label: 'Target Audience', type: 'text', placeholder: 'e.g., "All Hiring Managers and HR Staff"' },
@@ -318,7 +318,7 @@
 * **Tone and Clarity:** The writing must be clear, direct, and accessible to a 12th-grade reading level. Avoid filler words like "tapestry," "symphony," or "delve." Do not use constructions like "it's not about X, it's about Y." Use technical language precisely where necessary but ensure the overall narrative is easy to follow.
 
 **3. Required Output Structure**
-Please structure your response as a chronological, scene-by-scene breakdown. For each timed segment, provide the following six elements:
+Please structure your response as a chronological scene‑by‑scene breakdown, as a table where the first column is the timestamp and the second column includes all the details. For each timed segment, provide the following six elements:
 
 * **Timestamp:** The start and end time for the scene (e.g., \`0:00 - 0:15\`).
 * **Visual Description:** A detailed description of what should be on screen. If relevant footage exists in the provided library, suggest it by name.
@@ -337,7 +337,7 @@ Please structure your response as a chronological, scene-by-scene breakdown. For
 
 **2. Mandatory Writing and Style Guide**
 
-* **Tone and Clarity:** The tone must be professional, direct, and objective. The language must be clear and accessible. Avoid passive voice. Do not use meaningless filler words or phrases like "tapestry," "symphony," "delve," "labyrinth," or constructions like "it's not about X, it's about Y."
+* **Tone and Clarity:** The tone must be professional, direct, and objective. The language must be clear and accessible. Avoid passive voice. Do not use meaningless filler words or phrases like "tapestry," "symphony," "delve," "labyrinth," or constructions like "it's not about X, it's about Y." Don't overuse colons, semicolons, or em dashes where not necessary.
 * **Structure and Formatting:** The report must be clearly organized with a logical flow. All headings and subheadings must be in **sentence case**, not title case.
 * **Factual Integrity:** Every claim or assertion must be directly supported by the provided source materials. **You must not invent or hallucinate any facts, statistics, or sources.** If information is missing, state that it is unavailable.
 * **Citations:** All sources must be cited in-text and listed in a final "References" section using **APA 7th Edition format**. For online sources, the reference must end with a direct, clickable URL enclosed in < >. Example: \`Author, A. A. (Year). *Title of work*. Source. <https://...>\`
@@ -409,7 +409,7 @@ Generate the research paper using the following section-by-section blueprint. Th
     3.  Link to external ideas, studies, or articles to support the argument (you can suggest these links).
     4.  Use subheadings to break up the text and guide the reader.
     5.  Conclude with a summary of the argument and a final "So what?" takeaway for the reader.
-* **Language:** Keep sentences and paragraphs relatively short. Avoid academic jargon.
+* **Language:** Keep sentences and paragraphs relatively short. Avoid academic jargon. Avoid passive voice. Do not use meaningless filler words or phrases like “tapestry,” “symphony,” “delve,” “labyrinth,” or constructions like “it’s not about X, it’s about Y.” Minimize use of commas, semicolons, and em dashes where it’s not needed for a better-flowing sentence. Write with a clear logical flow. Every claim or assertion must be directly supported by either the provided source materials or a reliable online source. You must not invent or hallucinate any facts, statistics, or sources. Use analogies sparingly and purposefully, to clarify a complex technical concept or reframe an issue to make a persuasive point more effectively.
 
 Please now generate the full Substack post based on these instructions.`,
                 press: p => `You are an expert public relations professional. Your task is to write a formal press release based on the provided information. The press release must be written in the style of a concise, factual news article.
@@ -428,14 +428,14 @@ The press release must follow this exact structure and contain the specified boi
 * **Dateline:** MALÉ, MALDIVES – ${new Date().toLocaleDateString('en-CA')} –
 * **Body Paragraphs:**
     * Write 3-5 body paragraphs summarizing the key findings from the source materials.
-    * The style must be that of a news article: clear, direct, and factual.
+    * The style must be that of a news article: clear, direct, and factual. Do not use meaningless filler words or phrases like “tapestry,” “symphony,” “delve,” “labyrinth,” or constructions like “it’s not about X, it’s about Y.” Minimize use of commas, semicolons, and em dashes where it’s not needed for a better-flowing sentence.
     * Each paragraph should be short, containing only 2-4 sentences for maximum readability.
     * The first paragraph must summarize the most important finding (the "lede").
     * Subsequent paragraphs should provide supporting details, statistics, and key quotes (you can create a quote attributed to a spokesperson).
 * **Project Summary Paragraph:** (This paragraph must be included as written below, adapted with the project's details)
     * "The research, titled '[Insert Report Title]', provides a comprehensive analysis of [briefly describe the project's purpose]. The study highlights the urgent need for policy changes to address [state the core problem] and improve urban livability for all residents."
 * **Boilerplate Paragraph:** (This paragraph must be included verbatim)
-    * "**About Public Policy Lab:** Public Policy Lab is a think tank and consultancy firm based in the Maldives focused on developing the policy environment through original research, targeted projects, and training. Follow our work on Instagram, TikTok, and X (formerly Twitter) at @policylabmv."
+    * "Public Policy Lab is a think tank and consultancy firm based in the Maldives focused on developing the policy environment through original research, targeted projects, and training. Follow our work on Instagram, TikTok, and X/Twitter at @policylabmv."
 * **###** (The press release must end with three hash marks centered on a new line)
 
 Please now generate the complete press release.`,
@@ -474,7 +474,7 @@ Generate the plan as a markdown table with two columns: "Timestamp" and "Shot De
 * **Tool-Specific Instructions:** ${p.tools}
 
 **2. Mandatory Visual and Design Guide**
-* **Color Palette:** The design must be heavily influenced by the Public Policy Lab brand colors: Teal (#46bbb7), Coral Red (#f05b4e), Green (#3fad87), Blue (#0097b2), and Pink (#ec9896). Use these as the core palette.
+* **Color Palette:** Where applicable, the design should be influenced by the Public Policy Lab brand colors: Teal (#46bbb7), Coral Red (#f05b4e), Green (#3fad87), Blue (#0097b2), and Pink (#ec9896). Use these as the core palette.
 
 **3. Required Output Structure**
 
@@ -486,6 +486,7 @@ Provide a single, detailed concept with the following sections:
 * **Visual Elements:** Detail the specific icons, charts, and illustrations to use for each data point.
 * **Text Content:** Write the exact text for the main title, section headers, labels, and descriptions.
 * **Tool-Specific Instructions:**
+    * If none are selected, give instructions for both Canva and Easel.ly
     * **For Canva Pro:** Suggest specific templates, font pairings (e.g., "League Spartan" for headers), and elements from the Canva library.
     * **For Easel.ly:** Suggest relevant templates and objects from the Easel.ly library.`,
                 charts: p => `You are an expert data visualization specialist. Your task is to analyze the provided data and goal, discuss potential chart options, and then provide a detailed recommendation and creation plan. Your analysis must be based on the principles outlined below.
@@ -524,7 +525,7 @@ You must choose the most appropriate chart type based on the primary data relati
     * **Rationale:** Justify your final choice, explaining why it best serves the primary goal.
     * **Design:** Suggest a clear title, axis labels, and legends.
 * **3. Creation Instructions:**
-    * Provide clear, step-by-step instructions for creating the recommended chart(s) in **each of the selected tools**.
+    * Provide clear, step-by-step instructions for creating the recommended chart(s) in **each of the selected tools**. If no tools are selected, provide step-by-step instructions in all four tool options of Datawrapper, ggplot2, Flourish, and Tableau.
     * Include instructions on any necessary **data cleaning or pre-processing** steps.
     * **For ggplot2:** Provide the complete, runnable R code. **The code must be heavily commented**, explaining each function and argument for a user who does not know R.`,
                 dashboard: p => `You are an expert data analyst and dashboard designer, specializing in Tableau. Your task is to design a detailed plan for a powerful and user-friendly dashboard based on the provided data and objectives.
@@ -648,7 +649,7 @@ Generate the briefing note using this exact format:
 
 **Way Forward:**
 * Use bullet points to list actionable recommendations, decisions to be made, or next steps to be taken.`,
-                narrative: p => `You are an expert public policy strategist and lobbying consultant. Your task is to generate a comprehensive narrative framing and stakeholder engagement plan for a given policy idea. You must be strategic, persuasive, and meticulous, drawing on real-world information to tailor your recommendations.
+                narrative: p => `You are an expert public policy strategist and lobbying consultant. Your task is to generate a comprehensive narrative framing and stakeholder engagement plan for a given policy idea. You must be strategic, persuasive, and meticulous, drawing on real-world information to tailor your recommendations. Make sure you're only using valid sources, whether drawing from the source material files attached or online. Make sure you don't hallucinate any sources.
 
 **1. Core Policy Details**
 
@@ -667,7 +668,7 @@ Generate the briefing note using this exact format:
 Generate the narrative framing document using the following comprehensive, multi-part structure:
 
 ### 1. Potential Key Narratives/Framing
-* **Instruction:** Develop 2-3 high-level, persuasive core narratives to frame the policy for a general audience. Each narrative should be engaging, positive, and highlight the broad benefits in a compelling way that makes the policy seem like an obviously good idea.
+* **Instruction:** Develop some high-level, persuasive core narratives to frame the policy for a general audience. Each narrative should be engaging, positive, and highlight the broad benefits in a compelling way that makes the policy seem like an obviously good idea.
 
 ### 2. CICO analysis (Conflicts of Interest, Competition, Opposition)
 * **Instruction:** Analyze potential roadblocks based on the CICO framework.
