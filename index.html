@@ -303,6 +303,104 @@
                     { id: 'required_calculations_and_logic', label: 'What automatic calculations or totals are needed?', type: 'textarea', placeholder: 'e.g., A weekly total for patient counts per department, the daily bed occupancy percentage.' },
                     { id: 'final_reporting_needs', label: 'Describe the final report you want to generate.', type: 'textarea', placeholder: 'e.g., A printable weekly summary report showing total patients per hospital and a pie chart of no-shows.' },
                     { id: 'known_categories_and_rules', label: 'List any fields with fixed options or logical rules.', type: 'textarea', placeholder: 'e.g., Hospital Names: IGMH, HMH, AEH. Rule: Occupied Beds cannot be greater than Total Beds.' }
+                ]},
+{ id: 'qgis', name: 'GIS (QGIS)', color: brandColors.teal, fields: [
+                    { id: 'objective', label: 'Primary Objective', type: 'textarea', placeholder: 'What is the main question you want to answer? e.g., To find the best location for a new school.' },
+                    { id: 'sources', label: 'Source Data Files', type: 'textarea', placeholder: 'List the file names and briefly describe the key data in each. e.g., "islands.shp" (population), "existing_schools.csv" (coordinates).' },
+                    { id: 'final_outcome', label: 'What is the intended final outcome or product?', type: 'textarea', placeholder: 'Describe what you want to create. e.g., A map showing the top 3 most suitable atolls for a new project.' },
+                    { id: 'methodology_notes', label: 'Key Methodological Considerations', type: 'textarea', placeholder: 'e.g., "Prioritize clusters of islands. A location is "served" if it is within a 15-minute drive."' }
+                ]},
+                { id: 'anylogic', name: 'AnyLogic Model', color: brandColors.blue, fields: [
+                    { id: 'objective', label: 'Primary Policy Question', type: 'textarea', placeholder: 'e.g., To understand the impact of a new ferry subsidy on island overcrowding.' },
+                    { id: 'system_components', label: 'Key Actors, Objects, and Places', type: 'textarea', placeholder: 'e.g., Passengers, Ferries, Islands, Ticket Counters, Ferry Terminals.' },
+                    { id: 'key_processes', label: 'Describe the Main Processes or Rules', type: 'textarea', placeholder: 'e.g., Passengers arrive, wait for a ferry, buy a ticket, board, travel, and disembark.' },
+                    { id: 'final_outcome', label: 'What should the final simulation show or measure?', type: 'textarea', placeholder: 'e.g., A map showing ferry movements and charts displaying average passenger wait times.' }
+                ]},
+                { id: 'grant', name: 'Grant Proposal', color: brandColors.pink, fields: [
+                    { id: 'format_type', label: 'Select Application Format', type: 'checkbox', options: ['General / Other Foundation', 'UNDP (Project Document)', 'UNICEF (Logical Framework)', 'UNFPA / UN Women', 'USAID', 'European Union (Concept Note)', 'UK (FCDO) / Australia (DFAT)', 'Japan (GGP Form)', 'Green Climate Fund (GCF)', 'World Bank / ADB / IsDB (Partnership Note)'] },
+                    { id: 'project_title', label: 'Project Title', type: 'text', placeholder: 'Enter the full, formal title of the project.' },
+                    { id: 'problem_statement', label: 'Problem Statement & Rationale', type: 'textarea', placeholder: 'Describe the core problem, its causes, and why this project is needed now.' },
+                    { id: 'goal_objectives', label: 'Project Goal & SMART Objectives', type: 'textarea', placeholder: 'List the high-level goal and 2-4 specific, measurable, achievable, relevant, and time-bound objectives.' },
+                    { id: 'activities', label: 'Main Activities', type: 'textarea', placeholder: 'List the key activities you will undertake to achieve each objective.' },
+                    { id: 'beneficiaries', label: 'Target Beneficiaries', type: 'text', placeholder: 'e.g., "150 unemployed youth aged 18-25 in Addu City."' },
+                    { id: 'monitoring_plan', label: 'Monitoring & Evaluation (M&E) Plan', type: 'textarea', placeholder: 'How will you measure success? List key indicators for each objective.' },
+                    { id: 'budget_summary', label: 'Budget Summary & Amount Requested', type: 'text', placeholder: 'e.g., "Total budget of $50,000, requesting $45,000 for one year."' },
+                    { id: 'org_capacity', label: 'Your Organization\'s Capacity', type: 'textarea', placeholder: 'Briefly describe your organization\'s experience and qualifications for this project.' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files with background data, needs assessments, etc.' }
+                ]},
+                { id: 'csr_proposal', name: 'CSR Proposal', color: brandColors.coral, fields: [
+                    { id: 'project_title', label: 'Project Title', type: 'text', placeholder: 'Enter the full, formal title of the project.' },
+                    { id: 'target_company', label: 'Target Company', type: 'text', placeholder: 'e.g., Dhiraagu, Bank of Maldives' },
+                    { id: 'alignment_with_csr_goals', label: 'Alignment with Company\'s CSR Goals', type: 'textarea', placeholder: 'Explain how this project fits the company\'s stated CSR pillars (e.g., youth empowerment).' },
+                    { id: 'problem_statement', label: 'Problem Statement', type: 'textarea', placeholder: 'Describe the core social problem the project will address.' },
+                    { id: 'activities', label: 'Project Activities', type: 'textarea', placeholder: 'List the key activities you will undertake.' },
+                    { id: 'budget_summary', label: 'Budget Summary', type: 'text', placeholder: 'e.g., "Requesting MVR 750,000 for one year."' },
+                    { id: 'impact_metrics', label: 'Measurable Impact (KPIs)', type: 'textarea', placeholder: 'List the key metrics to show success (e.g., "Train 50 youth per year").' }
+                ]},
+                { id: 'bid_submission', name: 'Bid Submission', color: brandColors.green, fields: [
+                    { id: 'tender_id', label: 'Tender ID / Reference Number', type: 'text', placeholder: 'e.g., MDV-RFP-2025-088' },
+                    { id: 'organization', label: 'Procurement Portal', type: 'checkbox', options: ['UNDP/Quantum', 'World Bank/WBG eProcure', 'ADB/CMS', 'UNGM'] },
+                    { id: 'technical_proposal_summary', label: 'Technical Proposal Summary', type: 'textarea', placeholder: 'Briefly describe your proposed approach and methodology.' },
+                    { id: 'financial_proposal_summary', label: 'Financial Proposal Summary', type: 'textarea', placeholder: 'Briefly state the total bid amount and key cost categories.' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List the file names of the tender documents (e.g., "RFP.pdf", "ToR.docx").' }
+                ]},
+                { id: 'mou', name: 'MOU', color: brandColors.teal, fields: [
+                    { id: 'party_a_details', label: 'Party A Details', type: 'text', placeholder: 'e.g., Public Policy Lab, a research think tank based in Malé' },
+                    { id: 'party_b_details', label: 'Party B Details', type: 'text', placeholder: 'e.g., The Maldives National University (MNU), Faculty of Arts' },
+                    { id: 'purpose_of_agreement', label: 'Purpose of Agreement', type: 'textarea', placeholder: 'Describe the main goal of the collaboration.' },
+                    { id: 'responsibilities_of_party_a', label: 'Responsibilities of Party A', type: 'textarea', placeholder: 'List the specific duties of Party A.' },
+                    { id: 'responsibilities_of_party_b', label: 'Responsibilities of Party B', type: 'textarea', placeholder: 'List the specific duties of Party B.' },
+                    { id: 'start_date', label: 'Start Date', type: 'text', placeholder: 'YYYY-MM-DD' },
+                    { id: 'end_date', label: 'End Date', type: 'text', placeholder: 'YYYY-MM-DD' }
+                ]},
+                { id: 'network_model', name: 'Network Model', color: brandColors.blue, fields: [
+                    { id: 'objective', label: 'Objective', type: 'textarea', placeholder: 'e.g., To identify the most efficient route for a new public bus service.' },
+                    { id: 'model_type', label: 'Model Type', type: 'checkbox', options: ['GIS/Spatial', 'Social Network'] },
+                    { id: 'nodes_and_edges_description', label: 'Nodes (the points) & Edges (the connections)', type: 'textarea', placeholder: 'Describe what the points and connections in your network represent. e.g., Nodes are hospitals; Edges are the roads.' },
+                    { id: 'sources', label: 'Source Data', type: 'textarea', placeholder: 'List the file names of your data (e.g., "Roads.shp", "Hospitals.csv").' }
+                ]},
+                { id: 'monte_carlo', name: 'Monte Carlo Simulation', color: brandColors.pink, fields: [
+                    { id: 'question_to_answer', label: 'Question to Answer', type: 'textarea', placeholder: 'What question do you want to answer with this simulation?' },
+                    { id: 'key_variables_and_ranges', label: 'Key Variables & Possible Ranges', type: 'textarea', placeholder: 'List each uncertain variable and its possible range of values (e.g., "Daily sales: 50-150").' },
+                    { id: 'sources', label: 'Source Materials (if any)', type: 'textarea', placeholder: 'Refer to any attached files containing historical data for your variables.' },
+                    { id: 'number_of_simulations', label: 'Number of Simulations', type: 'number', placeholder: 'e.g., 10000' },
+                    { id: 'desired_output', label: 'Desired Output', type: 'text', placeholder: 'e.g., "A histogram showing the distribution of annual profit."' }
+                ]},
+                { id: 'survey_form', name: 'Survey Form', color: brandColors.coral, fields: [
+                    { id: 'survey_goal', label: 'Survey Goal', type: 'text', placeholder: 'What is the primary objective of this survey?' },
+                    { id: 'target_audience', label: 'Target Audience', type: 'text', placeholder: 'Who will be taking this survey?' },
+                    { id: 'question_list', label: 'Draft Question List', type: 'textarea', placeholder: 'List the questions you want to ask.' },
+                    { id: 'platform', label: 'Target Platform', type: 'checkbox', options: ['Google Forms', 'MS Forms', 'SurveyMonkey'] }
+                ]},
+                { id: 'openproject', name: 'OpenProject Plan', color: brandColors.green, fields: [
+                    { id: 'project_name', label: 'Project Name', type: 'text', placeholder: 'Enter the full project name.' },
+                    { id: 'project_goal', label: 'Project Goal', type: 'textarea', placeholder: 'Describe the final, high-level objective of the project.' },
+                    { id: 'start_date', label: 'Start Date', type: 'text', placeholder: 'YYYY-MM-DD' },
+                    { id: 'end_date', label: 'End Date', type: 'text', placeholder: 'YYYY-MM-DD' },
+                    { id: 'key_milestones', label: 'Key Milestones', type: 'textarea', placeholder: 'List the major milestones or phases of the project.' }
+                ]},
+                { id: 'department_mandate', name: 'Departmental Mandate', color: brandColors.teal, fields: [
+                    { id: 'department_name', label: 'Department Name', type: 'text', placeholder: 'e.g., Research and Development Unit' },
+                    { id: 'organization_mandate', label: 'Parent Organization\'s Mandate', type: 'textarea', placeholder: 'Describe the overall mission of the parent organization.' },
+                    { id: 'department_activities', label: 'Department\'s Key Activities & Projects', type: 'textarea', placeholder: 'List the main activities the department is responsible for.' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'Refer to any attached files with additional context.' }
+                ]},
+                { id: 'action_plan', name: 'Action Plan', color: brandColors.blue, fields: [
+                    { id: 'overall_goal', label: 'Overall Goal', type: 'text', placeholder: 'What is the high-level goal this action plan is meant to achieve?' },
+                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List the file names of all relevant meeting minutes, reports, or notes to be synthesized.' }
+                ]},
+                { id: 'business_plan', name: 'Business Plan', color: brandColors.pink, fields: [
+                    { id: 'company_name', label: 'Company Name', type: 'text', placeholder: 'Enter the name of the business.' },
+                    { id: 'mission_statement', label: 'Mission Statement', type: 'text', placeholder: 'A concise statement of the company\'s purpose.' },
+                    { id: 'product_or_service', label: 'Product or Service', type: 'textarea', placeholder: 'Describe what your business offers.' },
+                    { id: 'target_market', label: 'Target Market', type: 'textarea', placeholder: 'Describe your ideal customers.' },
+                    { id: 'marketing_strategy', label: 'Marketing & Sales Strategy', type: 'textarea', placeholder: 'How will you reach your target market?' },
+                    { id: 'financial_summary', label: 'Financial Summary', type: 'textarea', placeholder: 'Briefly describe your revenue model, key costs, and funding needs.' }
+                ]},
+                { id: 'strategic_analysis', name: 'SWOT / PEST / CICO', color: brandColors.coral, fields: [
+                    { id: 'analysis_subject', label: 'Subject of Analysis', type: 'text', placeholder: 'What policy, project, or organization are you analyzing?' },
+                    { id: 'analysis_type', label: 'Analysis Type to Perform', type: 'checkbox', options: ['SWOT', 'PEST', 'CICO'] },
+                    { id: 'context_and_sources', label: 'Context and Source Materials', type: 'textarea', placeholder: 'Provide background information or refer to attached files.' }
                 ]}
             ];
             
@@ -1557,7 +1655,505 @@ This sheet will automatically aggregate and display data from a master dataset f
 * **b. Recommended layout:** Design a professional, printable report layout based on the user's reporting needs.
 * **c. Step-by-step setup instructions:**
     1.  Provide a table with example formulas (\`SUMIFS\`, \`AVERAGEIFS\`, \`VLOOKUP\`) to pull the required data from the master dataset into the report. Explain each argument of the function. For example: "To get the weekly total for IGMH Flu Clinic, use \`=SUM(Data!B11:H11)\`, where B11:H11 is the row containing the daily flu clinic data for the 7 days of the week in your data aggregation sheet."
-    2.  If charts were requested, provide clear instructions on how to create them and link their data ranges to the auto-populating cells in the report.`
+    2.  If charts were requested, provide clear instructions on how to create them and link their data ranges to the auto-populating cells in the report.`,
+                qgis: p => `You are an expert GIS analyst and development planning consultant specializing in QGIS. Your task is to generate a comprehensive, step-by-step guide for a non-expert user to perform a specific analysis in QGIS based on the provided details.
+
+**1. Core Task Details**
+
+* **Primary Objective:** ${p.objective}
+* **Source Data Files:** ${p.sources}
+* **Intended Final Outcome:** ${p.final_outcome}
+* **Key Methodological Considerations:** ${p.methodology_notes}
+
+**2. Mandatory Methodological Framework**
+
+Your response **must** be framed as a developmental analysis. Embed the following principles into your step-by-step instructions:
+
+* **Determine the Correct Analysis:** Based on the user's **Intended Final Outcome**, your first task is to determine the most appropriate GIS analysis or sequence of analyses (e.g., Suitability Modeling, Cluster Analysis, Network Analysis). You must **briefly explain this choice** at the beginning of your response before starting the step-by-step instructions.
+* **Data Integrity First:** The first phase of your instructions must always involve checking the data. This includes verifying the Coordinate Reference System (CRS) is appropriate for distance/area measurements (i.e., it's a projected CRS, not geographic) and checking for data errors.
+* **Prioritize Clusters over Isolation:** When the objective involves identifying target populations or areas, you must explicitly recommend and provide instructions for a **cluster analysis** (e.g., using the DBSCAN algorithm in QGIS). Explain *why* this is important for development work—that serving a cluster of 4,000 people across three small islands is often better than serving one island of 2,000.
+* **Incorporate Real-World Constraints:** The analysis should model reality as closely as possible. Instead of simple circular buffers, recommend using tools like the **Service Area (from network)** tool if a road/ferry network is available. If not, explain how to use cost-based buffers or other more realistic methods.
+* **Actionable Visualization:** The final output should not just be data, but a clear, professional map. The final steps of your guide must include instructions on how to style the layers (e.g., using color gradients for population density, clear labels, and creating a print layout with a legend and scale bar).
+
+**3. Required Output Structure**
+
+Generate the response as a clear, sequential guide. Use markdown for formatting.
+
+* Start with a brief "Recommended Approach" section explaining the analysis you've chosen.
+* Use numbered headings for major phases (e.g., "### 1. Project Setup and Data Validation").
+* Use numbered lists for step-by-step actions within each phase.
+* Bold the names of **QGIS tools**, **panels**, and **layer names** so they are easy for the user to find.
+* Provide example values or settings where appropriate.
+* Conclude with a brief paragraph explaining how to interpret the final map to answer the user's primary objective.
+
+Please now generate the full QGIS guide.`,
+                anylogic: p => `You are an expert simulation modeler and policy analyst specializing in AnyLogic. Your task is to create a comprehensive, step-by-step tutorial for a junior staff member who is new to AnyLogic. The tutorial should guide them in building a simulation model based on the policy problem they have described.
+
+**1. Core Task Details**
+
+* **Primary Policy Question:** ${p.objective}
+* **Key System Components:** ${p.system_components}
+* **Key Processes / Rules:** ${p.key_processes}
+* **Desired Final Outcome / Metrics:** ${p.final_outcome}
+
+**2. Mandatory Methodological Framework**
+
+Your response must be a complete guide that teaches both the "how" and the "why." Embed the following principles into your instructions:
+
+* **1. Choose the Right Modeling Paradigm:** Your first and most important task is to analyze the user's problem and recommend the best primary modeling paradigm. You must choose from **Agent-Based Modeling (ABM)**, **System Dynamics (SD)**, or **Discrete-Event Simulation (DES)**.
+    * You **must** start your response with a section explaining your choice in simple, non-technical terms. For example: "For this problem, we should use Agent-Based Modeling because we need to track individual passengers with unique behaviors. If we only cared about the total number of passengers over time, we might use System Dynamics."
+* **2. Define the Model Structure:** Based on your chosen paradigm, you must then clearly outline the main structural elements the user will build.
+    * **If Agent-Based:** Define the agent types (e.g., \`Passenger\`, \`Ferry\`), their key parameters/variables (e.g., \`p_waitTime\`), and a simple statechart for their behavior (e.g., "Waiting -> Traveling -> Arrived").
+    * **If Discrete-Event:** Map out the high-level process flowchart using blocks from AnyLogic's Process Modeling Library (e.g., \`Source\` -> \`Queue\` -> \`Delay\` -> \`Sink\`).
+    * **If System Dynamics:** Identify the key stocks (e.g., \`IslandPopulation\`), flows (e.g., \`arrivals\`), and feedback loops that drive the system's behavior.
+* **3. Build from Simple to Complex:** Structure your tutorial to start with the simplest possible version of the model. For example, guide the user to first build a model with just one ferry on a single route. Then, create a "Next Steps" section at the end that explains how to add more complexity, such as adding schedules, multiple ferry types, or passenger decision-making.
+* **4. Connect to the Policy Question:** Explicitly connect the model's components to the user's policy objective. Identify which model parameters can be used as **"policy levers"** (e.g., \`ferryCapacity\`, \`ticketPrice\`) and which outputs will measure the results (e.g., a time plot of \`averageWaitTime\`).
+
+**3. Required Output Structure**
+
+Generate the response as a clear, sequential tutorial for a beginner.
+
+* Start with a section named "**Recommended Modeling Approach**" that explains your choice of paradigm.
+* Use numbered headings for major phases (e.g., "### 1. Project Setup", "### 2. Creating the Ferry Agent").
+* Use numbered lists for step-by-step actions within each phase.
+* **Bold** the names of **AnyLogic palette items**, **properties**, and **Java code snippets**.
+* Provide clear, commented Java code snippets where necessary (e.g., for statechart actions or function calls).
+* Conclude with sections on "**How to Interpret the Results**" and "**Next Steps for Adding Complexity**".
+
+Please now generate the full AnyLogic tutorial.`,
+                grant: p => {
+                    const sharedHeader = `You are an expert grant writer and program manager with extensive experience securing funding from major international donors. Your task is to write a complete, professional, and persuasive grant application draft based on the provided project details.
+
+**0. Context and Critical Instructions**
+
+* **Applicant Context:** The applying organization is a Civil Society Organisation (CSO) based in **Malé, Maldives**.
+* **CRITICAL INSTRUCTION: VERIFY FORMATTING.** The following sections provide standard templates for various donors. However, these formats can change. Before you begin writing, you **must perform a quick search** for the most recent grant application guidelines for the selected donor (e.g., search for "European Union grants for CSOs guidelines 2025"). If your search reveals a newer or different format, you **must use the official, most recent format** and state at the top of your response that you have done so. If the provided template is still correct, proceed as planned.
+
+**1. Core Project Details**
+
+* **Project Title:** ${p.project_title}
+* **Problem Statement & Rationale:** ${p.problem_statement}
+* **Goal & Objectives:** ${p.goal_objectives}
+* **Main Activities:** ${p.activities}
+* **Target Beneficiaries:** ${p.beneficiaries}
+* **M&E Plan:** ${p.monitoring_plan}
+* **Budget Summary:** ${p.budget_summary}
+* **Organizational Capacity:** ${p.org_capacity}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Writing and Style Guide**
+
+* **Tone:** The writing must be professional, clear, direct, and persuasive. Avoid jargon where possible.
+* **Logical Flow:** Ensure there is a clear "theory of change" where the **Activities** logically lead to achieving the **Objectives**, which in turn contribute to the overall **Goal**.
+* **Factual Integrity:** All claims and statistics must be directly supported by the provided **Source Materials**. Do not invent information.
+* **Strict Adherence to Format:** You **must** follow the exact section headings, structure, and formatting requirements specified below for the selected application type.
+
+---
+`;
+                    let formatInstructions = '';
+                    if (p.format_type.includes('UNDP')) {
+                        formatInstructions = `
+**3. Required Format: UNDP Project Document (ProDoc)**
+
+Generate the application using the following standard UNDP ProDoc structure:
+* **1. Development Challenge**
+* **2. Strategy** (Theory of Change)
+* **3. Results and Partnerships** (Expected Results, Partnerships, Stakeholder Engagement)
+* **4. Governance and Management Arrangements**
+* **5. Results Framework** (Create a table with Outcomes, Indicators, Baselines, and Targets)
+* **6. Monitoring And Evaluation**
+* **7. Multi-Year Work Plan**
+* **8. Budget Narrative**`;
+                    } else if (p.format_type.includes('UNICEF')) {
+                        formatInstructions = `
+**3. Required Format: UNICEF Proposal (Logical Framework)**
+
+This format requires a strong focus on a **Logical Framework (LogFrame)**, which is a standard tool in the UN system. Generate the application using the following structure:
+* **1. Rationale / Problem Analysis**
+* **2. Project Goal and Objectives**
+* **3. Expected Results (Outputs and Outcomes)**
+* **4. Key Activities**
+* **5. Logical Framework Matrix (LogFrame):** Create a detailed markdown table with columns for Project Structure (Goal, Outcomes, Outputs, Activities), Indicators, Means of Verification, and Assumptions/Risks.`;
+                    } else if (p.format_type.includes('UNFPA / UN Women')) {
+                        formatInstructions = `
+**3. Required Format: UN Agency Proposal (e.g., UNFPA, UN Women)**
+Applications for these UN agencies are typically built around a **Logical Framework (LogFrame)** to show a clear chain of results. Your proposal must be structured to demonstrate this.
+* **1. Rationale / Problem Analysis** (with a focus on the agency's mandate, e.g., gender equality, reproductive health)
+* **2. Project Goal and Objectives**
+* **3. Logical Framework Matrix (LogFrame):** Create a detailed markdown table with columns for Project Structure (Goal, Outcomes, Outputs, Activities), Indicators, Means of Verification, and Assumptions/Risks.
+* **4. Management and Coordination Arrangements**
+* **5. Budget Narrative**`;
+                    } else if (p.format_type.includes('USAID')) {
+                        formatInstructions = `
+**3. Required Format: USAID Standard Application**
+
+Generate the application in two main parts. Emphasize sustainability and local capacity building throughout.
+* **Part A: Technical Application** (Executive Summary, Technical Approach, Management Plan, M&E Plan, Sustainability)
+* **Part B: Budget Narrative** (Detailed justification for each budget line item)`;
+                    } else if (p.format_type.includes('European Union')) {
+                        formatInstructions = `
+**3. Required Format: European Union (EU) Concept Note**
+
+Generate the first-stage **Concept Note** required for most EU calls for proposals. The structure must be concise and persuasive.
+* **1. Summary of the Action:** (A brief table with title, location(s), total duration, EU contribution, etc.)
+* **2. Relevance of the Action:** (Address the problems/needs, describe the target groups, and explain the relevance to the call's objectives).
+* **3. Description of the Action:** (Describe the proposed activities, the theory of change, and the expected outcomes).`;
+                    } else if (p.format_type.includes('UK (FCDO) / Australia (DFAT)')) {
+                        formatInstructions = `
+**3. Required Format: Bilateral Donor Application (e.g., FCDO, DFAT)**
+These donors require highly structured technical proposals similar to USAID or the EU. The proposal must be evidence-based and demonstrate strong value for money.
+* **1. Strategic Case:** (Problem, rationale, alignment with donor's country strategy).
+* **2. Management Case:** (Project management, risk management, M&E).
+* **3. Financial Case:** (Detailed budget, value for money).
+* **4. Results Framework:** (A detailed logframe-style matrix).`;
+                    } else if (p.format_type.includes('Japan (GGP Form)')) {
+                        formatInstructions = `
+**3. Required Format: Japan Grant Assistance for Grassroots Human Security Projects (GGP)**
+
+Generate the application based on the standard GGP form.
+* **1. Project Title**
+* **2. Project Site & Target Group**
+* **3. Objectives of the Project**
+* **4. Project Description & Activities** (Detail the specific activities and how they address the objectives).
+* **5. Estimated Budget:** (Provide a detailed, itemized budget in a table format).
+* **6. Expected Impact & Sustainability**`;
+                    } else if (p.format_type.includes('Green Climate Fund')) {
+                        formatInstructions = `
+**3. Required Format: Green Climate Fund (GCF) Concept Note**
+
+Generate a Concept Note for the GCF, focusing on the climate rationale and alignment with GCF investment criteria.
+* **1. Project / Programme Information**
+* **2. Project Description** (Context, Problem, Theory of Change)
+* **3. Climate Rationale** (Explain how the project addresses climate change impacts).
+* **4. Alignment with GCF Investment Criteria:** (Structure this section with subheadings for Impact Potential; Paradigm Shift Potential; Sustainable Development Potential; Needs of the Recipient; Country Ownership; and Efficiency & Effectiveness).
+* **5. Logical Framework**`;
+                    } else if (p.format_type.includes('World Bank / ADB / IsDB')) {
+                        formatInstructions = `
+**3. Required Format: Partnership Concept Note for a Multilateral Development Bank (MDB)**
+
+Instead of a grant application, write a formal **Partnership Concept Note** or **Expression of Interest (EoI)**. The goal is to position the CSO as an ideal implementing partner for a larger, bank-funded government project.
+* **1. Introduction: Alignment with Country Strategy:** (Introduce your CSO and explain how this proposed partnership aligns with the World Bank/ADB/IsDB's official Country Partnership Framework for the Maldives).
+* **2. Statement of Capability:** (Detail your organization's technical expertise, past performance, and capacity to manage large-scale projects).
+* **3. Proposed Partnership Area:** (Describe the specific component of a government program where your CSO could add value as an implementing partner).
+* **4. Value Proposition:** (Explain why partnering with your CSO would be more efficient, effective, or equitable for the bank and the government).`;
+                    } else { // Default to General / Other Foundation
+                        formatInstructions = `
+**3. Required Format: General Grant Application**
+
+This is a standard format. If the user has attached a 'Guidelines for Applicants' document, base your structure primarily on that. Otherwise, proceed with the comprehensive structure below.
+* **1. Executive Summary**
+* **2. Introduction / Problem Statement**
+* **3. Organizational Background**
+* **4. Project Goal and Objectives**
+* **5. Project Activities**
+* **6. Monitoring and Evaluation Plan**
+* **7. Budget and Budget Narrative**
+* **8. Sustainability Plan**`;
+                    }
+                    return sharedHeader + formatInstructions;
+                },
+                csr_proposal: p => `You are a CSR partnership and corporate fundraising expert. Your task is to write a persuasive proposal that frames the project as a strategic partnership, not just a donation request.
+
+**1. Core Project Details**
+
+* **Project Title:** ${p.project_title}
+* **Target Company:** ${p.target_company}
+* **Strategic Alignment:** ${p.alignment_with_csr_goals}
+* **Problem Statement:** ${p.problem_statement}
+* **Project Activities:** ${p.activities}
+* **Budget:** ${p.budget_summary}
+* **Measurable Impact:** ${p.impact_metrics}
+
+**2. Mandatory Methodological Framework**
+
+* **Think Like a Partnership Manager:** Your primary goal is to demonstrate mutual benefit. The proposal must not read like a request for a handout, but as a pitch for a strategic partnership that helps the target company achieve its own goals.
+* **Strategic Alignment is Key:** You must explicitly connect the project to the target company's publicly stated CSR pillars, brand identity, and marketing objectives. If possible, reference specific statements from their annual reports or sustainability pages.
+* **Focus on the "Win-Win":** Emphasize the concrete benefits for the company, such as positive PR opportunities, enhanced brand reputation, employee engagement (e.g., volunteering), and clear, measurable social impact metrics that they can use in their own reporting.
+
+**3. Required Output Structure**
+
+Generate a professional proposal document with the following sections:
+
+* **1. Executive Summary:** A brief, compelling overview of the partnership opportunity.
+* **2. The Opportunity:** A description of the social problem and why it presents a strategic opportunity for the target company to make an impact.
+* **3. Proposed Project: [Project Title]:** A detailed description of the project, its activities, and its objectives.
+* **4. Strategic Alignment with [Target Company Name]:** A dedicated section explaining exactly how this project helps the company meet its CSR goals.
+* **5. Measurable Impact and Reporting:** A list of clear KPIs and a promise to provide regular reports that the company can use for its own communications.
+* **6. Partnership Budget:** A summary of the required funding.
+* **7. About Our Organization:** A brief introduction to your organization and its track record.
+
+Please now generate the full CSR proposal.`,
+                bid_submission: p => `You are a procurement expert specializing in submitting bids to large international organizations. Your task is to generate a guide for preparing and submitting the bid described below.
+
+**1. Tender Details**
+
+* **Tender ID:** ${p.tender_id}
+* **Procurement Portal:** ${p.organization}
+* **Technical Proposal Summary:** ${p.technical_proposal_summary}
+* **Financial Proposal Summary:** ${p.financial_proposal_summary}
+* **Attached Documents:** ${p.sources}
+
+**2. Mandatory Methodological Framework**
+
+* **Compliance and Responsiveness:** The absolute most important principle is to be 100% compliant with and responsive to the tender documents. Your entire response must be structured to make it easy for the evaluators to see that you have met every single requirement.
+* **Map to Evaluation Criteria:** You must instruct the user to find the "Evaluation Criteria" section in the tender documents and use it as a checklist. The Technical Proposal should be written to explicitly address each criterion in the order it appears.
+* **Clarity and Professionalism:** The writing must be clear, direct, and error-free. The financial proposal must be transparent and well-justified.
+
+**3. Required Output Structure**
+
+Please provide a two-part response:
+
+**Part 1: Portal Navigation Guide**
+Provide a clear, step-by-step guide on how to submit a bid through the selected procurement portal. Mention key steps like finding the tender, acknowledging participation, uploading documents to the correct sections, and submitting the final offer. Include a disclaimer that portal layouts can change over time.
+
+**Part 2: Document Drafting Guide**
+Based on the attached tender documents, create a detailed outline for the Technical Proposal and the Financial Proposal. For the Technical Proposal, the outline's main headings MUST mirror the structure of the tender's Terms of Reference (ToR) or Statement of Work (SoW). For each section of the outline, specify what information should be included, drawing from the user's summaries and the attached files.`,
+                mou: p => `You are a legal and partnerships advisor. Your task is to generate a standard, formal Memorandum of Understanding (MOU) based on the details provided below.
+
+**1. MOU Details**
+
+* **Party A:** ${p.party_a_details}
+* **Party B:** ${p.party_b_details}
+* **Purpose:** ${p.purpose_of_agreement}
+* **Responsibilities of Party A:** ${p.responsibilities_of_party_a}
+* **Responsibilities of Party B:** ${p.responsibilities_of_party_b}
+* **Term:** Start on ${p.start_date} and end on ${p.end_date}.
+
+**2. Mandatory Methodological Framework**
+
+* **Clarity and Risk Mitigation:** The primary goal of an MOU is to prevent future misunderstandings. The language must be clear, direct, and unambiguous. Each party's responsibilities should be defined as precisely as possible.
+* **Balance and Fairness:** The draft should be written from a neutral perspective and should not unfairly favor one party over the other.
+* **Non-Binding Nature:** The document should explicitly state that it is a non-binding agreement that expresses the intentions of the parties, not a legally enforceable contract (unless otherwise specified).
+
+**3. Required Output Structure**
+
+Please generate the full MOU. The document must include standard boilerplate sections such as:
+
+* Preamble (identifying the parties)
+* Purpose of the Agreement
+* Responsibilities of Each Party
+* Term and Termination
+* Confidentiality
+* Dispute Resolution
+* Signature blocks
+
+The document must conclude with a clear, prominent disclaimer: "**This is a non-binding starting point and must be reviewed by a qualified legal professional before signing.**"`,
+                network_model: p => `You are a data scientist and network analysis expert. Your task is to provide a detailed, step-by-step guide to conduct the network analysis described below.
+
+**1. Analysis Details**
+
+* **Objective:** ${p.objective}
+* **Model Type:** ${p.model_type}
+* **System Description:** ${p.nodes_and_edges_description}
+* **Source Data:** ${p.sources}
+
+**2. Mandatory Methodological Framework**
+
+* **Choose the Right Tool for the Job:** You must first analyze the user's objective and model type to recommend the best software (e.g., QGIS for spatial networks, Gephi for visual exploration of abstract networks, Python with NetworkX for complex analysis). You must justify your choice.
+* **Explain the Core Concepts:** Before the tutorial, briefly explain the key concepts of network analysis in simple terms. Define what nodes, edges, and key metrics (like centrality) mean in the context of the user's problem.
+* **Data Preparation is Crucial:** Emphasize that the quality of the analysis depends on correctly formatted data. The first section of your tutorial must focus on preparing the data for the chosen software.
+
+**3. Required Output Structure**
+
+Please generate the guide with the following sections:
+
+* **1. Recommended Approach and Key Concepts:** State your recommended software and analysis type, and briefly define the core concepts.
+* **2. Step-by-Step Tutorial:** Provide a clear, sequential guide that covers:
+    * **a. Data Preparation:** How to load the source data files and format them correctly.
+    * **b. Running the Analysis:** How to use the appropriate tools to answer the user's objective.
+    * **c. Interpreting and Visualizing the Results:** How to understand the output and create a clear visualization of the final network.`,
+                monte_carlo: p => `You are a quantitative analyst. Your task is to provide a complete, commented Python script to run the Monte Carlo simulation described below.
+
+**1. Simulation Details**
+
+* **Question to Answer:** ${p.question_to_answer}
+* **Key Variables and Ranges:** ${p.key_variables_and_ranges}
+* **Source Materials:** ${p.sources}
+* **Number of Simulations:** ${p.number_of_simulations}
+* **Desired Output:** ${p.desired_output}
+
+**2. Mandatory Methodological Framework**
+
+* **Explain the "Why":** Before providing the code, you must start with a brief paragraph explaining *why* a Monte Carlo simulation is the right tool for this problem. Explain that it's a method for understanding the range of possible outcomes when some inputs are uncertain.
+* **Model Uncertainty with Distributions:** You must instruct the user on the importance of defining variables not as single numbers but as probability distributions. Based on the user's input and any source data, you should recommend the appropriate distribution (e.g., Normal, Uniform, etc.) for each key variable and explain your choice.
+* **Code for Clarity:** The Python script must be exceptionally well-commented. Every major block of code should have a comment explaining its purpose in plain English, so a non-programmer can understand the logic.
+
+**3. Required Output Structure**
+
+Generate a response with the following sections:
+
+* **1. The Logic of the Simulation:** A brief explanation of the simulation's purpose and the probability distributions chosen for the key variables.
+* **2. Complete Python Script:** A single, runnable code block using standard libraries like \`numpy\` and \`matplotlib\`. The script must be heavily commented and should:
+    * Define the variables and their distributions.
+    * Run the simulation loop for the specified number of iterations.
+    * Store and aggregate the results.
+    * Plot the final results as described in the "Desired Output."`,
+                survey_form: p => `You are a survey design and research methods expert. Your task is to generate a comprehensive plan for creating the survey described below.
+
+**1. Survey Details**
+
+* **Survey Goal:** ${p.survey_goal}
+* **Target Audience:** ${p.target_audience}
+* **Draft Question List:** ${p.question_list}
+* **Target Platform:** ${p.platform}
+
+**2. Mandatory Methodological Framework**
+
+* **The Goal is Unbiased, Actionable Data:** The primary principle is to design a survey that minimizes bias and collects data that can actually be used to answer the survey's goal.
+* **Question-by-Question Critique:** You must not just accept the user's questions. Your first task is to review their draft list and provide a constructive critique for each question. Identify potential issues like leading questions, double-barreled questions, ambiguous wording, or response options that are not mutually exclusive or exhaustive.
+* **Recommend Best Practices:** You must provide general best-practice tips for survey design, such as starting with easy, engaging questions, placing sensitive or demographic questions at the end, and the importance of a brief, clear introduction.
+
+**3. Required Output Structure**
+
+Please provide a two-part response:
+
+**Part 1: Survey Design and Question Refinement**
+For each question in the user's draft list, provide:
+* **Critique:** A brief analysis of any potential issues with the question.
+* **Suggested Revision:** A rewritten version of the question that addresses the issues.
+* **Recommended Question Type:** The best type for the revised question (e.g., Likert scale, multiple choice, ranking, open-ended).
+
+**Part 2: Platform Implementation Guide**
+Provide a clear, step-by-step guide on how to build the *refined* survey in the selected platform(s). Explain how to add each question type, implement skip logic (if applicable), and customize the survey's appearance.`,
+                openproject: p => `You are an expert project manager with deep experience in OpenProject and public sector initiatives. Your task is to generate a complete Work Breakdown Structure (WBS) for the project described below, formatted for easy use in a tool like OpenProject.
+
+**1. Project Details**
+
+* **Project Name:** ${p.project_name}
+* **Project Goal:** ${p.project_goal}
+* **Start Date:** ${p.start_date}
+* **End Date:** ${p.end_date}
+* **Key Milestones:** ${p.key_milestones}
+
+**2. Mandatory Methodological Framework**
+
+* **Phased Approach:** The project plan must be broken down into logical phases (e.g., 1. Initiation & Planning, 2. Execution, 3. Monitoring & Control, 4. Closing). This provides a structured and manageable workflow.
+* **Realistic Timelines:** Your duration estimates must account for the "planning fallacy" and common delays in public sector environments, such as approvals and procurement. Build in buffer time for critical tasks.
+* **Clear Accountability (RACI Lite):** For each task, you must distinguish between the "Assignee" (the person/role doing the work) and the "Accountable" person/role (the single individual who owns the outcome). This clarifies responsibility.
+
+**3. Required Output Structure**
+
+Please generate the full project plan. The plan should be structured as a hierarchical list (using indentation or numbering) of phases, tasks, and sub-tasks. For each task, you must provide:
+
+* **Task Name:** A clear, action-oriented name.
+* **Duration:** An estimated duration in working days.
+* **Dependencies:** Note any tasks that must be completed first.
+* **Assignee (Role):** Propose the appropriate role and seniority level for the person who will do the work (e.g., "Junior Officer, Research").
+* **Accountable (Role):** Propose the appropriate role and seniority level for the person ultimately responsible for the task's completion (e.g., "Senior Manager, Policy").
+* **Notes:** Briefly explain the reasoning for the selected timeframe or any key considerations.`,
+                department_mandate: p => `You are a public policy and institutional governance expert. Your task is to synthesize the provided information and draft a formal departmental mandate document. The document should serve as a clear and authoritative starting point for internal and external stakeholders.
+
+**1. Mandate Details**
+
+* **Department Name:** ${p.department_name}
+* **Parent Organization's Mandate:** ${p.organization_mandate}
+* **Department's Key Activities & Projects:** ${p.department_activities}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Methodological Framework**
+
+* **Strategic Alignment:** The core principle is to ensure a clear "line of sight" from the department's day-to-day activities to the parent organization's strategic goals. The mandate must demonstrate how the department contributes to the larger mission.
+* **Clarity and Bounded Authority:** The mandate must be written in clear, unambiguous language. It should not only define what the department *does* but also what it *doesn't* do, clarifying its scope of authority relative to other departments to prevent turf wars.
+* **Aspirational yet Practical:** The Vision and Mission should be forward-looking and motivational, while the Core Functions and Responsibilities must be grounded in the practical, real-world activities provided by the user.
+
+**3. Required Output Structure**
+
+Please generate the draft mandate document. It must be written in formal, official language and follow a standard structure with the following sections:
+
+* **1. Vision:** A high-level, aspirational statement of the department's long-term desired impact.
+* **2. Mission:** A concise statement of the department's overall purpose, its primary stakeholders, and how it achieves its vision.
+* **3. Core Functions:** A bulleted list detailing the primary, ongoing functions of the department.
+* **4. Key Responsibilities:** A numbered list of specific duties and responsibilities, derived from the provided activities and source materials.
+* **5. Scope of Authority:** A paragraph defining the boundaries of the department's decision-making power and its relationship to other departments.
+
+The document must conclude with a disclaimer: "**This is a draft for discussion and requires official validation and approval through the appropriate governance channels.**"`,
+                action_plan: p => `You are a strategic planning expert. Your task is to synthesize the information from the attached source materials (e.g., meeting minutes, reports, informal notes) into a structured and actionable plan.
+
+**1. Action Plan Details**
+
+* **Overall Goal:** ${p.overall_goal}
+* **Source Materials:** ${p.sources}
+
+**2. Mandatory Methodological Framework**
+
+* **From Unstructured to Structured:** Your primary role is to act as a synthesizer. You must read through potentially disorganized source materials and extract clear, actionable items.
+* **Focus on Accountability:** Every action item must have a single, clearly identified owner (a person or department) and a deadline. This is critical for turning discussion into action.
+* **Measure What Matters:** Every action item should be linked to a Key Performance Indicator (KPI) that allows the team to know if the action was successfully completed and had the desired effect.
+
+**3. Required Output Structure**
+
+Please review all the attached source files and generate the following:
+
+* **1. Narrative Summary:** Begin with a brief, one-paragraph summary of the key themes, major decisions, and overall direction identified in the source materials.
+* **2. Detailed Action Plan Table:** Present the core of your response as a markdown table with the following columns:
+
+| Strategic Goal | Specific Action Required | Directly Responsible Individual (DRI) / Dept. | Deadline | Key Performance Indicator (KPI) | Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| | | | | | |
+
+Fill the table by synthesizing the content from the provided sources. If information for a column (like a specific deadline) is not mentioned in the sources, you should note it as "To be determined (TBD)".`,
+                business_plan: p => `You are an experienced business consultant and financial analyst. Your task is to generate a standard, comprehensive business plan based on the details provided by the user.
+
+**1. Business Details**
+
+* **Company Name:** ${p.company_name}
+* **Mission Statement:** ${p.mission_statement}
+* **Product or Service:** ${p.product_or_service}
+* **Target Market:** ${p.target_market}
+* **Marketing & Sales Strategy:** ${p.marketing_strategy}
+* **Financial Summary:** ${p.financial_summary}
+
+**2. Mandatory Methodological Framework**
+
+* **Viability and Coherence:** The business plan must tell a coherent story. The market analysis must justify the financial projections. The marketing strategy must be realistic for the described budget and team. You must explicitly check for and comment on the internal consistency of the user's inputs.
+* **Audience-Centric:** The plan should be written for a specific audience (e.g., investors, lenders). The tone should be confident and persuasive, backed by data and logical reasoning.
+* **Focus on the "Why":** Beyond just describing the business, the plan must answer *why* this business will succeed. What is its unique value proposition? What is its competitive advantage?
+
+**3. Required Output Structure**
+
+Please generate a full business plan document. The document must be professionally structured with the following standard sections. You should expand on the user's inputs to create a complete narrative for each section.
+
+* **1.0 Executive Summary:** (A compelling overview of the entire plan, written last but placed first).
+* **2.0 Company Description:** (Details on the business, its mission, and legal structure).
+* **3.0 Market Analysis:** (An analysis of the industry, target market, and competition).
+* **4.0 Organization and Management:** (Details on the team structure and key personnel).
+* **5.0 Products or Services:** (A detailed description of what is being offered).
+* **6.0 Marketing and Sales Strategy:** (A plan for how to reach customers and generate sales).
+* **7.0 Financial Projections:** (Based on the user's summary, create a simple 3-year projection including revenue, key expenses, and profitability).`,
+                strategic_analysis: p => `You are an expert strategic analyst. Your task is to perform the selected strategic analysis based on the provided subject and context.
+
+**1. Analysis Details**
+
+* **Subject of Analysis:** ${p.analysis_subject}
+* **Analysis Type to Perform:** ${p.analysis_type}
+* **Context and Source Materials:** ${p.context_and_sources}
+
+**2. Mandatory Methodological Framework**
+
+* **Structured Thinking:** Your role is to apply a specific analytical lens to a broad topic. You must strictly adhere to the definitions of each framework component to ensure a rigorous and disciplined analysis.
+* **Evidence-Based:** Your analysis must not be based on opinion. Every point you make should be supported by evidence from the provided context and source materials or logical inference.
+* **From Analysis to Insight:** The goal is not just to fill in the boxes. After completing the framework, you must provide a concluding synthesis that explains the key strategic insight or implication revealed by the analysis. What is the most important "so what?"
+
+**3. Required Output Structure**
+
+Please generate a detailed analysis for each of the selected frameworks. Structure your response clearly with a main heading for each framework, followed by a final synthesis section.
+
+* **[Framework Name e.g., SWOT Analysis]**
+    * **Strengths:**
+    * **Weaknesses:**
+    * **Opportunities:**
+    * **Threats:**
+* **[Next Framework Name...]**
+* **Strategic Synthesis:** A brief, one-paragraph summary of the most important conclusion or strategic implication derived from the analysis as a whole.
+
+**Important Framework Definitions:**
+
+* **For SWOT:** Analyze **Strengths**, **Weaknesses**, **Opportunities**, and **Threats**.
+* **For PEST:** Analyze **Political**, **Economic**, **Social**, and **Technological** factors.
+* **For CICO:** You must use the following specific definition: **CICO stands for Conflicts of Interest, Competition, and Opposition.**
+    * **Conflicts of Interest:** Analyze potential conflicts between institutions (e.g., political opposition between a city council and the central government) and individuals (e.g., competing executives).
+    * **Competition:** Identify entities that may not be direct legal competitors but could see the subject as a threat to their status quo (e.g., a private cinema opposing a free community film club).
+    * **Opposition:** Identify groups that might oppose the subject on logistical, ideological, or social grounds (e.g., residents concerned about noise, criminal elements threatened by community improvement).`
             };
 
             // --- DYNAMIC UI BUILDER ---
