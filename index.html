@@ -77,6 +77,36 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white antialiased relative">
     
+    <!-- Access Code Overlay -->
+    <div id="access-overlay" class="fixed inset-0 bg-gray-50/95 dark:bg-gray-900/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full border border-gray-200 dark:border-gray-700">
+            <!-- Header with logo/icon -->
+            <div class="text-center pt-8 pb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-[#0097b2] to-[#007a8f] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Welcome</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Please enter your code to continue</p>
+            </div>
+            
+            <!-- Form -->
+            <div class="px-8 pb-8">
+                <div class="space-y-4">
+                    <div>
+                        <input type="password" id="access-code" placeholder="Enter access code" 
+                               class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#0097b2] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-colors">
+                    </div>
+                    <button id="submit-code" class="w-full bg-[#0097b2] hover:bg-[#007a8f] text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+                        Continue
+                    </button>
+                </div>
+                <div id="error-message" class="text-red-500 dark:text-red-400 text-sm text-center mt-3 hidden">Incorrect code. Please try again.</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Theme Toggle Button -->
     <div class="absolute top-4 right-4">
         <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -128,6 +158,41 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Access Code Logic
+            const accessOverlay = document.getElementById('access-overlay');
+            const accessCodeInput = document.getElementById('access-code');
+            const submitButton = document.getElementById('submit-code');
+            const errorMessage = document.getElementById('error-message');
+            
+            // Set your access codes here - can have as many as you want
+            const correctCodes = ['zayaan', 'vishah', 'misbah', 'azuhan', 'liusha', 'animaa', 'sahaa', 'msfdpolicy', 'policylabmv'];
+            
+            function checkAccess() {
+                const enteredCode = accessCodeInput.value.trim();
+                if (correctCodes.includes(enteredCode)) {
+                    accessOverlay.style.display = 'none';
+                    // Store in session storage so it persists during the session
+                    sessionStorage.setItem('accessGranted', 'true');
+                } else {
+                    errorMessage.classList.remove('hidden');
+                    accessCodeInput.value = '';
+                    accessCodeInput.focus();
+                }
+            }
+            
+            // Check if access was already granted in this session
+            if (sessionStorage.getItem('accessGranted') === 'true') {
+                accessOverlay.style.display = 'none';
+            }
+            
+            submitButton.addEventListener('click', checkAccess);
+            accessCodeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkAccess();
+                }
+            });
+
+            // --- THEME TOGGLE LOGIC ---
             // --- THEME TOGGLE LOGIC ---
             const btn = document.getElementById('theme-toggle');
             const sun = document.getElementById('theme-toggle-light-icon');
@@ -401,7 +466,9 @@
                     { id: 'analysis_subject', label: 'Subject of Analysis', type: 'text', placeholder: 'What policy, project, or organization are you analyzing?' },
                     { id: 'analysis_type', label: 'Analysis Type to Perform', type: 'checkbox', options: ['SWOT', 'PEST', 'CICO'] },
                     { id: 'context_and_sources', label: 'Context and Source Materials', type: 'textarea', placeholder: 'Provide background information or refer to attached files.' }
-                ]}
+                ]},
+                { id: 'style_instruction', name: 'Default Style Instruction', color: brandColors.green, fields: []
+		},
             ];
             
             const suggestions = {
@@ -450,6 +517,14 @@ Please structure your response as a chronological scene‑by‑scene breakdown, 
 * **Factual Integrity:** Every claim or assertion must be directly supported by the provided source materials. **You must not invent or hallucinate any facts, statistics, or sources.** If information is missing, state that it is unavailable.
 * **Citations:** All sources must be cited in-text and listed in a final "References" section using **APA 7th Edition format**. For online sources, the reference must end with a direct, clickable URL enclosed in < >. Example: \`Author, A. A. (Year). *Title of work*. Source. <https://...>\`
 * **Use of Analogies:** Use the provided analogies sparingly and purposefully. They should only be used to (a) clarify a complex technical concept or (b) reframe an issue to make a persuasive point more effectively. Do not use them as rhetorical flourishes.
+* Writing should be clear and direct, precise, and easy to follow/understand even for a non-expert with around 12th grade reading level. I want you to minimize unnecessary jargon while still using precise language including technical language where needed. Use varied sentence structure to ensure the writing has a smooth flow and rhythm. Try to avoid clunky or choppy prose style.
+* I want you to avoid phrases that overstate importance or symbolism (e.g., "serves as a testament to," "plays a vital role," "it is a symbol of"). Do not use promotional, subjective, or peacock terms (e.g., "breathtaking," "must-visit," "iconic," "remarkable").
+* Minimize use summarizing phrases at the end of paragraphs or sections (e.g., "In conclusion," "In summary," "Overall"). Minimize overusing transitional words and conjunctions like "moreover," "in addition," "furthermore," and "however." 
+* I want you to avoid 'AI slop' writing styles and constructions. Do not use the words 'delve', 'tapestry', 'labyrinth', 'symphony'. For headings and subheadings, I prefer mostly sentence case to title case. Minimize use of colons. Do not use emojis. Minimize use of boldface or excessive formatting in general.
+* Avoid superficial analyses that introduce unnecessary opinions, especially by tacking on a clause of surface-level opinion or commentary after factual information (e.g. in "The protest movement emerged as a continuation of this struggle, emphasizing the importance of solidarity and collective action in the fight for justice.", the "emphasizing the..." clause is pointless).
+* I need you to strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. "Whereas x, we now see that y...", "At one point, x was ... We now know that y ...", "In contrast to x, y has been ...", "Although x is ..."). 
+* Prefer the active voice to passive voice in most contexts, except in cases where the passive voice has a purpose like being more diplomatic or understated. Use definite, specific, and concrete language. Prefer to have coordinate ideas expressed in similar forms. Prefer placing the emphatic words or most important material at the end of a sentence for emphasis. Do not overwrite - clarity is fundamental. 
+* Do not have a preamble before the answer or a note after the answer. Never address me directly or use conversational filler rather than just providing the response. Do not ever refer to yourself as an AI or mention your knowledge cutoff date.
 
 **3. Required Report Structure**
 
@@ -518,6 +593,14 @@ Generate the research paper using the following section-by-section blueprint. Th
     4.  Use subheadings to break up the text and guide the reader.
     5.  Conclude with a summary of the argument and a final "So what?" takeaway for the reader.
 * **Language:** Keep sentences and paragraphs relatively short. Avoid academic jargon. Avoid passive voice. Do not use meaningless filler words or phrases like “tapestry,” “symphony,” “delve,” “labyrinth,” or constructions like “it’s not about X, it’s about Y.” Minimize use of commas, semicolons, and em dashes where it’s not needed for a better-flowing sentence. Write with a clear logical flow. Every claim or assertion must be directly supported by either the provided source materials or a reliable online source. You must not invent or hallucinate any facts, statistics, or sources. Use analogies sparingly and purposefully, to clarify a complex technical concept or reframe an issue to make a persuasive point more effectively.
+* Writing should be clear and direct, precise, and easy to follow/understand even for a non-expert with around 12th grade reading level. I want you to minimize unnecessary jargon while still using precise language including technical language where needed. Use varied sentence structure to ensure the writing has a smooth flow and rhythm. Try to avoid clunky or choppy prose style.
+* I want you to avoid phrases that overstate importance or symbolism (e.g., "serves as a testament to," "plays a vital role," "it is a symbol of"). Do not use promotional, subjective, or peacock terms (e.g., "breathtaking," "must-visit," "iconic," "remarkable").
+* Minimize use summarizing phrases at the end of paragraphs or sections (e.g., "In conclusion," "In summary," "Overall"). Minimize overusing transitional words and conjunctions like "moreover," "in addition," "furthermore," and "however." 
+* I want you to avoid 'AI slop' writing styles and constructions. Do not use the words 'delve', 'tapestry', 'labyrinth', 'symphony'. For headings and subheadings, I prefer mostly sentence case to title case. Minimize use of colons. Do not use emojis. Minimize use of boldface or excessive formatting in general.
+* Avoid superficial analyses that introduce unnecessary opinions, especially by tacking on a clause of surface-level opinion or commentary after factual information (e.g. in "The protest movement emerged as a continuation of this struggle, emphasizing the importance of solidarity and collective action in the fight for justice.", the "emphasizing the..." clause is pointless).
+* I need you to strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. "Whereas x, we now see that y...", "At one point, x was ... We now know that y ...", "In contrast to x, y has been ...", "Although x is ..."). 
+* Prefer the active voice to passive voice in most contexts, except in cases where the passive voice has a purpose like being more diplomatic or understated. Use definite, specific, and concrete language. Prefer to have coordinate ideas expressed in similar forms. Prefer placing the emphatic words or most important material at the end of a sentence for emphasis. Do not overwrite - clarity is fundamental. 
+* Do not have a preamble before the answer or a note after the answer. Never address me directly or use conversational filler rather than just providing the response. Do not ever refer to yourself as an AI or mention your knowledge cutoff date.
 
 Please now generate the full Substack post based on these instructions.`,
                 press: p => `You are an expert public relations professional. Your task is to write a formal press release based on the provided information. The press release must be written in the style of a concise, factual news article.
@@ -971,6 +1054,17 @@ You are an expert policy analyst and technical writer for a government ministry.
 * **Factual integrity:** Your primary task is to read, analyze, and synthesize information **exclusively** from the provided source materials. Do not invent facts, policies, or data.
 * **Strict citation required:** For every piece of information, every statistic, and every policy you mention, you **must** indicate which source document it came from. Use a clear citation format, like \`[Source: file_name.pdf]\`. This is critical for verification.
 * **Voice and tone:** The tone must be formal, objective, and bureaucratic, suitable for a UN submission. Avoid emotive or subjective language.
+* Writing should be clear and direct, precise, and easy to follow/understand even for a non-expert with around 12th grade reading level. I want you to minimize unnecessary jargon while still using precise language including technical language where needed. Use varied sentence structure to ensure the writing has a smooth flow and rhythm. Try to avoid clunky or choppy prose style.
+* I want you to avoid phrases that overstate importance or symbolism (e.g., "serves as a testament to," "plays a vital role," "it is a symbol of"). Do not use promotional, subjective, or peacock terms (e.g., "breathtaking," "must-visit," "iconic," "remarkable").
+* Minimize use summarizing phrases at the end of paragraphs or sections (e.g., "In conclusion," "In summary," "Overall"). Minimize overusing transitional words and conjunctions like "moreover," "in addition," "furthermore," and "however." 
+* I want you to avoid 'AI slop' writing styles and constructions. Do not use the words 'delve', 'tapestry', 'labyrinth', 'symphony'. For headings and subheadings, I prefer mostly sentence case to title case. Minimize use of colons. Do not use emojis. Minimize use of boldface or excessive formatting in general.
+* Avoid superficial analyses that introduce unnecessary opinions, especially by tacking on a clause of surface-level opinion or commentary after factual information (e.g. in "The protest movement emerged as a continuation of this struggle, emphasizing the importance of solidarity and collective action in the fight for justice.", the "emphasizing the..." clause is pointless).
+* I need you to strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. "Whereas x, we now see that y...", "At one point, x was ... We now know that y ...", "In contrast to x, y has been ...", "Although x is ..."). 
+* Prefer the active voice to passive voice in most contexts, except in cases where the passive voice has a purpose like being more diplomatic or understated. Use definite, specific, and concrete language. Prefer to have coordinate ideas expressed in similar forms. Prefer placing the emphatic words or most important material at the end of a sentence for emphasis. Do not overwrite - clarity is fundamental. 
+* Do not have a preamble before the answer or a note after the answer. Never address me directly or use conversational filler rather than just providing the response. Do not ever refer to yourself as an AI or mention your knowledge cutoff date.
+* Be diplomatic. Moral clarity is fine, but we have to work with various other departments and agencies, so things like being particularly harsh about any person or institution’s competence or intentions, making assumptions that are unfounded, etc… could be disastrous given the bureaucratic and political nature of the work.
+* This doesn’t mean being evasive on the facts or avoiding necessary criticism, but it does mean avoiding assumptions or accusations and avoiding overly harsh or confrontational language – phrasing significant criticism or negative assessments in neutral language and diplomatic framing. For example, if a failure seems likely to be attributable to malice or corruption but there is no explicit proof, the diplomatic way might be to call it misaligned incentives or conflicts of interest, or to frame it as being a public perception (e.g. “.. raising questions of corruption within the public” rather than directly accusing it of corruption). Or for failures from incompetence, the diplomatic way might be to talk about human capacity gaps or need for institutional strengthening, and so on.
+* Being diplomatic also means being sensitive to political, geopolitical, and religious contexts. This means avoiding party politics as much as possible, and keeping in mind that the Maldives is an institutionally Muslim country.
 
 ---
 
@@ -1090,7 +1184,15 @@ Language and Style Requirements:
 - Maintain professional tone suitable for international expert and government readership.
 - Include English translations of Dhivehi materials wherever applicable, with translator notes or methodology if needed.
 - Everything in this paper has to be justified by some kind of evidence or information from a source, do not speculate or make anything up.
-- Avoid words like “tapestry”, “symphony”, “delve”, or other “AI slop” words and avoid the “it’s not __, it’s __” construction in your writing.
+- Writing should be clear and direct, precise, and easy to follow/understand even for a non-expert with around 12th grade reading level. I want you to minimize unnecessary jargon while still using precise language including technical language where needed.
+- Use varied sentence structure to ensure the writing has a smooth flow and rhythm. Try to avoid clunky or choppy prose style.
+- I want you to avoid phrases that overstate importance or symbolism (e.g., "serves as a testament to," "plays a vital role," "it is a symbol of"). Do not use promotional, subjective, or peacock terms (e.g., "breathtaking," "must-visit," "iconic," "remarkable").
+- Minimize use summarizing phrases at the end of paragraphs or sections (e.g., "In conclusion," "In summary," "Overall"). Minimize overusing transitional words and conjunctions like "moreover," "in addition," "furthermore," and "however." 
+- I want you to avoid 'AI slop' writing styles and constructions. Do not use the words 'delve', 'tapestry', 'labyrinth', 'symphony'. For headings and subheadings, I prefer mostly sentence case to title case. Minimize use of colons. Do not use emojis. Minimize use of boldface or excessive formatting in general.
+- Avoid superficial analyses that introduce unnecessary opinions, especially by tacking on a clause of surface-level opinion or commentary after factual information (e.g. in "The protest movement emerged as a continuation of this struggle, emphasizing the importance of solidarity and collective action in the fight for justice.", the "emphasizing the..." clause is pointless).
+- I need you to strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. "Whereas x, we now see that y...", "At one point, x was ... We now know that y ...", "In contrast to x, y has been ...", "Although x is ..."). 
+- Prefer the active voice to passive voice in most contexts, except in cases where the passive voice has a purpose like being more diplomatic or understated. Use definite, specific, and concrete language. Prefer to have coordinate ideas expressed in similar forms. Prefer placing the emphatic words or most important material at the end of a sentence for emphasis. Do not overwrite - clarity is fundamental. 
+- Do not have a preamble before the answer or a note after the answer. Never address me directly or use conversational filler rather than just providing the response. Do not ever refer to yourself as an AI or mention your knowledge cutoff date.
 
 How good this paper is very important to my career, and an excellent paper with extremely detailed and comprehensive accurate coverage could lead to promotions and set me up for life financially, while an inadequate or inaccurate paper could do lasting damage to my career, so please make sure it is very comprehensive and accurate and that every bit of information is sourced and cited so that I can also double check it!`,
                 resilience: p => `You are an expert policy strategist specializing in institutional design and long-term policy sustainability. Your task is to generate a comprehensive Policy Resilience and Sustainability Plan based on the provided information. The plan should identify potential vulnerabilities and prescribe concrete strategies to ensure the policy can withstand political changes, staff turnover, and shifting priorities.
@@ -2153,7 +2255,25 @@ Please generate a detailed analysis for each of the selected frameworks. Structu
 * **For CICO:** You must use the following specific definition: **CICO stands for Conflicts of Interest, Competition, and Opposition.**
     * **Conflicts of Interest:** Analyze potential conflicts between institutions (e.g., political opposition between a city council and the central government) and individuals (e.g., competing executives).
     * **Competition:** Identify entities that may not be direct legal competitors but could see the subject as a threat to their status quo (e.g., a private cinema opposing a free community film club).
-    * **Opposition:** Identify groups that might oppose the subject on logistical, ideological, or social grounds (e.g., residents concerned about noise, criminal elements threatened by community improvement).`
+    * **Opposition:** Identify groups that might oppose the subject on logistical, ideological, or social grounds (e.g., residents concerned about noise, criminal elements threatened by community improvement).`,
+                style_instruction: p => `Writing style guide:
+- Writing should be clear and direct, precise, and easy to follow/understand even for a non-expert with around 12th grade reading level. I want you to minimize unnecessary jargon while still using precise language including technical language where needed.
+- Use varied sentence structure to ensure the writing has a smooth flow and rhythm. Try to avoid clunky or choppy prose style.
+- I want you to avoid phrases that overstate importance or symbolism (e.g., "serves as a testament to," "plays a vital role," "it is a symbol of"). Do not use promotional, subjective, or peacock terms (e.g., "breathtaking," "must-visit," "iconic," "remarkable").
+- Minimize use summarizing phrases at the end of paragraphs or sections (e.g., "In conclusion," "In summary," "Overall"). Minimize overusing transitional words and conjunctions like "moreover," "in addition," "furthermore," and "however." 
+- I want you to avoid 'AI slop' writing styles and constructions. Do not use the words 'delve', 'tapestry', 'labyrinth', 'symphony'. For headings and subheadings, I prefer mostly sentence case to title case.
+- Minimize use of colons. Do not use emojis. Minimize use of boldface or excessive formatting in general.
+- Avoid superficial analyses that introduce unnecessary opinions, especially by tacking on a clause of surface-level opinion or commentary after factual information (e.g. in "The protest movement emerged as a continuation of this struggle, emphasizing the importance of solidarity and collective action in the fight for justice.", the "emphasizing the..." clause is pointless).
+- I need you to strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. "Whereas x, we now see that y...", "At one point, x was ... We now know that y ...", "In contrast to x, y has been ...", "Although x is ..."). 
+- Prefer the active voice to passive voice in most contexts, except in cases where the passive voice has a purpose like being more diplomatic or understated. Use definite, specific, and concrete language. Prefer to have coordinate ideas expressed in similar forms. Prefer placing the emphatic words or most important material at the end of a sentence for emphasis. Do not overwrite - clarity is fundamental. 
+- Do not have a preamble before the answer or a note after the answer. Never address me directly or use conversational filler rather than just providing the response. Do not ever refer to yourself as an AI or mention your knowledge cutoff date.
+
+---
+
+(OPTIONAL) Being diplomatic:
+- Be diplomatic. Moral clarity is fine, but we have to work with various other departments and agencies, so things like being particularly harsh about any person or institution’s competence or intentions, making assumptions that are unfounded, etc… could be disastrous given the bureaucratic and political nature of the work.
+- This doesn’t mean being evasive on the facts or avoiding necessary criticism, but it does mean avoiding assumptions or accusations and avoiding overly harsh or confrontational language – phrasing significant criticism or negative assessments in neutral language and diplomatic framing. For example, if a failure seems likely to be attributable to malice or corruption but there is no explicit proof, the diplomatic way might be to call it misaligned incentives or conflicts of interest, or to frame it as being a public perception (e.g. “.. raising questions of corruption within the public” rather than directly accusing it of corruption). Or for failures from incompetence, the diplomatic way might be to talk about human capacity gaps or need for institutional strengthening, and so on.
+- Being diplomatic also means being sensitive to political, geopolitical, and religious contexts. This means avoiding party politics as much as possible, and keeping in mind that the Maldives is an institutionally Muslim country.`,
             };
 
             // --- DYNAMIC UI BUILDER ---
