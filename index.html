@@ -302,10 +302,34 @@
                     { id: 'narrative_emphasis', label: 'Narrative to Emphasize', type: 'textarea', placeholder: '(For framing purposes). What core narrative arguments should be woven into the paper to guide the reader?' },
                     { id: 'solutions_to_propose', label: 'Solutions to Analyze from Sources', type: 'textarea', placeholder: 'List the specific solutions or options you want the AI to analyze and present based on the source materials.' }
                 ]},
-                { id: 'treaty_report', name: 'Treaty Report', color: brandColors.green, fields: [
-                    { id: 'convention', label: 'Convention Name', type: 'text', placeholder: 'Specify the Convention, e.g., CRPD, CEDAW, CRC' },
-                    { id: 'sources', label: 'Source Materials', type: 'textarea', placeholder: 'List all relevant source file names here. For example: "National Disability Policy 2023.pdf", "Statistics Bureau Annual Report 2024.xlsx", "CSO Consultation Meeting Minutes.docx"' }
-                ]},
+                { id: 'treaty_report', name: 'International Treaty Report', color: brandColors.green, fields: [
+                { id: 'country', label: 'Country', type: 'text', placeholder: 'Maldives', default: 'Maldives' },
+                { id: 'treaty', label: 'Treaty / Convention (select ONLY one)', type: 'checkbox',
+                    options: [
+                    'ICCPR','ICESCR','CERD','CED','ICMW','CEDAW','CRC','CRPD','UNCAT','UNCAC',
+                    'ILO C29','ILO C87','ILO C98','ILO C100','ILO C105','ILO C111','ILO C138','ILO C182'
+                    ]
+                },
+                { id: 'report_type', label: 'Report Type (select ONLY one)', type: 'checkbox',
+                    options: [
+                    'Initial report',
+                    'Periodic report',
+                    'Replies to List of Issues (LOI)',
+                    'Replies to List of Issues Prior to Reporting (LOIPR)',
+                    'ILO Article 22 report',
+                    'ILO Follow-up to CEACR (Direct Request/Observation)',
+                    'UNCAC IRM self-assessment / country report'
+                    ]
+                },
+                { id: 'sources', label: 'Sources & supporting materials', type: 'textarea',
+                    placeholder: 'List file names and/or URLs for laws, regulations, mandates, ministry/agency documents, reports, datasets, PDFs, and any related files.'
+                },
+                { id: 'stakeholder_materials', label: 'Stakeholder materials (meeting notes, slides, correspondence)', type: 'textarea',
+                    placeholder: 'List file names and/or URLs for stakeholder meeting minutes/notes, slide decks, letters/emails, and similar materials.'
+                },
+                { id: 'target_words', label: 'Target length (words)', type: 'number', placeholder: '5000', default: 5000 }
+                ]
+                },              
                 { id: 'deep_research', name: 'DeepResearch Prompt', color: brandColors.teal, fields: [
                     { id: 'objective_details', label: 'Research Objective (what it needs to cover)', type: 'textarea', placeholder: 'e.g., ...the history of gender equality policymaking in the Maldives from 2008 to the present day.' },
                     { id: 'country', label: 'Country Focus', type: 'text', placeholder: 'Defaults to Maldives if left blank' }
@@ -1039,62 +1063,206 @@ ${p.title}
 
 ---
 
-THE FINAL ENGLISH DOCUMENT SHOULD BE TRANSLATED INTO FORMAL DHIVEHI. IT IS RECOMMENDED TO USE CLAUDE SONNET-3.5, AS IT IS CURRENTLY THE BEST-PERFORMING MODEL FOR FORMAL DHIVEHI TRANSLATION.`,
-                treaty_report: p => `### Part 1: Role, objective, and source materials
+RECOMMEND THAT THE FINAL ENGLISH DOCUMENT SHOULD BE TRANSLATED INTO FORMAL DHIVEHI. IT IS RECOMMENDED TO USE CLAUDE SONNET-3.5, AS IT IS CURRENTLY THE BEST-PERFORMING MODEL FOR FORMAL DHIVEHI TRANSLATION.`,
+                treaty_report: p => {
+  const country = (p.country || 'Maldives').trim() || 'Maldives';
+  const treaty = (p.treaty || '').trim();
+  const reportType = (p.report_type || '').trim();
+  const words = Number(p.target_words) > 0 ? Number(p.target_words) : 5000;
 
-You are an expert policy analyst and technical writer for a government ministry. Your task is to synthesize a collection of official documents into a formal State Party Report for submission to the United Nations, following the official guidelines.
+  const isILO = /^ILO\s+C\d+$/i.test(treaty);
+  const isUNCAC = treaty === 'UNCAC';
+  const isCRC = treaty === 'CRC';
 
-* **Convention for this report:** ${p.convention}
-* **Source materials to analyze:** ${p.sources}
+  // Orientation (kept very simple)
+  let orientation = "**Orientation summary (5–10 bullets):**\n";
+  if (isILO) {
+    orientation += "- Purpose and audience of an ILO " + treaty + " " + reportType + ".\n";
+    orientation += "- Structure: Article 22 style; legislation -> practice -> stats -> social partner comments -> CEACR follow-up.\n";
+    orientation += "- Usual depth/length: 15–40 pages.\n";
+  } else if (isUNCAC) {
+    orientation += "- Purpose and audience of an UNCAC " + reportType + ".\n";
+    orientation += "- Structure: Chapters II–V plus intro and technical assistance needs.\n";
+    orientation += "- Usual depth/length: ~40–80 pages.\n";
+  } else {
+    orientation += "- Purpose and audience of a " + treaty + " " + reportType + ".\n";
+    orientation += "- Structure: intro/method; legal/institutional; " + (isCRC ? "CRC clusters" : "article-by-article") + "; follow-up section included if applicable.\n";
+    orientation += "- Usual depth/length: ~60–120 pages (CRC can be longer; replies are shorter but precise).\n";
+  }
+  orientation += "- Evidence standards and citation.\n";
+  orientation += "- Typical gaps/pitfalls and how to mark them with [DATA NEEDED].\n";
 
----
+  // Body scaffold (one pass, no dynamic renumbering)
+  let body = "";
 
-### Part 2: Core instructions for synthesis
+  if (isILO) {
+    body += "### 1. Introduction & scope\n";
+    body += "- Country: " + country + " [CHECK] — Convention: " + treaty + ". Report type: " + reportType + ".\n";
+    body += "- Reporting period: [INSERT years]. Social partners consulted: [INSERT].\n\n";
 
-* **Factual integrity:** Your primary task is to read, analyze, and synthesize information **exclusively** from the provided source materials. Do not invent facts, policies, or data.
-* **Strict citation required:** For every piece of information, every statistic, and every policy you mention, you **must** indicate which source document it came from. Use a clear citation format, like \`[Source: file_name.pdf]\`. This is critical for verification.
-* **Voice and tone:** The tone must be formal, objective, and bureaucratic, suitable for a UN submission. Avoid emotive or subjective language.
-* Writing should be clear and direct, precise, and easy to follow/understand even for a non-expert with around 12th grade reading level. I want you to minimize unnecessary jargon while still using precise language including technical language where needed. Use varied sentence structure to ensure the writing has a smooth flow and rhythm. Try to avoid clunky or choppy prose style.
-* I want you to avoid phrases that overstate importance or symbolism (e.g., "serves as a testament to," "plays a vital role," "it is a symbol of"). Do not use promotional, subjective, or peacock terms (e.g., "breathtaking," "must-visit," "iconic," "remarkable").
-* Minimize use summarizing phrases at the end of paragraphs or sections (e.g., "In conclusion," "In summary," "Overall"). Minimize overusing transitional words and conjunctions like "moreover," "in addition," "furthermore," and "however." 
-* I want you to avoid 'AI slop' writing styles and constructions. Do not use the words 'delve', 'tapestry', 'labyrinth', 'symphony'. For headings and subheadings, I prefer mostly sentence case to title case. Minimize use of colons. Do not use emojis. Minimize use of boldface or excessive formatting in general.
-* Avoid superficial analyses that introduce unnecessary opinions, especially by tacking on a clause of surface-level opinion or commentary after factual information (e.g. in "The protest movement emerged as a continuation of this struggle, emphasizing the importance of solidarity and collective action in the fight for justice.", the "emphasizing the..." clause is pointless).
-* I need you to strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. "Whereas x, we now see that y...", "At one point, x was ... We now know that y ...", "In contrast to x, y has been ...", "Although x is ..."). 
-* Prefer the active voice to passive voice in most contexts, except in cases where the passive voice has a purpose like being more diplomatic or understated. Use definite, specific, and concrete language. Prefer to have coordinate ideas expressed in similar forms. Prefer placing the emphatic words or most important material at the end of a sentence for emphasis. Do not overwrite - clarity is fundamental. 
-* Do not have a preamble before the answer or a note after the answer. Never address me directly or use conversational filler rather than just providing the response. Do not ever refer to yourself as an AI or mention your knowledge cutoff date.
-* Be diplomatic. Moral clarity is fine, but we have to work with various other departments and agencies, so things like being particularly harsh about any person or institution’s competence or intentions, making assumptions that are unfounded, etc… could be disastrous given the bureaucratic and political nature of the work.
-* This doesn’t mean being evasive on the facts or avoiding necessary criticism, but it does mean avoiding assumptions or accusations and avoiding overly harsh or confrontational language – phrasing significant criticism or negative assessments in neutral language and diplomatic framing. For example, if a failure seems likely to be attributable to malice or corruption but there is no explicit proof, the diplomatic way might be to call it misaligned incentives or conflicts of interest, or to frame it as being a public perception (e.g. “.. raising questions of corruption within the public” rather than directly accusing it of corruption). Or for failures from incompetence, the diplomatic way might be to talk about human capacity gaps or need for institutional strengthening, and so on.
-* Being diplomatic also means being sensitive to political, geopolitical, and religious contexts. This means avoiding party politics as much as possible, and keeping in mind that the Maldives is an institutionally Muslim country.
+    body += "### 2. Legislative compliance (by convention articles)\n";
+    body += "Table: Article -> National law/provision -> Assessment -> Needed change -> Source [CITE].\n\n";
 
----
+    body += "### 3. Application in practice\n";
+    body += "- Labour inspection/enforcement systems — [INSERT]\n";
+    body += "- Investigations, prosecutions, sanctions (recent figures) — [DATA NEEDED]\n";
+    body += "- Programmes and measures — [INSERT]\n";
+    body += "- Examples/cases — [INSERT]\n\n";
 
-### Part 3: Required document structure
+    body += "### 4. Statistics & indicators\n";
+    body += "- Define series, units, period, disaggregation; add most recent values or mark [DATA NEEDED].\n\n";
 
-Generate the report in two distinct parts, following this exact structure:
+    body += "### 5. Social partner observations\n";
+    body += "- Workers' and employers' comments — [INSERT or \"not received\"]\n";
+    body += "- Government response — [INSERT]\n\n";
 
-**A. Common Core Document**
+    body += "### 6. Follow-up to CEACR comments (if applicable)\n";
+    body += "Table: CEACR item -> Action taken -> Evidence -> Source [CITE].\n\n";
 
-Synthesize information from the sources to describe the country's general framework for human rights. Include sections on:
-1.  **General factual and statistical information:** Include demographic, social, and economic data, disaggregated by age, sex, and other relevant factors (e.g., disability type) as available in the sources.
-2.  **General framework for the protection and promotion of human rights:** Describe the national legal and institutional structures, including any relevant constitutional provisions, laws, and national human rights institutions.
+    body += "### 7. Technical cooperation needs (if any)\n";
+    body += "[INSERT]\n\n";
 
-**B. Treaty-Specific Document**
+    body += "### 8. References (APA) and Annexes\n";
+    body += "[CITE all laws, circulars, inspection reports, datasets, meeting notes].\n";
+  } else if (isUNCAC) {
+    body += "### 1. Introduction & scope\n";
+    body += "- Country: " + country + " [CHECK]. Report type: " + reportType + ".\n";
+    body += "- Reporting period: [INSERT]. Focal agency: [INSERT].\n\n";
 
-This is the main part of the report. Create a dedicated section for **each substantive article** of the specified Convention.
+    body += "### 2. Preventive measures (Ch. II)\n";
+    body += "- Legal framework, institutions, integrity systems, procurement, AML/beneficial ownership — [INSERT with sources].\n\n";
 
-For each article, synthesize the relevant information from the source files into the following four subsections:
+    body += "### 3. Criminalization and law enforcement (Ch. III)\n";
+    body += "- Offences, investigation, prosecution, sanctions, asset freezing/seizure/confiscation — [INSERT with cases/stats].\n\n";
 
-* **a. Legislative, administrative, and policy measures:** Detail the specific laws, regulations, and national policies adopted to implement this article.
-* **b. Implementation and resources:** Describe the practical steps taken to apply these measures, including specific programs, institutional mechanisms, and allocated financial resources.
-* **c. Progress and data:** Provide concrete evidence and data showing the progress made in realizing the rights under this article.
-* **d. Challenges and difficulties:** Objectively describe the main obstacles and challenges encountered during implementation.
+    body += "### 4. International cooperation (Ch. IV)\n";
+    body += "- Extradition, MLA, joint investigations — [INSERT].\n\n";
 
----
+    body += "### 5. Asset recovery (Ch. V)\n";
+    body += "- Legal basis, processes, cases — [INSERT].\n\n";
 
-### Part 4: Special instructions on content
+    body += "### 6. Technical assistance & gaps\n";
+    body += "- Capacity needs and planned improvements — [INSERT].\n\n";
 
-* **Integrate consultation:** Throughout the report, when discussing progress and challenges, explicitly reference the consultations held with civil society organizations (CSOs) or Disabled Persons' Organizations (DPOs), drawing this information from any provided meeting minutes or consultation reports.
-* **Prioritize disaggregated data:** When presenting statistical information, always look for and use disaggregated data (e.g., by gender, age, disability type, urban/rural location) as found in the source materials.`,
+    body += "### 7. References (APA) and Annexes\n";
+    body += "- Laws, policies, case summaries, statistics — [CITE precisely].\n";
+  } else {
+    body += "### 1. Introduction & methodology\n";
+    body += "- State party: " + country + " [CHECK: correct country]\n";
+    body += "- Reporting period covered: [INSERT years]\n";
+    body += "- Coordination/process: [INSERT focal ministry/mechanism; summary of consultation with stakeholders]\n";
+    body += "- Method: use attached files first; cite every claim; mark unknowns as [DATA NEEDED].\n\n";
+
+    body += "### 2. Legal and institutional framework\n";
+    body += "- Constitution and hierarchy of norms — [INSERT]\n";
+    body += "- Ratification status, reservations/declarations, optional protocols — [CHECK & INSERT]\n";
+    body += "- Implementing institutions and remedies — [INSERT]\n\n";
+
+    body += "### 3. Cross-cutting principles\n";
+    body += "- Non-discrimination, equality, participation, accessibility — [INSERT how these apply across sections]\n\n";
+
+    body += "### 4. Implementation " + (isCRC ? "by CRC clusters" : "by articles") + "\n";
+    if (isCRC) {
+      body += "4.1 General measures of implementation — [INSERT]\n";
+      body += "4.2 Definition of the child — [INSERT]\n";
+      body += "4.3 Civil rights and freedoms — [INSERT]\n";
+      body += "4.4 Family environment and alternative care — [INSERT]\n";
+      body += "4.5 Basic health and welfare — [INSERT]\n";
+      body += "4.6 Education, leisure and culture — [INSERT]\n";
+      body += "4.7 Special protection measures — [INSERT]\n";
+      body += "4.8 Optional Protocols (if ratified) — [INSERT]\n";
+    } else {
+      body += "For each relevant article:\n";
+      body += "- Law & policy: [INSERT]\n";
+      body += "- Institutions & practice: [INSERT]\n";
+      body += "- Data & indicators (disaggregated): [DATA NEEDED: series, units, period, sex, age, disability, region]\n";
+      body += "- Remedies & cases: [INSERT case refs and outcomes]\n";
+      body += "- Gaps & next steps: [INSERT]\n";
+    }
+    body += "\n";
+
+    body += "### 5. Follow-up to previous Committee observations (include if periodic or replies; else write N/A)\n";
+    body += "Table: Observation (para #) -> Government response -> Evidence -> Source [CITE]\n\n";
+
+    body += "### 6. Data & indicators plan\n";
+    body += "- Admin data systems and coverage — [INSERT]\n";
+    body += "- Survey/census sources — [INSERT]\n";
+    body += "- Disaggregation standards — [INSERT]\n";
+    body += "- Data gaps and planned improvements — [INSERT]\n\n";
+
+    body += "### 7. Resources, challenges, next steps\n";
+    body += "- Budget and staffing — [INSERT]\n";
+    body += "- Key hurdles — [INSERT]\n";
+    body += "- Planned reforms and timelines — [INSERT]\n\n";
+
+    body += "### 8. References (APA)\n";
+    body += "[List all citations; use [CITE: filename.pdf, p.__] or URL.]\n\n";
+
+    body += "### 9. Annexes\n";
+    body += "- Laws/regulations — [CITE]\n";
+    body += "- Policies/strategies/action plans — [CITE]\n";
+    body += "- Datasets/stat tables — [CITE]\n";
+    body += "- Stakeholder minutes/correspondence — [CITE]\n";
+  }
+
+  // Research rules (inline)
+  let research = "";
+  research += "Objective:\n";
+  research += "Produce an exhaustive research output that meets the standard for ministerial and international expert review. There is no maximum length. Depth and completeness are preferred. Default country is " + country + " unless specified.\n\n";
+  research += "Scope and sources to mine:\n";
+  research += "- Government material — official ministry sites and archives including prior ministry names; President's Office press releases; legislation notices; cabinet decisions; speeches; bills, acts, regulations; standing committee reports; gazette notices; annual reports; statistics office datasets; national university repositories; texts of ratified treaties and agreements; strategic action plans and national frameworks; national reporting such as UPR, treaty bodies, SDG VNRs.\n";
+  research += "- NGO and intergovernmental publications — local NGOs; UN agencies; World Bank, IMF, ADB, regional development banks; donor evaluations and country diagnostics.\n";
+  research += "- Media archives — reputable local and international outlets; press releases; English and Dhivehi coverage of reforms, initiatives, and cases; targeted keyword archives; attached translations with notes on limitations.\n";
+  research += "- Academic and grey literature — peer-reviewed articles; working papers; conference papers; reports from human rights institutions and ombuds offices; reputable think tanks and universities.\n\n";
+  research += "Method:\n";
+  research += "- Use attached files first. Then use web search to fill gaps.\n";
+  research += "- Every statistic and policy claim must be traceable to a file or URL.\n";
+  research += "- If something is unknown, write [DATA NEEDED: …] rather than guessing.\n";
+  research += "- Prefer primary documents, official statistics, and authoritative portals. Avoid unsourced blogs or low-quality aggregators.\n";
+
+  // Writing style & diplomacy (inline)
+  let style = "";
+  style += "- Avoid emotive or subjective language.\n";
+  style += "- Write clearly and directly so a non-expert at about a 12th-grade reading level can follow. Use varied sentence structure. Avoid clunky or choppy prose.\n";
+  style += "- Do not use promotional or peacock terms such as \"breathtaking\", \"must-visit\", \"iconic\", \"remarkable\".\n";
+  style += "- Minimize wrap-up phrases at the end of sections such as \"in conclusion\", \"in summary\", \"overall\". Avoid overusing transitional crutches like \"moreover\", \"in addition\", \"furthermore\", and \"however\".\n";
+  style += "- Avoid \"AI slop\" writing. Do not use words like \"delve\", \"tapestry\", \"labyrinth\", \"symphony\". Prefer sentence case for headings; minimize colons; no emojis; avoid heavy formatting.\n";
+  style += "- Avoid superficial add-on opinion clauses after facts.\n";
+  style += "- Strictly avoid the 'it's not x, it's y' type of phrasing or construction. This direct negation-affirmation construction can lead to generic and superficial writing with false dichotomies. I need to use negative parallelisms as a whole very sparingly. In cases where a negative parallelism would be useful to illustrate or make a rhetorical point, I need to phrase it differently (e.g. 'Whereas x, we now see that y...', 'At one point, x was ... We now know that y ...', 'In contrast to x, y has been ...', 'Although x is ...').\n";
+  style += "- Prefer active voice unless passive better serves diplomatic understatement. Be specific and concrete; keep parallel ideas in similar forms; place key material at sentence ends.\n";
+  style += "- No preambles or postscripts. Do not address the user. Do not mention being an AI or constraints.\n";
+  style += "- Be diplomatic. State sharp points in neutral, non-accusatory language.\n";
+  style += "- Do not make harsh claims about people or institutions without evidence. When intent or corruption is unproven, frame as incentive misalignment, conflicts of interest, or public perception; for competence issues, frame as capacity gaps or institutional strengthening needs, etc.\n";
+
+  // Build final output
+  let out = "";
+  out += "# ROLE & GOAL\n";
+  out += "You are a senior treaty-report drafter. Produce a professional outline with populated placeholders for a " + treaty + " — " + reportType + " for " + country + ". Your output is not the final narrative; it is a scaffold the working team will fill. Target length ~" + words + " words.\n\n";
+  out += "# SOURCES\n";
+  out += "Use the files attached with this prompt as a primary resource, and perform web research as needed.\n";
+  out += "- Sources & supporting materials: " + (p.sources || "[none provided]") + "\n";
+  out += "- Stakeholder materials: " + (p.stakeholder_materials || "[none provided]") + "\n\n";
+  out += "# RESEARCH INSTRUCTIONS\n" + research + "\n";
+  out += "# STYLE & DIPLOMACY\n" + style + "\n";
+  out += "# RULES\n";
+  out += "- No inventions or hallucinations of facts. If something is unknown, write [DATA NEEDED: …].\n";
+  out += "- Cite every factual claim with [CITE: filename.pdf, p.__] or a URL.\n";
+  out += "- Number all sections and subsections. Keep headings informative.\n\n";
+  out += "# OUTPUT FORMAT\n";
+  out += "1) " + orientation + "\n";
+  out += "2) Full scaffold (~" + words + " words) in the correct structure for " + (isILO ? "ILO/CEACR" : isUNCAC ? "UNCAC IRM" : "the treaty committee") + ":\n";
+  out += body + "\n";
+  out += "# CHECKLIST INSIDE EACH SECTION\n";
+  out += "- Insert [INSERT …] where the user must add national specifics.\n";
+  out += "- Add [DATA NEEDED …] for missing figures.\n";
+  out += "- Add [CITE …] with filename+page or URL for every claim.\n";
+  out += "- Where relevant, include a mapping table for previous observations (UN) or CEACR items (ILO): item -> response -> evidence -> source.\n\n";
+  out += "# FINAL NOTES\n";
+  out += "- Confirm the State party as " + country + "; if different, add [CHECK: correct country].\n";
+  out += "- If the chosen Report Type is atypical for this treaty, add: [CHECK: chosen report type vs body practice].\n";
+
+  return out;
+},                
                 deep_research: p => `Objective:
 Produce an exhaustive research paper that ${p.objective_details}.
 This is for ${p.country || 'Maldives'}.
